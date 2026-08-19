@@ -1,0 +1,21 @@
+{
+  "name": "Thulani | Systems, Cloud, AI & Software Engineer Portfolio",
+  "short_name": "Thulani Portfolio",
+  "description": "Portfolio of Thulani — Full-Stack, Cloud Serverless, AI and IoT Systems Engineer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EDF6F9",
+  "theme_color": "#006D77",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

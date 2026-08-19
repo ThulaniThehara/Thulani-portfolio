@@ -2,32 +2,24 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/sections/Hero.astro';
 import FeaturedWork from '../components/sections/FeaturedWork.astro';
-import WhatIBuild from '../components/sections/WhatIBuild.astro';
 import AboutPreview from '../components/sections/AboutPreview.astro';
 import TechnicalInterests from '../components/sections/TechnicalInterests.astro';
-import LabPreview from '../components/sections/LabPreview.astro';
 import ContactCTA from '../components/sections/ContactCTA.astro';
 ---
 
 <BaseLayout>
-  <!-- 1. Hero Section -->
+  <!-- 1. Hero -->
   <Hero />
 
-  <!-- 2. Selected Work / Projects -->
+  <!-- 2. Featured Projects -->
   <FeaturedWork />
 
-  <!-- 3. What I Build / Capabilities -->
-  <WhatIBuild />
-
-  <!-- 4. About Preview -->
+  <!-- 3. About Teaser -->
   <AboutPreview />
 
-  <!-- 5. Technical Interests & Arsenal -->
+  <!-- 4. Skills -->
   <TechnicalInterests />
 
-  <!-- 6. The Lab R&D Preview -->
-  <LabPreview />
-
-  <!-- 7. Contact CTA Closing -->
+  <!-- 5. Contact -->
   <ContactCTA />
 </BaseLayout>

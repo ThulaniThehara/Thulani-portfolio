@@ -5,7 +5,7 @@ import { navItems } from '../../data/navigation';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="border-t border-[#D8EAEF] bg-white/80 mt-auto transition-colors">
+<footer class="border-t border-[#D8EAEF] bg-white/80 mt-auto">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
       <!-- Column 1: Brand & Bio -->
@@ -22,7 +22,7 @@ const currentYear = new Date().getFullYear();
         <div class="flex items-center gap-3 pt-2">
           <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-[#83C5BE]/20 text-[#006D77]">
             <span class="w-1.5 h-1.5 rounded-full bg-[#006D77] animate-pulse"></span>
-            Available for new opportunities
+            Available for opportunities
           </span>
         </div>
       </div>
@@ -38,6 +38,11 @@ const currentYear = new Date().getFullYear();
               </a>
             </li>
           ))}
+          <li>
+            <a href="/lab" class="hover:text-[#006D77] transition-colors">
+              Lab
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -91,8 +96,7 @@ const currentYear = new Date().getFullYear();
 
     <!-- Bottom Copyright -->
     <div class="pt-6 border-t border-[#D8EAEF] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#7E9FA8]">
-      <p>&copy; {currentYear} {siteConfig.author}. Designed & built with Astro, TypeScript & Tailwind CSS.</p>
-      <p>Clean architecture • High-performance static output</p>
+      <p>&copy; {currentYear} {siteConfig.author}. Built with Astro & TypeScript.</p>
     </div>
   </div>
 </footer>

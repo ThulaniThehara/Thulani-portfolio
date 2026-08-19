@@ -1,63 +1,59 @@
 ---
-const skillCategories = [
+const skillGroups = [
   {
-    category: 'Frontend & UI',
-    skills: ['TypeScript', 'React', 'Astro', 'Tailwind CSS', 'Next.js', 'HTML5/Semantic Web'],
-    accent: '#006D77',
+    category: 'Frontend',
+    skills: ['TypeScript', 'React', 'Astro', 'Next.js', 'Tailwind CSS'],
+    color: '#006D77',
   },
   {
-    category: 'Backend & APIs',
-    skills: ['Node.js', 'Express', 'FastAPI / Python', 'REST & GraphQL', 'PostgreSQL', 'Prisma / Drizzle'],
-    accent: '#0e838e',
+    category: 'Backend',
+    skills: ['Node.js', 'Express', 'Python', 'GraphQL', 'REST APIs'],
+    color: '#006D77',
   },
   {
-    category: 'Cloud & Infrastructure',
-    skills: ['Cloudflare Workers', 'AWS (Lambda, S3)', 'Docker', 'Serverless Architecture', 'CI/CD Pipelines'],
-    accent: '#006D77',
+    category: 'Cloud',
+    skills: ['AWS Lambda', 'DynamoDB', 'Cloudflare Workers', 'Docker'],
+    color: '#00565F',
   },
   {
-    category: 'Artificial Intelligence',
-    skills: ['LLM APIs & Prompting', 'RAG Architectures', 'Vector Databases', 'LangChain', 'Python'],
-    accent: '#83C5BE',
+    category: 'AI',
+    skills: ['OpenAI API', 'LangChain', 'RAG', 'Vector Embeddings'],
+    color: '#83C5BE',
   },
   {
     category: 'IoT & Hardware',
-    skills: ['ESP32 / Arduino', 'C / C++', 'MQTT Telemetry', 'WebSockets', 'Sensor Actuation'],
-    accent: '#E29578',
+    skills: ['ESP32', 'C/C++', 'MQTT', 'FreeRTOS', 'Sensors'],
+    color: '#E29578',
   },
   {
-    category: 'Tools & Practices',
-    skills: ['Git / GitHub', 'Linux Shell', 'Vite', 'Vitest / Jest', 'Agile Architecture'],
-    accent: '#547A85',
+    category: 'Tools',
+    skills: ['Git', 'Vitest', 'PostgreSQL', 'Prisma', 'Linux'],
+    color: '#547A85',
   },
 ];
 ---
 
-<section class="py-16 sm:py-24 bg-white border-y border-[#D8EAEF]">
+<section class="py-16 sm:py-24 bg-white border-y border-[#D8EAEF] reveal-on-scroll">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="max-w-2xl mb-12 space-y-3">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006D77]/10 text-[#006D77] text-xs font-semibold uppercase tracking-wider">
-        <span>Technical Arsenal</span>
-      </div>
+    <div class="max-w-2xl mb-10 space-y-2">
       <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#102A30]">
-        Technologies & Tooling
+        Skills & Technologies
       </h2>
-      <p class="text-base text-[#547A85] leading-relaxed">
-        A curated overview of the languages, frameworks, cloud primitives, and hardware environments I utilize.
+      <p class="text-base text-[#547A85]">
+        Languages, frameworks, and tools I work with regularly.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {skillCategories.map((group) => (
-        <div class="p-6 rounded-2xl bg-[#EDF6F9]/60 border border-[#D8EAEF] space-y-4 hover:border-[#83C5BE] transition-colors">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {skillGroups.map((group) => (
+        <div class="space-y-3">
           <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full" style={`background-color: ${group.accent}`}></span>
-            <h3 class="text-base font-bold text-[#102A30]">{group.category}</h3>
+            <span class="w-2 h-2 rounded-full" style={`background-color: ${group.color}`}></span>
+            <h3 class="text-sm font-bold text-[#102A30]">{group.category}</h3>
           </div>
-          
           <div class="flex flex-wrap gap-2">
             {group.skills.map((skill) => (
-              <span class="px-2.5 py-1 text-xs font-medium bg-white text-[#2D5560] rounded-lg border border-[#D8EAEF] shadow-2xs">
+              <span class="px-2.5 py-1 text-xs font-medium bg-[#EDF6F9] text-[#2D5560] rounded-lg border border-[#D8EAEF]">
                 {skill}
               </span>
             ))}

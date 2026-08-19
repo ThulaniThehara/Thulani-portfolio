@@ -1,40 +1,185 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { siteConfig } from '../../data/siteConfig';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
+import LabCard from '../../components/lab/LabCard.astro';
+import { labExperiments } from '../../data/labExperiments';
+
+const categories = ['All', 'AI', 'Cloud', 'Three.js', 'IoT', 'UI/UX', 'Performance'];
+const statuses = ['All', 'Prototype', 'In Progress', 'Experiment', 'Completed'];
 ---
 
-<BaseLayout title={`Lab & Experiments | ${siteConfig.author}`}>
-  <div class="max-w-4xl mx-auto py-12 space-y-10">
-    <header class="space-y-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006D77]/10 text-[#006D77] text-xs font-semibold uppercase tracking-wider">
-        <span>R&D Sandbox</span>
+<BaseLayout
+  title="The Engineering Lab | Prototypes & R&D Sandbox"
+  description="Technical playground for 3D shaders, WebGL experiments, AI agent workflows, and IoT hardware telemetry proofs-of-concept."
+>
+  <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8 space-y-12">
+    <!-- Header -->
+    <header class="space-y-4 max-w-3xl">
+      <div class="inline-flex items-center gap-2">
+        <Badge variant="soft-teal" size="md">
+          R&D Lab // Sandbox & Prototypes
+        </Badge>
       </div>
-      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#102A30]">Lab & Technical Experiments</h1>
-      <p class="text-lg text-[#547A85] leading-relaxed max-w-2xl">
-        A dedicated space for technical explorations, hardware telemetry prototypes, AI agent workflows, and graphics/shader experiments.
+
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.1]">
+        Engineering Lab & Technical Explorations
+      </h1>
+
+      <p class="text-lg sm:text-xl text-[var(--text-muted)] leading-relaxed font-normal">
+        A dedicated space for early prototypes, real-time graphics shaders, autonomous AI agents, and physical IoT telemetry experiments.
       </p>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-white p-6 rounded-2xl border border-[#D8EAEF] space-y-3">
-        <div class="w-10 h-10 rounded-xl bg-[#83C5BE]/20 flex items-center justify-center text-[#006D77] font-mono text-sm font-bold">
-          01
-        </div>
-        <h2 class="text-xl font-bold text-[#102A30]">Real-Time IoT Telemetry Sandbox</h2>
-        <p class="text-sm text-[#547A85]">
-          Testing low-latency MQTT message queues with ESP32 microcontrollers and browser-based WebSockets.
-        </p>
+    <!-- Concept Notice Callout -->
+    <div class="p-6 rounded-2xl bg-gradient-to-r from-[var(--bg-surface-teal-subtle)] via-[var(--bg-page)] to-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-2">
+      <div class="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[var(--brand-deep-teal)]">
+        <span class="w-2 h-2 rounded-full bg-[var(--brand-deep-teal)] animate-pulse"></span>
+        <span>The Philosophy of The Lab</span>
+      </div>
+      <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+        While the <a href="/work" class="text-[var(--brand-deep-teal)] font-semibold underline">Work</a> section contains fully realized production systems, <strong>The Lab</strong> showcases active experimentation. Here I benchmark bleeding-edge web APIs, stress-test microcontrollers, and document engineering curiosities.
+      </p>
+    </div>
+
+    <!-- Category Filter Controls -->
+    <div class="space-y-4 pt-2 border-b border-[var(--border-subtle)] pb-6">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-xs font-mono font-bold uppercase text-[var(--text-muted)] mr-2">Category:</span>
+        {categories.map((cat, idx) => (
+          <button
+            type="button"
+            class={`lab-filter-btn px-3.5 py-1 text-xs font-semibold rounded-full transition-all duration-150 cursor-pointer ${
+              idx === 0
+                ? 'bg-[var(--brand-deep-teal)] text-white shadow-xs active-filter'
+                : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border border-[var(--border-subtle)] hover:border-[var(--brand-soft-teal)] hover:text-[var(--brand-deep-teal)]'
+            }`}
+            data-filter-type="category"
+            data-filter-value={cat}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
 
-      <div class="bg-white p-6 rounded-2xl border border-[#D8EAEF] space-y-3">
-        <div class="w-10 h-10 rounded-xl bg-[#83C5BE]/20 flex items-center justify-center text-[#006D77] font-mono text-sm font-bold">
-          02
-        </div>
-        <h2 class="text-xl font-bold text-[#102A30]">Autonomous Agent Workflows</h2>
-        <p class="text-sm text-[#547A85]">
-          Experimenting with LLM tool-calling loops, context management, and structured generation.
-        </p>
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-xs font-mono font-bold uppercase text-[var(--text-muted)] mr-2">Status:</span>
+        {statuses.map((status, idx) => (
+          <button
+            type="button"
+            class={`lab-status-btn px-3 py-1 text-xs font-medium rounded-lg transition-all duration-150 cursor-pointer ${
+              idx === 0
+                ? 'bg-[var(--bg-surface-teal-subtle)] text-[var(--brand-deep-teal)] font-bold border border-[var(--brand-soft-teal)] active-status'
+                : 'bg-[var(--bg-page)] text-[var(--text-muted)] border border-[var(--border-subtle)] hover:text-[var(--text-primary)]'
+            }`}
+            data-filter-type="status"
+            data-filter-value={status}
+          >
+            {status}
+          </button>
+        ))}
       </div>
     </div>
+
+    <!-- Experiments Grid -->
+    <div id="experiments-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {labExperiments.map((exp) => (
+        <div class="experiment-item" data-category={exp.category} data-status={exp.status}>
+          <LabCard experiment={exp} />
+        </div>
+      ))}
+    </div>
+
+    <!-- Empty State (Hidden by default) -->
+    <div id="empty-state" class="hidden text-center py-16 p-8 rounded-2xl bg-[var(--bg-surface)] border border-dashed border-[var(--border-subtle)] space-y-3">
+      <div class="text-sm font-bold text-[var(--text-primary)]">No experiments match the selected filters</div>
+      <p class="text-xs text-[var(--text-muted)]">Try selecting another category or resetting the filter.</p>
+    </div>
+
+    <!-- Closing Lab CTA -->
+    <section class="rounded-3xl bg-gradient-to-br from-[var(--bg-surface)] to-[var(--bg-page)] border border-[var(--border-subtle)] p-8 sm:p-12 text-center space-y-6 shadow-xs">
+      <div class="max-w-xl mx-auto space-y-3">
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
+          Have an interesting experiment or idea?
+        </h2>
+        <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+          I am always open to exploring novel technical architectures, testing new hardware protocols, or collaborating on open-source prototypes.
+        </p>
+      </div>
+      <div class="pt-2 flex justify-center gap-4">
+        <Button href="/contact" variant="primary" size="md">
+          Suggest an Experiment
+        </Button>
+        <Button href="/work" variant="outline" size="md">
+          View Completed Projects
+        </Button>
+      </div>
+    </section>
   </div>
 </BaseLayout>
+
+<script>
+  function setupLabFiltering() {
+    let activeCategory = 'All';
+    let activeStatus = 'All';
+
+    const categoryButtons = document.querySelectorAll('.lab-filter-btn');
+    const statusButtons = document.querySelectorAll('.lab-status-btn');
+    const experimentItems = document.querySelectorAll('.experiment-item');
+    const emptyState = document.getElementById('empty-state');
+
+    function applyFilters() {
+      let visibleCount = 0;
+
+      experimentItems.forEach((item) => {
+        const itemCategory = item.getAttribute('data-category');
+        const itemStatus = item.getAttribute('data-status');
+
+        const matchesCategory = activeCategory === 'All' || itemCategory === activeCategory;
+        const matchesStatus = activeStatus === 'All' || itemStatus === activeStatus;
+
+        if (matchesCategory && matchesStatus) {
+          (item as HTMLElement).style.display = 'block';
+          visibleCount++;
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+
+      if (emptyState) {
+        emptyState.classList.toggle('hidden', visibleCount > 0);
+      }
+    }
+
+    categoryButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        categoryButtons.forEach((b) => {
+          b.classList.remove('bg-[var(--brand-deep-teal)]', 'text-white', 'shadow-xs', 'active-filter');
+          b.classList.add('bg-[var(--bg-surface)]', 'text-[var(--text-secondary)]', 'border-[var(--border-subtle)]');
+        });
+        btn.classList.add('bg-[var(--brand-deep-teal)]', 'text-white', 'shadow-xs', 'active-filter');
+        btn.classList.remove('bg-[var(--bg-surface)]', 'text-[var(--text-secondary)]');
+
+        activeCategory = btn.getAttribute('data-filter-value') || 'All';
+        applyFilters();
+      });
+    });
+
+    statusButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        statusButtons.forEach((b) => {
+          b.classList.remove('bg-[var(--bg-surface-teal-subtle)]', 'text-[var(--brand-deep-teal)]', 'font-bold', 'border-[var(--brand-soft-teal)]', 'active-status');
+          b.classList.add('bg-[var(--bg-page)]', 'text-[var(--text-muted)]');
+        });
+        btn.classList.add('bg-[var(--bg-surface-teal-subtle)]', 'text-[var(--brand-deep-teal)]', 'font-bold', 'border-[var(--brand-soft-teal)]', 'active-status');
+        btn.classList.remove('bg-[var(--bg-page)]', 'text-[var(--text-muted)]');
+
+        activeStatus = btn.getAttribute('data-filter-value') || 'All';
+        applyFilters();
+      });
+    });
+  }
+
+  setupLabFiltering();
+  document.addEventListener('astro:after-swap', setupLabFiltering);
+</script>

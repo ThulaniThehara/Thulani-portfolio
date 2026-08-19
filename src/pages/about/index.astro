@@ -1,52 +1,205 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { siteConfig } from '../../data/siteConfig';
+import Badge from '../../components/ui/Badge.astro';
 import Button from '../../components/ui/Button.astro';
+
+// Simplified skill groups (flat tags, no levels)
+const skillGroups = [
+  {
+    name: 'Frontend',
+    color: 'var(--brand-deep-teal)',
+    skills: ['TypeScript', 'React', 'Astro', 'Next.js', 'Tailwind CSS', 'HTML5 / A11y'],
+  },
+  {
+    name: 'Backend & APIs',
+    color: 'var(--brand-deep-teal)',
+    skills: ['Node.js', 'Express', 'Python / FastAPI', 'GraphQL', 'REST', 'WebSockets'],
+  },
+  {
+    name: 'Cloud & Infrastructure',
+    color: 'var(--brand-deep-teal-dark)',
+    skills: ['AWS Lambda', 'AppSync', 'DynamoDB', 'Amazon SQS', 'Cloudflare Workers', 'Docker'],
+  },
+  {
+    name: 'Databases',
+    color: 'var(--brand-soft-teal)',
+    skills: ['PostgreSQL', 'DynamoDB', 'Prisma ORM', 'Redis'],
+  },
+  {
+    name: 'AI & Data',
+    color: 'var(--brand-soft-teal)',
+    skills: ['OpenAI API', 'LangChain', 'RAG Pipelines', 'Vector Embeddings'],
+  },
+  {
+    name: 'IoT & Hardware',
+    color: 'var(--brand-coral)',
+    skills: ['ESP32', 'C / C++', 'FreeRTOS', 'MQTT', 'Sensors & Actuators'],
+  },
+  {
+    name: 'Tools',
+    color: 'var(--text-secondary)',
+    skills: ['Git', 'Vitest / Jest', 'Linux Shell', 'Vite', 'Postman'],
+  },
+];
+
+// Timeline
+const timeline = [
+  {
+    period: '2023 — Present',
+    type: 'Engineering',
+    role: 'Software & Systems Engineer',
+    organization: 'Independent Projects & Contract Development',
+    description:
+      'Building serverless cloud platforms, IoT telemetry solutions, and AI applications. Key projects include the Enlear HRMS (AWS AppSync, DynamoDB, Lambda) and the Smart Shooting Gallery IoT hardware rig.',
+    tags: ['AWS', 'React', 'TypeScript', 'ESP32', 'DynamoDB'],
+  },
+  {
+    period: '2021 — 2024',
+    type: 'Education',
+    role: 'B.Sc. in Software Engineering',
+    organization: 'University Engineering Curriculum',
+    description:
+      'Foundation in Data Structures, Algorithms, Distributed Computing, Database Systems, and Software Architecture.',
+    tags: ['Algorithms', 'System Design', 'Databases', 'Networking'],
+  },
+  {
+    period: '2022 — 2023',
+    type: 'Engineering',
+    role: 'Full-Stack Developer',
+    organization: 'Web Platforms & E-Commerce',
+    description:
+      'Built responsive full-stack applications including Slice of Heaven e-commerce platform with PostgreSQL, Prisma, and Stripe integration.',
+    tags: ['React', 'Node.js', 'PostgreSQL', 'Prisma', 'Stripe'],
+  },
+];
 ---
 
-<BaseLayout title={`About | ${siteConfig.author}`}>
-  <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 space-y-12">
-    <header class="space-y-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006D77]/10 text-[#006D77] text-xs font-semibold uppercase tracking-wider">
-        <span>Biography</span>
+<BaseLayout
+  title={`About | ${siteConfig.author}`}
+  description="About Thulani — software engineer working across full-stack web, cloud, AI, and IoT systems."
+>
+  <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 space-y-16">
+    
+    <!-- 1. Introduction -->
+    <section class="space-y-6">
+      <div class="space-y-3">
+        <span class="text-xs font-semibold uppercase tracking-wider text-[var(--brand-deep-teal)]">About</span>
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.1]">
+          Hi, I'm {siteConfig.author}
+        </h1>
       </div>
-      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#102A30]">About Me</h1>
-      <p class="text-lg text-[#547A85] leading-relaxed max-w-2xl">
-        {siteConfig.positioning}
+
+      <div class="space-y-4 text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+        <p>
+          I'm a software engineer interested in understanding how complete technical systems work — from microcontroller firmware and analog sensor circuits, through cloud message brokers and serverless functions, to type-safe web interfaces.
+        </p>
+        <p>
+          I build full-stack applications, design serverless architectures on AWS, create AI-powered tools, and prototype IoT hardware solutions. I prioritize clean code, strong types, and good user experiences.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-4">
+        <Button href="/work" variant="primary" size="md" class="group">
+          View My Work
+          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </Button>
+        <Button href="/contact" variant="outline" size="md">
+          Get in Touch
+        </Button>
+      </div>
+    </section>
+
+    <!-- 2. Skills -->
+    <section class="space-y-6">
+      <div class="space-y-1">
+        <span class="text-xs font-semibold uppercase tracking-wider text-[var(--brand-deep-teal)]">Skills</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
+          Technologies I Work With
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {skillGroups.map((group) => (
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full" style={`background-color: ${group.color}`}></span>
+              <h3 class="text-sm font-bold text-[var(--text-primary)]">{group.name}</h3>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              {group.skills.map((skill) => (
+                <span class="px-2.5 py-1 text-xs font-medium bg-[var(--bg-page)] text-[var(--text-secondary)] rounded-lg border border-[var(--border-subtle)]">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 3. Experience & Education Timeline -->
+    <section class="space-y-6">
+      <div class="space-y-1">
+        <span class="text-xs font-semibold uppercase tracking-wider text-[var(--brand-deep-teal)]">Experience</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
+          Background
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {timeline.map((item) => (
+          <div class="rounded-2xl bg-white border border-[var(--border-subtle)] p-5 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+              <div>
+                <h3 class="text-base font-bold text-[var(--text-primary)]">{item.role}</h3>
+                <div class="text-xs font-semibold text-[var(--brand-deep-teal)]">{item.organization}</div>
+              </div>
+              <Badge variant={item.type === 'Engineering' ? 'soft-teal' : 'subtle'} size="sm">
+                {item.period}
+              </Badge>
+            </div>
+
+            <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+              {item.description}
+            </p>
+
+            <div class="flex flex-wrap gap-1.5 pt-2 border-t border-[var(--border-subtle)]">
+              {item.tags.map((tag) => (
+                <Badge variant="subtle" size="sm">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 4. Contact CTA -->
+    <section class="rounded-2xl bg-[var(--brand-deep-teal)] text-white p-8 sm:p-12 text-center space-y-5">
+      <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+        Let's build something together
+      </h2>
+      <p class="text-sm text-[var(--brand-ice-white)]/85 max-w-lg mx-auto">
+        I'm open to full-stack engineering roles, cloud architecture projects, and IoT hardware collaborations.
       </p>
-    </header>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-      <div class="md:col-span-8 space-y-6 text-[#2D5560] leading-relaxed text-base">
-        <p>
-          I am a software engineer focused on building robust systems that bridge frontend interfaces, cloud infrastructure, AI models, and IoT microcontrollers.
-        </p>
-        <p>
-          My approach prioritizes type-safety, clean code architecture, and high reliability. Rather than viewing engineering disciplines as isolated silos, I enjoy connecting hardware sensors to cloud brokers and building intuitive web interfaces to visualize and control them.
-        </p>
-        <div class="pt-4 flex gap-4">
-          <Button href="/work" variant="primary">View My Work</Button>
-          <Button href="/contact" variant="outline">Get In Touch</Button>
-        </div>
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+        <Button href="/contact" variant="accent" size="lg">
+          Get in Touch
+        </Button>
+        <Button
+          href={`mailto:${siteConfig.social.email}`}
+          variant="outline"
+          size="lg"
+          class="!border-white !text-white hover:!bg-white/10"
+        >
+          Send an Email
+        </Button>
       </div>
+    </section>
 
-      <div class="md:col-span-4 bg-white p-6 rounded-2xl border border-[#D8EAEF] space-y-4">
-        <h3 class="font-bold text-sm text-[#102A30] uppercase tracking-wider">Quick Highlights</h3>
-        <ul class="space-y-3 text-xs text-[#547A85]">
-          <li class="flex items-start gap-2">
-            <span class="text-[#006D77] font-bold">•</span>
-            <span>Focus on Full-Stack, Cloud & AI</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-[#006D77] font-bold">•</span>
-            <span>Hardware & IoT experimentation</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-[#006D77] font-bold">•</span>
-            <span>Based in and ready for remote/hybrid roles</span>
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
 </BaseLayout>
