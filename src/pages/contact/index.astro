@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../data/siteConfig';
+import Button from '../../components/ui/Button.astro';
+---
+
+<BaseLayout title={`Contact | ${siteConfig.author}`}>
+  <div class="max-w-3xl mx-auto py-12 px-4 sm:px-6 space-y-12">
+    <header class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006D77]/10 text-[#006D77] text-xs font-semibold uppercase tracking-wider">
+        <span>Get in Touch</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#102A30]">Let's Connect</h1>
+      <p class="text-lg text-[#547A85] leading-relaxed">
+        Whether you have a technical question, a project collaboration idea, or an engineering role, feel free to reach out.
+      </p>
+    </header>
+
+    <div class="bg-white rounded-2xl border border-[#D8EAEF] p-8 space-y-6 shadow-xs">
+      <div class="space-y-4">
+        <div class="flex items-center justify-between py-3 border-b border-[#D8EAEF]">
+          <span class="text-sm font-semibold text-[#547A85]">Direct Email</span>
+          <a
+            href={`mailto:${siteConfig.social.email}`}
+            class="text-sm font-medium text-[#006D77] hover:underline"
+          >
+            {siteConfig.social.email}
+          </a>
+        </div>
+
+        <div class="flex items-center justify-between py-3 border-b border-[#D8EAEF]">
+          <span class="text-sm font-semibold text-[#547A85]">GitHub</span>
+          <a
+            href={siteConfig.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm font-medium text-[#006D77] hover:underline"
+          >
+            {siteConfig.social.github} &rarr;
+          </a>
+        </div>
+
+        <div class="flex items-center justify-between py-3">
+          <span class="text-sm font-semibold text-[#547A85]">LinkedIn</span>
+          <a
+            href={siteConfig.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm font-medium text-[#006D77] hover:underline"
+          >
+            {siteConfig.social.linkedin} &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-[#D8EAEF]">
+        <Button href={`mailto:${siteConfig.social.email}`} variant="primary" class="w-full justify-center">
+          Send An Email Directly
+        </Button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,110 @@
+---
+const capabilities = [
+  {
+    title: 'Full-Stack Platforms',
+    description: 'Scalable web applications with type-safe APIs, performant frontend state management, relational schemas, and robust authorization.',
+    tech: 'React, Astro, TypeScript, Node.js, PostgreSQL',
+    iconType: 'code',
+  },
+  {
+    title: 'Cloud & Serverless Infrastructure',
+    description: 'Resilient cloud backends, event-driven architectures, edge compute workers, and zero-maintenance automated CI/CD deployment pipelines.',
+    tech: 'Cloudflare Workers, AWS, Docker, Serverless SQL',
+    iconType: 'cloud',
+  },
+  {
+    title: 'Applied AI & Intelligent Workflows',
+    description: 'Integration of LLMs into production workflows, streaming generative UI interfaces, RAG semantic search, and autonomous tool calling.',
+    tech: 'OpenAI API, LangChain, Vector Embeddings, Python',
+    iconType: 'ai',
+  },
+  {
+    title: 'IoT & Hardware Systems',
+    description: 'Embedded systems interfacing microcontrollers with cloud telemetry dashboards via low-latency MQTT and WebSocket protocols.',
+    tech: 'ESP32, C/C++, MQTT, WebSockets, Sensors & Actuators',
+    iconType: 'iot',
+  },
+  {
+    title: 'UI/UX & Interactive Design',
+    description: 'Crafted design systems with strict accessibility compliance (a11y), responsive fluid layouts, micro-interactions, and high performance.',
+    tech: 'Tailwind CSS, Figma, Vanilla CSS, Islands Architecture',
+    iconType: 'design',
+  },
+];
+---
+
+<section class="py-16 sm:py-24 bg-white border-y border-[#D8EAEF]">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="max-w-2xl mb-12 space-y-3">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006D77]/10 text-[#006D77] text-xs font-semibold uppercase tracking-wider">
+        <span>Core Competencies</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#102A30]">
+        What I Build & Engineer
+      </h2>
+      <p class="text-base text-[#547A85] leading-relaxed">
+        I engineer across the complete stack — from microcontroller firmware to cloud pipelines and modern user interfaces.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {capabilities.map((item, index) => (
+        <div class="p-6 rounded-2xl bg-[#EDF6F9]/60 border border-[#D8EAEF] hover:bg-[#EDF6F9] transition-colors flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <div class="w-10 h-10 rounded-xl bg-[#006D77] text-white flex items-center justify-center shadow-xs">
+              {item.iconType === 'code' && (
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+              )}
+              {item.iconType === 'cloud' && (
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z" />
+                </svg>
+              )}
+              {item.iconType === 'ai' && (
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              )}
+              {item.iconType === 'iot' && (
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                </svg>
+              )}
+              {item.iconType === 'design' && (
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                </svg>
+              )}
+            </div>
+            <h3 class="text-lg font-bold text-[#102A30]">{item.title}</h3>
+            <p class="text-sm text-[#547A85] leading-relaxed">
+              {item.description}
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-[#D8EAEF] text-xs font-mono text-[#006D77]">
+            {item.tech}
+          </div>
+        </div>
+      ))}
+
+      <!-- Systems Integration Highlight Card -->
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-[#006D77] to-[#004249] text-white flex flex-col justify-between space-y-4 shadow-sm">
+        <div class="space-y-3">
+          <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white/20 text-[#EDF6F9]">
+            The Core Advantage
+          </span>
+          <h3 class="text-xl font-bold">End-to-End System Thinking</h3>
+          <p class="text-sm text-[#EDF6F9]/85 leading-relaxed">
+            Rather than staying siloed in one layer, I design software that seamlessly speaks to microcontrollers, cloud databases, and AI models.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-white/20 text-xs font-mono text-[#83C5BE]">
+          Hardware &harr; Cloud &harr; Web &harr; Intelligence
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

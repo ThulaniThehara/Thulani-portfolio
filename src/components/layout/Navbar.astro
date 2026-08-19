@@ -1,0 +1,133 @@
+---
+import { navItems, navCTA } from '../../data/navigation';
+import { siteConfig } from '../../data/siteConfig';
+import Button from '../ui/Button.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 w-full backdrop-blur-md bg-[#EDF6F9]/90 border-b border-[#D8EAEF] transition-colors">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
+    <!-- Brand Logo -->
+    <a
+      href="/"
+      class="group flex items-center gap-2.5 text-lg font-bold tracking-tight text-[#102A30] focus-visible:outline-2 focus-visible:outline-[#006D77] rounded-lg py-1"
+      aria-label={`${siteConfig.author} Portfolio Home`}
+    >
+      <span class="w-8 h-8 rounded-lg bg-[#006D77] text-white flex items-center justify-center font-mono text-sm font-semibold shadow-sm group-hover:bg-[#00565f] transition-colors">
+        T
+      </span>
+      <span class="font-semibold text-[#102A30] group-hover:text-[#006D77] transition-colors">
+        {siteConfig.author}
+      </span>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="hidden md:flex items-center gap-1 bg-white/70 px-3 py-1.5 rounded-full border border-[#D8EAEF] shadow-xs" aria-label="Main Navigation">
+      {navItems.map((item) => {
+        const isActive = item.href === '/'
+          ? currentPath === '/'
+          : currentPath === item.href || currentPath.startsWith(item.href + '/');
+
+        return (
+          <a
+            href={item.href}
+            class={`px-3.5 py-1.5 text-sm font-medium rounded-full transition-all duration-150 ${
+              isActive
+                ? 'bg-[#006D77] text-white shadow-xs'
+                : 'text-[#2D5560] hover:text-[#006D77] hover:bg-[#83C5BE]/15'
+            }`}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Desktop CTA Button -->
+    <div class="hidden md:flex items-center gap-3">
+      <Button href={navCTA.href} variant="primary" size="sm">
+        {navCTA.label}
+      </Button>
+    </div>
+
+    <!-- Mobile Menu Toggle Button -->
+    <button
+      id="mobile-menu-button"
+      type="button"
+      class="md:hidden inline-flex items-center justify-center p-2 rounded-xl text-[#2D5560] hover:text-[#006D77] hover:bg-[#83C5BE]/20 focus:outline-none focus:ring-2 focus:ring-[#006D77] transition-colors"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Toggle navigation menu"
+    >
+      <!-- Menu open icon (hamburger) -->
+      <svg id="menu-open-icon" class="w-6 h-6 block" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+      <!-- Menu close icon (X) -->
+      <svg id="menu-close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden border-t border-[#D8EAEF] bg-[#EDF6F9] px-4 pt-3 pb-6 space-y-2 shadow-lg"
+    aria-label="Mobile Navigation"
+  >
+    <div class="flex flex-col space-y-1">
+      {navItems.map((item) => {
+        const isActive = item.href === '/'
+          ? currentPath === '/'
+          : currentPath === item.href || currentPath.startsWith(item.href + '/');
+
+        return (
+          <a
+            href={item.href}
+            class={`px-4 py-2.5 text-base font-medium rounded-xl transition-colors ${
+              isActive
+                ? 'bg-[#006D77] text-white'
+                : 'text-[#2D5560] hover:text-[#006D77] hover:bg-white/80'
+            }`}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </div>
+    <div class="pt-3 border-t border-[#D8EAEF]">
+      <Button href={navCTA.href} variant="primary" size="md" class="w-full justify-center">
+        {navCTA.label}
+      </Button>
+    </div>
+  </div>
+</header>
+
+<script>
+  function setupMobileMenu() {
+    const button = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    const openIcon = document.getElementById('menu-open-icon');
+    const closeIcon = document.getElementById('menu-close-icon');
+
+    if (!button || !menu || !openIcon || !closeIcon) return;
+
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!isExpanded));
+      menu.classList.toggle('hidden');
+      openIcon.classList.toggle('hidden');
+      openIcon.classList.toggle('block');
+      closeIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('block');
+    });
+  }
+
+  // Run on initial load and client transitions
+  setupMobileMenu();
+  document.addEventListener('astro:after-swap', setupMobileMenu);
+</script>

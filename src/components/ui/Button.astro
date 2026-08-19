@@ -1,0 +1,63 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'accent' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+  type?: 'button' | 'submit' | 'reset';
+  target?: string;
+  rel?: string;
+  'aria-label'?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  class: className = '',
+  type = 'button',
+  target,
+  rel,
+  'aria-label': ariaLabel,
+} = Astro.props;
+
+const baseStyles = 'inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#006D77]';
+
+const sizeStyles = {
+  sm: 'px-3.5 py-1.5 text-xs gap-1.5',
+  md: 'px-5 py-2.5 text-sm gap-2',
+  lg: 'px-6 py-3.5 text-base gap-2.5 shadow-sm',
+};
+
+const variantStyles = {
+  primary: 'bg-[#006D77] text-white hover:bg-[#00565f] shadow-sm hover:shadow active:scale-[0.99]',
+  secondary: 'bg-[#83C5BE]/25 text-[#006D77] hover:bg-[#83C5BE]/40 active:scale-[0.99]',
+  accent: 'bg-[#E29578] text-white hover:bg-[#b86243] shadow-sm hover:shadow active:scale-[0.99]',
+  outline: 'border border-[#006D77] text-[#006D77] hover:bg-[#006D77]/10 active:scale-[0.99]',
+  ghost: 'text-[#006D77] hover:bg-[#006D77]/10 active:scale-[0.99]',
+};
+
+const computedClass = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      class={computedClass}
+      target={target}
+      rel={target === '_blank' ? (rel || 'noopener noreferrer') : rel}
+      aria-label={ariaLabel}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      type={type}
+      class={computedClass}
+      aria-label={ariaLabel}
+    >
+      <slot />
+    </button>
+  )
+}

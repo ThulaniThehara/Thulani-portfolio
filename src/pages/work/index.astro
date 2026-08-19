@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/projects/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+---
+
+<BaseLayout title="Work & Projects | Portfolio">
+  <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 space-y-12">
+    <header class="space-y-4 max-w-2xl">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006D77]/10 text-[#006D77] text-xs font-semibold uppercase tracking-wider">
+        <span>Portfolio Archive</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#102A30]">Selected Work & Case Studies</h1>
+      <p class="text-lg text-[#547A85] leading-relaxed">
+        Comprehensive breakdowns of full-stack platforms, hardware IoT prototypes, and AI-enabled software systems.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+      {projects.map((project) => (
+        <ProjectCard
+          id={project.id}
+          title={project.data.title}
+          description={project.data.description}
+          category={project.data.category}
+          tags={project.data.tags}
+          publishDate={project.data.publishDate}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>

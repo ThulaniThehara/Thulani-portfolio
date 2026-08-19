@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../data/siteConfig';
+import Button from '../../components/ui/Button.astro';
+---
+
+<BaseLayout title={`About | ${siteConfig.author}`}>
+  <div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 space-y-12">
+    <header class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006D77]/10 text-[#006D77] text-xs font-semibold uppercase tracking-wider">
+        <span>Biography</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#102A30]">About Me</h1>
+      <p class="text-lg text-[#547A85] leading-relaxed max-w-2xl">
+        {siteConfig.positioning}
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      <div class="md:col-span-8 space-y-6 text-[#2D5560] leading-relaxed text-base">
+        <p>
+          I am a software engineer focused on building robust systems that bridge frontend interfaces, cloud infrastructure, AI models, and IoT microcontrollers.
+        </p>
+        <p>
+          My approach prioritizes type-safety, clean code architecture, and high reliability. Rather than viewing engineering disciplines as isolated silos, I enjoy connecting hardware sensors to cloud brokers and building intuitive web interfaces to visualize and control them.
+        </p>
+        <div class="pt-4 flex gap-4">
+          <Button href="/work" variant="primary">View My Work</Button>
+          <Button href="/contact" variant="outline">Get In Touch</Button>
+        </div>
+      </div>
+
+      <div class="md:col-span-4 bg-white p-6 rounded-2xl border border-[#D8EAEF] space-y-4">
+        <h3 class="font-bold text-sm text-[#102A30] uppercase tracking-wider">Quick Highlights</h3>
+        <ul class="space-y-3 text-xs text-[#547A85]">
+          <li class="flex items-start gap-2">
+            <span class="text-[#006D77] font-bold">•</span>
+            <span>Focus on Full-Stack, Cloud & AI</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-[#006D77] font-bold">•</span>
+            <span>Hardware & IoT experimentation</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-[#006D77] font-bold">•</span>
+            <span>Based in and ready for remote/hybrid roles</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,68 @@
+---
+import Button from '../ui/Button.astro';
+import { siteConfig } from '../../data/siteConfig';
+---
+
+<section class="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6">
+  <div class="bg-white rounded-3xl border border-[#D8EAEF] p-8 sm:p-12 lg:p-16 shadow-xs">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <!-- Left text area -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006D77]/10 text-[#006D77] text-xs font-semibold uppercase tracking-wider">
+          <span>About Me</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#102A30]">
+          Engineering with Curiosity, Rigor & Craft
+        </h2>
+
+        <p class="text-base sm:text-lg text-[#547A85] leading-relaxed">
+          I am a software engineer driven by understanding how complex technical systems work from the inside out. My background bridges hands-on software development with system architecture, cloud deployment, and embedded hardware.
+        </p>
+
+        <p class="text-sm sm:text-base text-[#547A85] leading-relaxed">
+          Whether constructing full-stack TypeScript applications, optimizing cloud queries, or orchestrating real-time telemetry from physical devices, I prioritize clear code, strong types, and delightful user experiences.
+        </p>
+
+        <div class="pt-2">
+          <Button href="/about" variant="outline" size="md">
+            Read My Full Story &rarr;
+          </Button>
+        </div>
+      </div>
+
+      <!-- Right Highlight Stat/Pillars Box -->
+      <div class="lg:col-span-5 space-y-4">
+        <div class="p-6 rounded-2xl bg-[#EDF6F9] border border-[#D8EAEF] space-y-4">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-[#006D77]">Engineering Focus</h3>
+          
+          <div class="space-y-3 text-sm">
+            <div class="flex items-start gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#006D77] text-white flex items-center justify-center text-xs mt-0.5">&check;</span>
+              <div>
+                <strong class="text-[#102A30] block">Modern Type-Safe Stacks</strong>
+                <span class="text-[#547A85] text-xs">TypeScript, Astro, React, PostgreSQL</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#006D77] text-white flex items-center justify-center text-xs mt-0.5">&check;</span>
+              <div>
+                <strong class="text-[#102A30] block">Distributed & Serverless Systems</strong>
+                <span class="text-[#547A85] text-xs">Edge compute, microservices, cloud telemetry</span>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <span class="w-5 h-5 rounded-full bg-[#006D77] text-white flex items-center justify-center text-xs mt-0.5">&check;</span>
+              <div>
+                <strong class="text-[#102A30] block">Real-World Integration</strong>
+                <span class="text-[#547A85] text-xs">AI agent workflows & embedded IoT hardware</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
