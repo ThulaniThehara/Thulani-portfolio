@@ -1,27 +1,29 @@
 ---
 import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
 import { siteConfig } from '../../data/siteConfig';
 ---
 
-<section class="relative overflow-hidden py-16 sm:py-24 lg:py-32 border-b border-[#D8EAEF] bg-gradient-to-b from-[#EDF6F9] via-[#EDF6F9] to-white">
+<section class="relative overflow-hidden py-16 sm:py-24 lg:py-32 border-b border-[var(--border-subtle)] bg-gradient-to-b from-[var(--bg-page)] via-[var(--bg-page)] to-white">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
       <!-- Left Column: Copy & CTAs -->
       <div class="lg:col-span-7 space-y-6 text-left">
         <!-- Status Badge -->
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#D8EAEF] shadow-xs text-xs font-semibold text-[#006D77]">
-          <span class="w-2 h-2 rounded-full bg-[#006D77] animate-pulse"></span>
-          <span>{siteConfig.role}</span>
+        <div>
+          <Badge variant="soft-teal" size="md" dot>
+            {siteConfig.role}
+          </Badge>
         </div>
 
         <!-- Main Headline -->
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#102A30] leading-[1.1]">
-          I build systems that connect <span class="text-[#006D77]">software</span>, <span class="text-[#0e838e]">cloud</span>, <span class="text-[#006D77]">AI</span> and <span class="text-[#E29578]">hardware</span>.
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.1]">
+          I build systems that connect <span class="text-[var(--brand-deep-teal)]">software</span>, <span class="text-[var(--brand-soft-teal)]">cloud</span>, <span class="text-[var(--brand-deep-teal)]">AI</span> and <span class="text-[var(--brand-coral)]">hardware</span>.
         </h1>
 
         <!-- Short Description -->
-        <p class="text-lg sm:text-xl text-[#547A85] leading-relaxed max-w-2xl font-normal">
-          Hi, I'm <strong class="text-[#102A30] font-semibold">{siteConfig.author}</strong>. I design and engineer reliable full-stack applications, scalable serverless architectures, intelligent AI workflows, and connected IoT devices.
+        <p class="text-lg sm:text-xl text-[var(--text-muted)] leading-relaxed max-w-2xl font-normal">
+          Hi, I'm <strong class="text-[var(--text-primary)] font-semibold">{siteConfig.author}</strong>. I design and engineer reliable full-stack applications, scalable serverless architectures, intelligent AI workflows, and connected IoT devices.
         </p>
 
         <!-- CTAs -->
@@ -38,91 +40,91 @@ import { siteConfig } from '../../data/siteConfig';
         </div>
 
         <!-- Pillar tags -->
-        <div class="pt-6 border-t border-[#D8EAEF] flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-[#547A85] font-mono">
+        <div class="pt-6 border-t border-[var(--border-subtle)] flex flex-wrap items-center gap-y-2 gap-x-6 text-xs text-[var(--text-muted)] font-mono">
           <span class="flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#006D77]"></span> Full-Stack Platforms
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--brand-deep-teal)]"></span> Full-Stack Platforms
           </span>
           <span class="flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#83C5BE]"></span> Cloud & Serverless
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--brand-soft-teal)]"></span> Cloud & Serverless
           </span>
           <span class="flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#006D77]"></span> Applied AI Systems
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--brand-deep-teal)]"></span> Applied AI Systems
           </span>
           <span class="flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#E29578]"></span> IoT & Edge Devices
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--brand-coral)]"></span> IoT & Edge Devices
           </span>
         </div>
       </div>
 
-      <!-- Right Column: Subtle Systems Architecture Visual Element -->
+      <!-- Right Column: Systems Architecture Schematic Visual Element -->
       <div class="lg:col-span-5 flex justify-center lg:justify-end">
-        <div class="relative w-full max-w-md bg-white rounded-2xl border border-[#D8EAEF] p-6 shadow-sm space-y-4">
+        <div class="relative w-full max-w-md bg-[var(--bg-surface)] rounded-2xl border border-[var(--border-subtle)] p-6 shadow-[var(--shadow-card)] space-y-4">
           <!-- Terminal/Card Header -->
-          <div class="flex items-center justify-between border-b border-[#D8EAEF] pb-3 text-xs text-[#547A85]">
+          <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 text-xs text-[var(--text-muted)]">
             <div class="flex items-center gap-1.5">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#E29578]/60"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#83C5BE]"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#006D77]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[var(--brand-coral)]/70"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[var(--brand-soft-teal)]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[var(--brand-deep-teal)]"></span>
             </div>
             <span class="font-mono font-medium">systems_matrix.ts</span>
           </div>
 
           <!-- Architecture Nodes Visualization -->
           <div class="space-y-3 font-mono text-xs">
-            <div class="p-3 rounded-xl bg-[#EDF6F9] border border-[#D8EAEF] flex items-center justify-between">
+            <div class="p-3 rounded-xl bg-[var(--bg-page)] border border-[var(--border-subtle)] flex items-center justify-between">
               <div class="flex items-center gap-2.5">
-                <span class="w-6 h-6 rounded-lg bg-[#006D77] text-white flex items-center justify-center text-[10px] font-bold">FS</span>
+                <span class="w-6 h-6 rounded-lg bg-[var(--brand-deep-teal)] text-white flex items-center justify-center text-[10px] font-bold">FS</span>
                 <div>
-                  <div class="font-bold text-[#102A30]">Software & Web Layer</div>
-                  <div class="text-[11px] text-[#547A85]">React • Astro • TypeScript • REST/GraphQL</div>
+                  <div class="font-bold text-[var(--text-primary)]">Software & Web Layer</div>
+                  <div class="text-[11px] text-[var(--text-muted)]">React • Astro • TypeScript • REST/GraphQL</div>
                 </div>
               </div>
-              <span class="text-[#006D77] font-semibold">Active</span>
+              <span class="text-[var(--brand-deep-teal)] font-semibold">Active</span>
             </div>
 
-            <div class="flex justify-center text-[#83C5BE]">
+            <div class="flex justify-center text-[var(--brand-soft-teal)]">
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </div>
 
-            <div class="p-3 rounded-xl bg-[#EDF6F9] border border-[#D8EAEF] flex items-center justify-between">
+            <div class="p-3 rounded-xl bg-[var(--bg-page)] border border-[var(--border-subtle)] flex items-center justify-between">
               <div class="flex items-center gap-2.5">
-                <span class="w-6 h-6 rounded-lg bg-[#0e838e] text-white flex items-center justify-center text-[10px] font-bold">CL</span>
+                <span class="w-6 h-6 rounded-lg bg-[var(--brand-deep-teal)]/90 text-white flex items-center justify-center text-[10px] font-bold">CL</span>
                 <div>
-                  <div class="font-bold text-[#102A30]">Cloud & Edge Infrastructure</div>
-                  <div class="text-[11px] text-[#547A85]">Cloudflare • Serverless • Microservices • SQL</div>
+                  <div class="font-bold text-[var(--text-primary)]">Cloud & Edge Infrastructure</div>
+                  <div class="text-[11px] text-[var(--text-muted)]">Cloudflare • Serverless • Microservices • SQL</div>
                 </div>
               </div>
-              <span class="text-[#006D77] font-semibold">Ready</span>
+              <span class="text-[var(--brand-deep-teal)] font-semibold">Ready</span>
             </div>
 
-            <div class="flex justify-center text-[#83C5BE]">
+            <div class="flex justify-center text-[var(--brand-soft-teal)]">
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
-              <div class="p-3 rounded-xl bg-[#EDF6F9] border border-[#D8EAEF] space-y-1">
-                <div class="flex items-center gap-1.5 font-bold text-[#102A30]">
-                  <span class="w-2 h-2 rounded-full bg-[#006D77]"></span> AI Pipelines
+              <div class="p-3 rounded-xl bg-[var(--bg-page)] border border-[var(--border-subtle)] space-y-1">
+                <div class="flex items-center gap-1.5 font-bold text-[var(--text-primary)]">
+                  <span class="w-2 h-2 rounded-full bg-[var(--brand-deep-teal)]"></span> AI Pipelines
                 </div>
-                <div class="text-[10px] text-[#547A85]">LLMs • RAG • Embeddings</div>
+                <div class="text-[10px] text-[var(--text-muted)]">LLMs • RAG • Embeddings</div>
               </div>
-              <div class="p-3 rounded-xl bg-[#EDF6F9] border border-[#D8EAEF] space-y-1">
-                <div class="flex items-center gap-1.5 font-bold text-[#102A30]">
-                  <span class="w-2 h-2 rounded-full bg-[#E29578]"></span> IoT & Sensors
+              <div class="p-3 rounded-xl bg-[var(--bg-page)] border border-[var(--border-subtle)] space-y-1">
+                <div class="flex items-center gap-1.5 font-bold text-[var(--text-primary)]">
+                  <span class="w-2 h-2 rounded-full bg-[var(--brand-coral)]"></span> IoT & Sensors
                 </div>
-                <div class="text-[10px] text-[#547A85]">MQTT • Telemetry • Hardware</div>
+                <div class="text-[10px] text-[var(--text-muted)]">MQTT • Telemetry • Hardware</div>
               </div>
             </div>
           </div>
 
           <!-- Bottom Metric -->
-          <div class="pt-2 border-t border-[#D8EAEF] flex items-center justify-between text-[11px] text-[#547A85]">
+          <div class="pt-2 border-t border-[var(--border-subtle)] flex items-center justify-between text-[11px] text-[var(--text-muted)]">
             <span>Focus: Reliability & Craft</span>
-            <span class="font-mono text-[#006D77] font-semibold">100% Type-Safe</span>
+            <span class="font-mono text-[var(--brand-deep-teal)] font-semibold">100% Type-Safe</span>
           </div>
         </div>
       </div>

@@ -1,0 +1,46 @@
+---
+interface StackCategory {
+  category: string;
+  items: string[];
+}
+
+interface Props {
+  stack?: StackCategory[];
+  items?: string[];
+}
+
+const { stack = [], items = [] } = Astro.props;
+---
+
+<div class="my-6 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 space-y-4 shadow-xs">
+  <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-[var(--brand-deep-teal)]">
+    Technologies Used
+  </h4>
+
+  {stack.length > 0 ? (
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {stack.map((group) => (
+        <div class="p-3 rounded-xl bg-[var(--bg-page)] border border-[var(--border-subtle)] space-y-2">
+          <span class="text-xs font-bold text-[var(--text-primary)] block">{group.category}</span>
+          <div class="flex flex-wrap gap-1.5">
+            {group.items.map((item) => (
+              <span class="px-2 py-0.5 text-[11px] font-medium bg-white text-[var(--text-secondary)] rounded-md border border-[var(--border-subtle)]">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  ) : items.length > 0 ? (
+    <div class="flex flex-wrap gap-2">
+      {items.map((item) => (
+        <span class="px-2.5 py-1 text-xs font-medium bg-[var(--bg-page)] text-[var(--brand-deep-teal)] rounded-lg border border-[var(--border-subtle)]">
+          {item}
+        </span>
+      ))}
+    </div>
+  ) : (
+    <slot />
+  )}
+</div>

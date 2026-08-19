@@ -21,20 +21,20 @@ const {
   'aria-label': ariaLabel,
 } = Astro.props;
 
-const baseStyles = 'inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#006D77]';
+const baseStyles = 'inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-deep-teal)]';
 
 const sizeStyles = {
   sm: 'px-3.5 py-1.5 text-xs gap-1.5',
   md: 'px-5 py-2.5 text-sm gap-2',
-  lg: 'px-6 py-3.5 text-base gap-2.5 shadow-sm',
+  lg: 'px-6 py-3.5 text-base gap-2.5',
 };
 
 const variantStyles = {
-  primary: 'bg-[#006D77] text-white hover:bg-[#00565f] shadow-sm hover:shadow active:scale-[0.99]',
-  secondary: 'bg-[#83C5BE]/25 text-[#006D77] hover:bg-[#83C5BE]/40 active:scale-[0.99]',
-  accent: 'bg-[#E29578] text-white hover:bg-[#b86243] shadow-sm hover:shadow active:scale-[0.99]',
-  outline: 'border border-[#006D77] text-[#006D77] hover:bg-[#006D77]/10 active:scale-[0.99]',
-  ghost: 'text-[#006D77] hover:bg-[#006D77]/10 active:scale-[0.99]',
+  primary: 'bg-[var(--brand-deep-teal)] text-white hover:bg-[var(--brand-deep-teal-hover)] shadow-xs hover:shadow-sm active:scale-[0.99]',
+  secondary: 'bg-[var(--bg-surface-teal-subtle)] text-[var(--brand-deep-teal)] hover:bg-[var(--brand-soft-teal-light)] active:scale-[0.99]',
+  accent: 'bg-[var(--brand-coral)] text-white hover:bg-[var(--brand-coral-hover)] shadow-[var(--shadow-coral)] active:scale-[0.99]',
+  outline: 'border border-[var(--brand-deep-teal)] text-[var(--brand-deep-teal)] hover:bg-[var(--bg-surface-teal-subtle)] active:scale-[0.99]',
+  ghost: 'text-[var(--brand-deep-teal)] hover:bg-[var(--bg-surface-teal-subtle)] active:scale-[0.99]',
 };
 
 const computedClass = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;

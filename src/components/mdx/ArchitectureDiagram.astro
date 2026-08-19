@@ -1,0 +1,56 @@
+---
+interface NodeItem {
+  title: string;
+  desc?: string;
+  type?: 'client' | 'server' | 'cloud' | 'hardware' | 'db';
+}
+
+interface Props {
+  title?: string;
+  nodes?: NodeItem[];
+}
+
+const {
+  title = "System Architecture Diagram",
+  nodes = [],
+} = Astro.props;
+
+const nodeTypeStyles = {
+  client: 'bg-white border-[var(--border-subtle)] text-[var(--text-primary)]',
+  server: 'bg-[var(--bg-surface-teal-subtle)] border-[var(--brand-soft-teal)] text-[var(--brand-deep-teal)]',
+  cloud: 'bg-[var(--bg-page)] border-[var(--brand-deep-teal)] text-[var(--brand-deep-teal)]',
+  hardware: 'bg-[var(--brand-soft-peach)]/40 border-[var(--brand-coral)] text-[var(--text-coral)]',
+  db: 'bg-white border-[var(--border-medium)] text-[var(--text-secondary)]',
+};
+---
+
+<div class="my-8 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface-subtle)] p-6 shadow-xs">
+  <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3 mb-6">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-[var(--brand-deep-teal)]"></span>
+      <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-[var(--brand-deep-teal)]">
+        {title}
+      </h4>
+    </div>
+    <span class="text-[11px] font-mono text-[var(--text-muted)]">Data Flow & Components</span>
+  </div>
+
+  {nodes.length > 0 ? (
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {nodes.map((node, i) => (
+        <div class={`p-4 rounded-xl border ${nodeTypeStyles[node.type || 'server']} space-y-1 relative`}>
+          <div class="flex items-center justify-between text-[11px] font-mono opacity-80">
+            <span class="uppercase">{node.type || 'node'}</span>
+            <span>0{i + 1}</span>
+          </div>
+          <div class="font-bold text-sm">{node.title}</div>
+          {node.desc && <div class="text-xs opacity-90 leading-snug">{node.desc}</div>}
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div class="space-y-4">
+      <slot />
+    </div>
+  )}
+</div>

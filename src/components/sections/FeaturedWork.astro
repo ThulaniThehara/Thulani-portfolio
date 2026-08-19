@@ -1,26 +1,22 @@
 ---
-import { getCollection } from 'astro:content';
+import { getFeaturedProjects } from '../../utils/projects';
 import ProjectCard from '../projects/ProjectCard.astro';
 import Button from '../ui/Button.astro';
 
-const allProjects = await getCollection('projects');
-// Prioritize featured or return all 4 initial projects
-const featuredProjects = allProjects.filter((p) => p.data.featured).length >= 3
-  ? allProjects.filter((p) => p.data.featured)
-  : allProjects.slice(0, 4);
+const featuredProjects = await getFeaturedProjects();
 ---
 
 <section class="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6">
   <!-- Section Header -->
   <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
     <div class="space-y-3 max-w-xl">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006D77]/10 text-[#006D77] text-xs font-semibold uppercase tracking-wider">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--bg-surface-teal-subtle)] text-[var(--brand-deep-teal)] text-xs font-semibold uppercase tracking-wider">
         <span>Portfolio Highlights</span>
       </div>
-      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#102A30]">
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--text-primary)]">
         Selected Work & Systems
       </h2>
-      <p class="text-base text-[#547A85] leading-relaxed">
+      <p class="text-base text-[var(--text-muted)] leading-relaxed">
         Production systems, IoT hardware implementations, and intelligent applications built with end-to-end engineering rigor.
       </p>
     </div>
@@ -43,8 +39,8 @@ const featuredProjects = allProjects.filter((p) => p.data.featured).length >= 3
         title={project.data.title}
         description={project.data.description}
         category={project.data.category}
-        tags={project.data.tags}
-        publishDate={project.data.publishDate}
+        tags={project.data.technologies || project.data.tags || []}
+        publishDate={project.data.publishDate || `${project.data.year}-01-01`}
       />
     ))}
   </div>

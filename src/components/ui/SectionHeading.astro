@@ -1,0 +1,42 @@
+---
+import Badge from './Badge.astro';
+
+interface Props {
+  kicker?: string;
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+  class?: string;
+}
+
+const {
+  kicker,
+  title,
+  subtitle,
+  align = 'left',
+  class: className = '',
+} = Astro.props;
+
+const alignStyles = {
+  left: 'text-left max-w-2xl',
+  center: 'text-center mx-auto max-w-2xl items-center',
+};
+---
+
+<div class={`space-y-3 mb-12 flex flex-col ${alignStyles[align]} ${className}`}>
+  {kicker && (
+    <div>
+      <Badge variant="soft-teal" size="md">
+        {kicker}
+      </Badge>
+    </div>
+  )}
+  <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--text-primary)]">
+    {title}
+  </h2>
+  {subtitle && (
+    <p class="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed font-normal">
+      {subtitle}
+    </p>
+  )}
+</div>

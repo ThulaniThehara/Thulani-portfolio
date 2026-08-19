@@ -1,0 +1,17 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = "Key Engineering Takeaway" } = Astro.props;
+---
+
+<div class="my-8 rounded-2xl bg-gradient-to-r from-[var(--brand-deep-teal)] to-[var(--brand-deep-teal-dark)] text-white p-6 sm:p-8 shadow-sm space-y-3">
+  <div class="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-[var(--brand-soft-teal)]">
+    <span class="w-2 h-2 rounded-full bg-[var(--brand-soft-teal)] animate-pulse"></span>
+    <span>{title}</span>
+  </div>
+  <div class="text-base sm:text-lg text-[var(--brand-ice-white)] leading-relaxed font-medium">
+    <slot />
+  </div>
+</div>

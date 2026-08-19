@@ -1,0 +1,47 @@
+---
+interface Props {
+  type?: 'note' | 'tip' | 'warning' | 'info';
+  title?: string;
+}
+
+const { type = 'note', title } = Astro.props;
+
+const calloutStyles = {
+  note: {
+    container: 'bg-[var(--bg-page)] border-[var(--brand-deep-teal)] text-[var(--text-primary)]',
+    badge: 'bg-[var(--brand-deep-teal)] text-white',
+    defaultTitle: 'Engineering Note',
+  },
+  tip: {
+    container: 'bg-[var(--bg-surface-teal-subtle)] border-[var(--brand-soft-teal)] text-[var(--brand-deep-teal)]',
+    badge: 'bg-[var(--brand-soft-teal)] text-[var(--brand-deep-teal-dark)]',
+    defaultTitle: 'Pro-Tip / Optimization',
+  },
+  warning: {
+    container: 'bg-[var(--brand-soft-peach)]/30 border-[var(--brand-coral)] text-[var(--text-primary)]',
+    badge: 'bg-[var(--brand-coral)] text-white',
+    defaultTitle: 'Technical Challenge',
+  },
+  info: {
+    container: 'bg-white border-[var(--border-medium)] text-[var(--text-primary)]',
+    badge: 'bg-[var(--text-secondary)] text-white',
+    defaultTitle: 'Context',
+  },
+};
+
+const current = calloutStyles[type];
+---
+
+<div class={`my-6 rounded-2xl border-l-4 p-5 ${current.container} shadow-xs space-y-2`}>
+  <div class="flex items-center gap-2">
+    <span class={`px-2 py-0.5 text-[10px] font-mono font-bold uppercase rounded ${current.badge}`}>
+      {type}
+    </span>
+    <h5 class="text-sm font-bold text-[var(--text-primary)]">
+      {title || current.defaultTitle}
+    </h5>
+  </div>
+  <div class="text-sm text-[var(--text-secondary)] leading-relaxed prose-sm">
+    <slot />
+  </div>
+</div>

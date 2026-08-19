@@ -1,0 +1,45 @@
+---
+interface Props {
+  variant?: 'teal' | 'soft-teal' | 'peach' | 'coral' | 'neutral' | 'subtle';
+  size?: 'sm' | 'md';
+  class?: string;
+  dot?: boolean;
+}
+
+const {
+  variant = 'teal',
+  size = 'md',
+  class: className = '',
+  dot = false,
+} = Astro.props;
+
+const baseStyles = 'inline-flex items-center font-medium rounded-md border tracking-wide';
+
+const sizeStyles = {
+  sm: 'px-2 py-0.5 text-[11px] gap-1',
+  md: 'px-2.5 py-1 text-xs gap-1.5',
+};
+
+const variantStyles = {
+  teal: 'bg-[var(--brand-deep-teal)] text-white border-transparent',
+  'soft-teal': 'bg-[var(--bg-surface-teal-subtle)] text-[var(--brand-deep-teal)] border-[var(--border-subtle)]',
+  peach: 'bg-[var(--brand-soft-peach)] text-[var(--text-coral)] border-[var(--border-peach)]',
+  coral: 'bg-[var(--brand-coral)] text-white border-transparent',
+  neutral: 'bg-white text-[var(--text-secondary)] border-[var(--border-subtle)] shadow-2xs',
+  subtle: 'bg-[var(--bg-page)] text-[var(--text-secondary)] border-[var(--border-subtle)]',
+};
+
+const dotColors = {
+  teal: 'bg-white',
+  'soft-teal': 'bg-[var(--brand-deep-teal)]',
+  peach: 'bg-[var(--text-coral)]',
+  coral: 'bg-white',
+  neutral: 'bg-[var(--brand-deep-teal)]',
+  subtle: 'bg-[var(--brand-soft-teal)]',
+};
+---
+
+<span class={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}>
+  {dot && <span class={`w-1.5 h-1.5 rounded-full ${dotColors[variant]}`}></span>}
+  <slot />
+</span>
