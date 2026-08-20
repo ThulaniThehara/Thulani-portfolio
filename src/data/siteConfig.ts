@@ -8,6 +8,7 @@ export interface SiteConfig {
   social: {
     github: string;
     linkedin: string;
+    medium: string;
     email: string;
   };
 }
@@ -22,6 +23,7 @@ export const siteConfig: SiteConfig = {
   social: {
     github: "https://github.com",
     linkedin: "https://linkedin.com",
-    email: "thulani.dev@example.com",
+    medium: "https://medium.com/@thulanithehara03",
+    email: "thulanithehara03@gmail.com",
   },
 };

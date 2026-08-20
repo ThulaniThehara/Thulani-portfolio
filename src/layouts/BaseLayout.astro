@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
+import TealCurrent from '../components/background/TealCurrent.astro';
 import { siteConfig } from '../data/siteConfig';
 
 interface Props {
@@ -37,6 +38,7 @@ const defaultStructuredData = structuredData || {
   sameAs: [
     siteConfig.social.github,
     siteConfig.social.linkedin,
+    siteConfig.social.medium,
   ],
   knowsAbout: [
     'Software Engineering',
@@ -105,7 +107,10 @@ const defaultStructuredData = structuredData || {
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json" set:html={JSON.stringify(defaultStructuredData)} />
   </head>
-  <body class="min-h-full flex flex-col bg-[#EDF6F9] text-[#102A30] antialiased selection:bg-[#83C5BE] selection:text-[#004249]">
+  <body class="min-h-full flex flex-col bg-[#EDF6F9] text-[#102A30] antialiased selection:bg-[#83C5BE] selection:text-[#004249] relative">
+    <!-- Reusable Global Background Component -->
+    <TealCurrent />
+
     <!-- Accessibility Skip Link -->
     <a
       href="#main-content"
@@ -116,40 +121,90 @@ const defaultStructuredData = structuredData || {
 
     <Navbar />
     
-    <main id="main-content" class="flex-1 w-full">
+    <main id="main-content" class="flex-1 w-full relative z-10">
       <slot />
     </main>
 
     <Footer />
 
-    <!-- Performance: Deferred Scroll-Reveal Observer -->
+    <!-- Scroll-linked "approach" reveal: sections ease toward the viewer as they enter, -->
+    <!-- tracked continuously against scroll position (not a one-shot trigger) for a smooth, -->
+    <!-- physically-lagging motion. See .reveal-on-scroll / .approach-3d in global.css. -->
     <script>
       function setupScrollReveal() {
+        const items = Array.from(document.querySelectorAll<HTMLElement>('.reveal-on-scroll'));
+        if (!items.length) return;
+
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
-            el.classList.add('is-revealed');
+          items.forEach((el) => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
           });
           return;
+        }
+
+        const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
+        const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+        const current = new Map<HTMLElement, number>(items.map((el) => [el, 0]));
+        const activeEls = new Set<HTMLElement>();
+        let rafId: number | null = null;
+
+        function computeTarget(el: HTMLElement) {
+          const rect = el.getBoundingClientRect();
+          const vh = window.innerHeight;
+          const raw = 1 - (rect.top - vh * 0.15) / (vh * 0.6);
+          return clamp01(raw);
+        }
+
+        function apply(el: HTMLElement, value: number) {
+          const eased = easeOutCubic(value);
+          const translateY = (1 - eased) * 56;
+          const scale = 0.94 + eased * 0.06;
+          let transform = `translateY(${translateY}px) scale(${scale})`;
+
+          if (el.classList.contains('approach-3d')) {
+            const rotateX = (1 - eased) * 8;
+            const translateZ = (1 - eased) * -120;
+            transform = `translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) scale(${scale})`;
+          }
+
+          el.style.opacity = String(eased);
+          el.style.transform = transform;
+        }
+
+        function tick() {
+          activeEls.forEach((el) => {
+            const target = computeTarget(el);
+            const prev = current.get(el) ?? 0;
+            const next = prev + (target - prev) * 0.18;
+            current.set(el, next);
+            apply(el, next);
+          });
+
+          rafId = activeEls.size ? requestAnimationFrame(tick) : null;
+        }
+
+        function ensureLoop() {
+          if (rafId === null) rafId = requestAnimationFrame(tick);
         }
 
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
+              const el = entry.target as HTMLElement;
               if (entry.isIntersecting) {
-                entry.target.classList.add('is-revealed');
-                observer.unobserve(entry.target);
+                activeEls.add(el);
+                ensureLoop();
+              } else {
+                activeEls.delete(el);
               }
             });
           },
-          {
-            rootMargin: '0px 0px -30px 0px',
-            threshold: 0.05,
-          }
+          { rootMargin: '20% 0px 20% 0px', threshold: 0 }
         );
 
-        document.querySelectorAll('.reveal-on-scroll:not(.is-revealed)').forEach((el) => {
-          observer.observe(el);
-        });
+        items.forEach((el) => observer.observe(el));
       }
 
       setupScrollReveal();

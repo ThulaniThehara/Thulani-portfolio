@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/articles/ArticleCard.astro';
+import Badge from '../../components/ui/Badge.astro';
+import { getAllArticles, getAllCategories, getReadingTime } from '../../utils/articles';
+
+const articles = await getAllArticles();
+const categories = await getAllCategories();
+---
+
+<BaseLayout title="Articles | Thulani" description="Writing on software development, cloud technologies, and AI — notes from building real systems.">
+  <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 space-y-12">
+    <!-- Header -->
+    <header class="space-y-4 max-w-2xl">
+      <div>
+        <Badge variant="soft-teal" size="md">
+          Writing
+        </Badge>
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[var(--text-primary)]">
+        Articles
+      </h1>
+      <p class="text-lg text-[var(--text-muted)] leading-relaxed font-normal">
+        Notes on software development, cloud technologies, and AI — written while building real systems, not just reading about them.
+      </p>
+    </header>
+
+    {articles.length > 0 ? (
+      <>
+        <!-- Category Filter -->
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-b border-[var(--border-subtle)] pb-6">
+          <span class="text-xs font-mono font-semibold uppercase text-[var(--text-muted)] mr-2">Filter:</span>
+          <button
+            type="button"
+            class="article-filter-btn px-3 py-1 text-xs font-semibold rounded-full bg-[var(--brand-deep-teal)] text-white shadow-xs active-filter cursor-pointer"
+            data-filter-value="All"
+          >
+            All ({articles.length})
+          </button>
+          {categories.map((cat) => (
+            <button
+              type="button"
+              class="article-filter-btn px-3 py-1 text-xs font-medium rounded-full bg-white text-[var(--text-secondary)] border border-[var(--border-subtle)] hover:border-[var(--brand-soft-teal)] hover:text-[var(--brand-deep-teal)] cursor-pointer transition-colors"
+              data-filter-value={cat}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <!-- Articles Grid -->
+        <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {articles.map((article) => (
+            <div class="article-item" data-category={article.data.category}>
+              <ArticleCard
+                title={article.data.title}
+                description={article.data.description}
+                category={article.data.category}
+                tags={article.data.tags}
+                publishDate={article.data.publishDate}
+                readingTime={getReadingTime(article)}
+                externalUrl={article.data.externalUrl}
+                coverImage={article.data.coverImage}
+              />
+            </div>
+          ))}
+        </div>
+
+        <!-- Empty State (hidden by default) -->
+        <div id="empty-state" class="hidden text-center py-16 p-8 rounded-2xl bg-[var(--bg-surface)] border border-dashed border-[var(--border-subtle)] space-y-3">
+          <div class="text-sm font-bold text-[var(--text-primary)]">No articles match this filter</div>
+          <p class="text-xs text-[var(--text-muted)]">Try selecting another category.</p>
+        </div>
+      </>
+    ) : (
+      <div class="text-center py-20 p-8 rounded-2xl bg-[var(--bg-surface)] border border-dashed border-[var(--border-subtle)] space-y-3">
+        <div class="text-sm font-bold text-[var(--text-primary)]">No articles published yet</div>
+        <p class="text-xs text-[var(--text-muted)]">Check back soon — new writing is on the way.</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<script>
+  function setupArticleFiltering() {
+    let activeCategory = 'All';
+
+    const filterButtons = document.querySelectorAll('.article-filter-btn');
+    const articleItems = document.querySelectorAll('.article-item');
+    const emptyState = document.getElementById('empty-state');
+
+    function applyFilter() {
+      let visibleCount = 0;
+
+      articleItems.forEach((item) => {
+        const matches = activeCategory === 'All' || item.getAttribute('data-category') === activeCategory;
+        (item as HTMLElement).style.display = matches ? 'block' : 'none';
+        if (matches) visibleCount++;
+      });
+
+      if (emptyState) {
+        emptyState.classList.toggle('hidden', visibleCount > 0);
+      }
+    }
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach((b) => {
+          b.classList.remove('bg-[var(--brand-deep-teal)]', 'text-white', 'shadow-xs', 'active-filter');
+          b.classList.add('bg-white', 'text-[var(--text-secondary)]', 'border', 'border-[var(--border-subtle)]');
+        });
+        btn.classList.add('bg-[var(--brand-deep-teal)]', 'text-white', 'shadow-xs', 'active-filter');
+        btn.classList.remove('bg-white', 'text-[var(--text-secondary)]');
+
+        activeCategory = btn.getAttribute('data-filter-value') || 'All';
+        applyFilter();
+      });
+    });
+  }
+
+  setupArticleFiltering();
+  document.addEventListener('astro:after-swap', setupArticleFiltering);
+</script>

@@ -3,15 +3,15 @@ import Button from '../ui/Button.astro';
 import { siteConfig } from '../../data/siteConfig';
 ---
 
-<section class="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6 reveal-on-scroll">
+<section class="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6" style="perspective: 1200px;">
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
     <!-- Text -->
-    <div class="lg:col-span-8 space-y-4">
+    <div class="lg:col-span-8 space-y-4 reveal-on-scroll approach-3d">
       <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--text-primary)]">
         About Me
       </h2>
       <p class="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed max-w-2xl">
-        I'm a software engineer who enjoys understanding how systems work end to end — from embedded microcontrollers and cloud infrastructure to type-safe web interfaces and AI pipelines. I focus on writing clean, testable code that solves real problems.
+       I’m a 3rd Year IT Undergraduate passionate about software development, cloud technologies, and AI. I enjoy turning ideas into practical, user-focused solutions while continuously learning and exploring new technologies.
       </p>
       <div class="pt-2">
         <Button href="/about" variant="outline" size="md" class="group">
@@ -26,19 +26,19 @@ import { siteConfig } from '../../data/siteConfig';
     <!-- Quick Stats -->
     <div class="lg:col-span-4">
       <div class="grid grid-cols-2 gap-4">
-        <div class="p-4 rounded-2xl bg-white border border-[var(--border-subtle)] text-center">
+        <div class="reveal-on-scroll approach-3d p-4 rounded-2xl bg-white border border-[var(--border-subtle)] text-center">
           <div class="text-2xl font-extrabold text-[var(--brand-deep-teal)]">5+</div>
           <div class="text-xs text-[var(--text-muted)] mt-1">Projects</div>
         </div>
-        <div class="p-4 rounded-2xl bg-white border border-[var(--border-subtle)] text-center">
+        <div class="reveal-on-scroll approach-3d p-4 rounded-2xl bg-white border border-[var(--border-subtle)] text-center">
           <div class="text-2xl font-extrabold text-[var(--brand-deep-teal)]">4</div>
           <div class="text-xs text-[var(--text-muted)] mt-1">Domains</div>
         </div>
-        <div class="p-4 rounded-2xl bg-white border border-[var(--border-subtle)] text-center">
+        <div class="reveal-on-scroll approach-3d p-4 rounded-2xl bg-white border border-[var(--border-subtle)] text-center">
           <div class="text-2xl font-extrabold text-[var(--brand-deep-teal)]">10+</div>
           <div class="text-xs text-[var(--text-muted)] mt-1">Technologies</div>
         </div>
-        <div class="p-4 rounded-2xl bg-white border border-[var(--border-subtle)] text-center">
+        <div class="reveal-on-scroll approach-3d p-4 rounded-2xl bg-white border border-[var(--border-subtle)] text-center">
           <div class="text-2xl font-extrabold text-[var(--brand-deep-teal)]">3+</div>
           <div class="text-xs text-[var(--text-muted)] mt-1">Years Coding</div>
         </div>

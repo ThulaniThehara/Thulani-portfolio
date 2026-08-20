@@ -62,7 +62,6 @@ const projectStructuredData = {
         Back to all projects
       </a>
       <div class="text-xs text-[var(--text-muted)] font-mono hidden sm:block">
-        Case Study // {data.year}
       </div>
     </div>
 
@@ -86,9 +85,7 @@ const projectStructuredData = {
         {data.title}
       </h1>
 
-      <p class="text-lg sm:text-xl text-[var(--text-muted)] leading-relaxed font-normal animate-fade-in-up delay-200">
-        {data.description}
-      </p>
+
 
       <!-- Action Buttons -->
       {(data.liveUrl || data.githubUrl) && (
@@ -113,11 +110,7 @@ const projectStructuredData = {
       )}
 
       <!-- Metadata Box -->
-      <div class="rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] p-6 shadow-xs grid grid-cols-2 sm:grid-cols-4 gap-6 animate-fade-in-up delay-300">
-        <div>
-          <span class="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)] block mb-1">My Role</span>
-          <span class="text-sm font-bold text-[var(--text-primary)]">{data.role || 'Software Engineer'}</span>
-        </div>
+      <div class="rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] p-6 shadow-xs grid grid-cols-2 sm:grid-cols-3 gap-6 animate-fade-in-up delay-300">
         <div>
           <span class="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)] block mb-1">Duration</span>
           <span class="text-sm font-bold text-[var(--text-primary)]">{data.duration || '3 Months'}</span>
@@ -132,21 +125,7 @@ const projectStructuredData = {
         </div>
       </div>
 
-      <!-- Tech Stack Badges -->
-      {technologies.length > 0 && (
-        <div class="space-y-2 animate-fade-in-up delay-400">
-          <span class="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--brand-deep-teal)]">
-            Primary Stack:
-          </span>
-          <div class="flex flex-wrap gap-1.5">
-            {technologies.map((tech) => (
-              <Badge variant="subtle" size="sm">
-                {tech}
-              </Badge>
-            ))}
-          </div>
-        </div>
-      )}
+
     </header>
 
     <!-- Main Case Study MDX Content Container -->

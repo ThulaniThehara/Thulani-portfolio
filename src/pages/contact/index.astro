@@ -22,7 +22,7 @@ import Button from '../../components/ui/Button.astro';
           <span class="text-sm font-semibold text-[#547A85]">Direct Email</span>
           <a
             href={`mailto:${siteConfig.social.email}`}
-            class="text-sm font-medium text-[#006D77] hover:underline"
+            class="text-sm font-medium text-[#006D77] hover:underline font-mono"
           >
             {siteConfig.social.email}
           </a>
@@ -40,7 +40,7 @@ import Button from '../../components/ui/Button.astro';
           </a>
         </div>
 
-        <div class="flex items-center justify-between py-3">
+        <div class="flex items-center justify-between py-3 border-b border-[#D8EAEF]">
           <span class="text-sm font-semibold text-[#547A85]">LinkedIn</span>
           <a
             href={siteConfig.social.linkedin}
@@ -49,6 +49,18 @@ import Button from '../../components/ui/Button.astro';
             class="text-sm font-medium text-[#006D77] hover:underline"
           >
             {siteConfig.social.linkedin} &rarr;
+          </a>
+        </div>
+
+        <div class="flex items-center justify-between py-3">
+          <span class="text-sm font-semibold text-[#547A85]">Medium</span>
+          <a
+            href={siteConfig.social.medium}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm font-medium text-[#006D77] hover:underline"
+          >
+            {siteConfig.social.medium} &rarr;
           </a>
         </div>
       </div>

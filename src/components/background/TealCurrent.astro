@@ -1,0 +1,183 @@
+---
+/*
+  TealCurrent.astro — Premium, ultra-lightweight global background animation.
+  Metaphor: Soft, quiet flowing current of light moving behind website content.
+*/
+---
+
+<div
+  class="teal-current-container pointer-events-none fixed inset-0 z-[-1] overflow-hidden bg-[#EDF6F9]"
+  aria-hidden="true"
+>
+  <!-- Ambient Soft Radial Glow -->
+  <div class="ambient-glow absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[#83C5BE] opacity-10 blur-[120px]"></div>
+
+  <!-- Flow Set A (Forward Current - 22s cycle) -->
+  <div class="flow-set-a absolute inset-0 w-[115%] h-[115%] -top-[7.5%] -left-[7.5%] opacity-[0.11]">
+    <svg
+      class="w-full h-full"
+      viewBox="0 0 1440 900"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+    >
+      <!-- Flow A - Curve 1 -->
+      <path
+        d="M-100 180 C240 80, 520 280, 880 160 C1140 70, 1380 240, 1540 190"
+        stroke="#83C5BE"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+      <!-- Flow A - Curve 2 -->
+      <path
+        d="M-80 540 C180 420, 480 620, 820 480 C1120 360, 1340 560, 1520 490"
+        stroke="#83C5BE"
+        stroke-width="1.75"
+        stroke-dasharray="8 6"
+      />
+      <!-- Flow A - Curve 3 (subtle secondary line) -->
+      <path
+        d="M-120 780 C290 680, 580 840, 940 720 C1220 620, 1420 780, 1560 710"
+        stroke="#006D77"
+        stroke-width="1.2"
+        stroke-opacity="0.6"
+      />
+    </svg>
+  </div>
+
+  <!-- Flow Set B (Reverse Counter-Current - 30s cycle) -->
+  <div class="flow-set-b absolute inset-0 w-[115%] h-[115%] -top-[7.5%] -left-[7.5%] opacity-[0.09]">
+    <svg
+      class="w-full h-full"
+      viewBox="0 0 1440 900"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+    >
+      <!-- Flow B - Curve 1 -->
+      <path
+        d="M-120 320 C190 440, 560 220, 920 340 C1180 430, 1390 290, 1560 360"
+        stroke="#83C5BE"
+        stroke-width="2.2"
+      />
+      <!-- Flow B - Curve 2 -->
+      <path
+        d="M-60 660 C310 520, 610 740, 960 600 C1210 500, 1410 670, 1540 590"
+        stroke="#83C5BE"
+        stroke-width="1.5"
+      />
+    </svg>
+  </div>
+
+  <!-- Sparse Coral Accent Points (1-2 tiny points traveling slowly along the flow) -->
+  <div class="coral-accent-1 absolute top-[28%] left-[45%] w-1.5 h-1.5 rounded-full bg-[#E29578] opacity-60 shadow-[0_0_8px_#E29578]"></div>
+  <div class="coral-accent-2 absolute top-[62%] left-[72%] w-1 h-1 rounded-full bg-[#E29578] opacity-50 shadow-[0_0_6px_#E29578]"></div>
+</div>
+
+<style>
+  /* Slow, organic GPU-accelerated movement for Flow A */
+  @keyframes tealFlowA {
+    0%, 100% {
+      transform: translate3d(-1.8%, -1.2%, 0);
+    }
+    50% {
+      transform: translate3d(1.8%, 1.2%, 0);
+    }
+  }
+
+  /* Counter-directional slow movement for Flow B */
+  @keyframes tealFlowB {
+    0%, 100% {
+      transform: translate3d(1.5%, 1%, 0);
+    }
+    50% {
+      transform: translate3d(-1.5%, -1%, 0);
+    }
+  }
+
+  /* Subtle pulsing drift for Ambient Radial Glow */
+  @keyframes ambientPulse {
+    0%, 100% {
+      transform: translate3d(-50%, -50%, 0) scale(1);
+      opacity: 0.08;
+    }
+    50% {
+      transform: translate3d(-48%, -52%, 0) scale(1.06);
+      opacity: 0.12;
+    }
+  }
+
+  /* Tiny Coral Accent Motion */
+  @keyframes coralDrift1 {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate3d(24px, -14px, 0) scale(1.2);
+      opacity: 0.75;
+    }
+  }
+
+  @keyframes coralDrift2 {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translate3d(-20px, 12px, 0) scale(1.15);
+      opacity: 0.65;
+    }
+  }
+
+  .flow-set-a {
+    animation: tealFlowA 22s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    will-change: transform;
+  }
+
+  .flow-set-b {
+    animation: tealFlowB 30s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    will-change: transform;
+  }
+
+  .ambient-glow {
+    animation: ambientPulse 24s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  .coral-accent-1 {
+    animation: coralDrift1 19s ease-in-out infinite;
+  }
+
+  .coral-accent-2 {
+    animation: coralDrift2 25s ease-in-out infinite;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .flow-set-b {
+      display: none; /* Reduce GPU load on mobile: render only 1 subtle flow set */
+    }
+    .flow-set-a {
+      animation-duration: 28s;
+      opacity: 0.08;
+    }
+    .ambient-glow {
+      width: 450px;
+      height: 450px;
+      filter: blur(80px);
+    }
+  }
+
+  /* Strict Reduced Motion Override */
+  @media (prefers-reduced-motion: reduce) {
+    .flow-set-a,
+    .flow-set-b,
+    .ambient-glow,
+    .coral-accent-1,
+    .coral-accent-2 {
+      animation: none !important;
+      transform: none !important;
+    }
+  }
+</style>

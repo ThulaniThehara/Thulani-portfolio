@@ -32,13 +32,19 @@ const featuredProjects = await getFeaturedProjects();
   </div>
 
   <!-- Projects Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8">
-    {featuredProjects.map((project) => (
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+    {featuredProjects.slice(0, 3).map((project) => (
       <ProjectCard
         id={project.id}
         title={project.data.title}
         description={project.data.description}
         category={project.data.category}
+        projectType={project.data.projectType}
+        icon={project.data.icon}
+        frontendTech={project.data.frontendTech}
+        backendTech={project.data.backendTech}
+        databaseTech={project.data.databaseTech}
+        githubUrl={project.data.githubUrl}
         tags={project.data.technologies || project.data.tags || []}
         publishDate={project.data.publishDate || `${project.data.year}-01-01`}
       />

@@ -1,17 +1,19 @@
 ---
 title: "Enlear HRMS — Serverless Enterprise Platform"
 slug: "hrms"
-description: "A serverless Human Resource Management platform built with AWS AppSync (GraphQL), AWS Lambda, DynamoDB, and Cognito. Features automated payroll computation, attendance tracking, device management, an event-driven notification engine via SQS, and an AI policy assistant."
-shortDescription: "Serverless HRMS with AWS AppSync, DynamoDB, Lambda, Cognito, and AI assistant."
-year: 2024
+description: "A cloud-native, serverless Human Resource Management System for employee management, attendance, leave, and device allocation, built on AWS AppSync, Lambda, DynamoDB, and Cognito with an Amazon Bedrock-powered AI chatbot."
+shortDescription: "Serverless enterprise HRMS on AWS with an AI-powered chatbot assistant."
+year: 2026
 category: "Cloud & Serverless"
+projectType: "FULL-STACK · CLOUD · SERVERLESS"
+icon: "cloud"
+frontendTech: ["Next.js", "TypeScript"]
+backendTech: ["AWS AppSync", "Lambda"]
+databaseTech: ["DynamoDB"]
 featured: true
-technologies: ["AWS AppSync", "AWS Lambda", "Amazon DynamoDB", "Amazon Cognito", "Amazon SQS", "React", "TypeScript", "GraphQL", "Vitest", "Tailwind CSS"]
-role: "Full-Stack & Cloud Engineer"
-duration: "4 Months"
-team: "Engineering Team (3 Engineers)"
+duration: "1 year"
+team: "5 members"
 githubUrl: "https://github.com"
-liveUrl: "https://example.com"
 status: "Completed"
 ---
 
@@ -24,44 +26,47 @@ import Highlight from '../../components/mdx/Highlight.astro';
 
 ## Overview
 
-**Enlear HRMS** is an enterprise human resource management platform architected on a 100% serverless foundation using AWS. Designed to replace disconnected third-party tools and error-prone spreadsheets, the system provides a unified operational dashboard for employee lifecycle management, attendance clocking, leave approvals, company device allocation, and internal HR policy Q&A.
+Enterprise **HRMS** is a cloud-native Human Resource Management System designed to streamline employee management, attendance, leave, and device allocation. It provides role-based experiences for Administrators, Managers, and Employees while integrating workplace services such as Google Calendar, Google Chat, Slack, and GitHub. Built with a serverless AWS architecture using AppSync, Lambda, DynamoDB, SQS, and Cognito, the system is designed for secure and scalable operations. An Amazon Bedrock-powered AI chatbot further enhances the platform by providing intelligent assistance for HR-related tasks.
 
 <ProjectStats stats={[
   { label: 'Architecture', value: 'Serverless', detail: 'Zero idle compute cost' },
   { label: 'API Paradigm', value: 'GraphQL', detail: 'AWS AppSync typed schema' },
-  { label: 'Test Coverage', value: '88%+', detail: 'Vitest unit & integration' },
-  { label: 'Security Model', value: 'RBAC', detail: 'Cognito JWT custom claims' }
+  { label: 'Test Coverage', value: 'Vitest', detail: 'unit & integration testing' },
+  { label: 'Notification', value: 'Subscription', detail: 'Real time notifications' }
 ]} />
 
 ## The Problem
 
-Growing organizations face significant operational overhead when scaling HR processes:
-1. **Scattered Employee Records**: Personal data, leave balances, and company hardware assignments lived across disparate spreadsheets without access control.
-2. **Attendance Discrepancies**: Manual shift logging lacked real-time validation and caused downstream payroll friction.
-3. **Repetitive HR Support Tickets**: HR staff spent hours answering standard questions about insurance coverage, leave entitlements, and company policies.
-4. **Fragile Scaling**: Traditional server hosting incurred high maintenance costs while failing to scale smoothly during peak morning clock-in surges.
+Growing organizations face significant operational overhead when scaling HR processes:<br/>
+1.Challenges due to fragmented HR and operational systems <br/>
+2.Attendance, leave management, and productivity tracking operated independently <br/>
+3.Manual attendance logging caused inaccuracies and delays <br/>
+4.Leave approvals were time-consuming and lacked real-time visibility <br/>
+5.No centralized system to track company devices and reported issues <br/>
+6.Difficulty correlating developer work output (GitHub activity) with attendance records <br/>
+7.Limited analytical insights for managers and administrators
+
 
 ## Goals
 
-- **Fully Serverless Infrastructure**: Build a low-maintenance, pay-per-use backend using AWS managed primitives.
-- **Granular Role-Based Access Control**: Strict segregation across Administrators, Department Managers, and Employees.
-- **Event-Driven Asynchronous Processing**: Offload heavy email dispatches, PDF generation, and notifications using message queues.
-- **AI-Powered Self-Service**: Provide an integrated intelligent assistant to answer employee policy questions instantly.
-- **High Test Reliability**: Maintain thorough test suites using Vitest for Lambda resolvers and business calculation logic.
+1.To design and develop a custom Human Resource Management System for Enlear<br/>
+2.Automate HR workflows and reduce administrative overhead<br/>
+3.Improve transparency, efficiency, and decision-making<br/>
+4.Provide a scalable and secure platform tailored to Enlear’s workflow<br/>
+
 
 ## My Role & Key Decisions
 
-As a **Full-Stack & Cloud Engineer**, I owned the end-to-end implementation of several core subsystems:
-- **Cloud Architecture & Schemas**: Designed the GraphQL schema in AWS AppSync and partitioned DynamoDB single-table access patterns.
-- **Authentication & Authorization**: Implemented Amazon Cognito user pools with custom Lambda pre-token generation triggers for role claims.
-- **Asynchronous Pipeline**: Built the notification engine utilizing Amazon SQS to decouple time-consuming notification dispatches from client request paths.
-- **Frontend Dashboard**: Developed interactive React views with TypeScript, Apollo Client caching, and optimistic UI updates.
-- **Testing**: Built a comprehensive test pipeline with Vitest to validate complex leave accumulation formulas and payroll rules.
+1.Device management module for all 3 roles( including device assignment, device issue managment)<br/>
+2.Integrated AWS subscription (graphQL) for internal system notifications with using AWS SQS.<br/>
+3.Implemented browser session-based chat history for chatbot to retain conversations until the employee closes the tab or logs out. <br/>
+4.Create test cases using vitest.<br/>
+
 
 <TechStack stack={[
-  { category: 'Frontend', items: ['React 18', 'TypeScript', 'Tailwind CSS', 'Apollo Client', 'Vite'] },
-  { category: 'Cloud & Serverless', items: ['AWS AppSync', 'AWS Lambda', 'Amazon DynamoDB', 'Amazon Cognito', 'Amazon SQS', 'Amazon S3'] },
-  { category: 'Testing & Tools', items: ['Vitest', 'GraphQL Code Generator', 'AWS CDK', 'Git'] }
+  { category: 'Frontend', items: ['Next.js', 'TypeScript', 'Vanila CSS', 'Lucide React'] },
+  { category: 'Cloud & Serverless', items: ['AWS AppSync', 'AWS Lambda', 'Amazon DynamoDB', 'Amazon Cognito', 'Amazon SQS', 'Amazon S3', 'SES', 'Bedrock'] },
+  { category: 'Testing & Tools', items: ['Vitest', 'GraphQL', 'AWS CDK', 'Git'] }
 ]} />
 
 ## System Architecture
@@ -80,106 +85,6 @@ The architecture separates client interaction from cloud execution using a serve
   ]}
 />
 
-## Implementation Deep Dive
-
-### 1. Granular Authentication & RBAC with Amazon Cognito
-To enforce role separation without querying the database on every HTTP request, user roles (Admin, HR Manager, Employee) and department scopes are embedded directly into Cognito JWT ID tokens via a Lambda Pre-Token Generation trigger:
-
-```typescript
-// AWS Lambda Pre-Token Generation Trigger
-export const handler = async (event: any) => {
-  const userId = event.request.userAttributes.sub;
-  const userProfile = await fetchUserRoleAndPermissions(userId);
-
-  event.response = {
-    claimsOverrideDetails: {
-      claimsToAddOrOverride: {
-        'custom:role': userProfile.role,
-        'custom:deptId': userProfile.departmentId,
-        'custom:permissions': JSON.stringify(userProfile.permissions),
-      },
-    },
-  };
-  return event;
-};
-```
-
-Within AppSync GraphQL resolvers, directives like `@aws_auth(cognito_groups: ["Admin", "HR_Manager"])` and custom resolver logic ensure employees cannot access restricted payroll or peer attendance data.
-
-### 2. Event-Driven Notification System via Amazon SQS
-When an employee submits a leave request or hardware issue, the primary AppSync Lambda resolver writes the state mutation to DynamoDB and promptly enqueues a message payload to an Amazon SQS FIFO queue:
-
-```typescript
-import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
-
-const sqsClient = new SQSClient({});
-
-export async function dispatchLeaveEvent(payload: LeaveEventPayload) {
-  const command = new SendMessageCommand({
-    QueueUrl: process.env.NOTIFICATION_QUEUE_URL,
-    MessageBody: JSON.stringify({
-      eventType: 'LEAVE_SUBMITTED',
-      recipientId: payload.managerId,
-      metadata: payload,
-      timestamp: new Date().toISOString(),
-    }),
-    MessageGroupId: `dept-${payload.departmentId}`,
-    MessageDeduplicationId: `${payload.leaveId}-${Date.now()}`,
-  });
-  await sqsClient.send(command);
-}
-```
-
-A dedicated worker Lambda processes queue batches in the background, formatting localized emails and dispatching company Slack webhooks without degrading front-end user latency.
-
-### 3. Device & Asset Management Subsystem
-To track distributed hardware (laptops, monitors, security fobs), we implemented an asset registry in DynamoDB:
-- Assets are indexed by serial number, assignment status, and employee ID.
-- When an employee offboards, an automated audit workflow flags all assigned hardware for return verification.
-
-### 4. AI-Powered Policy Chatbot
-To resolve common employee inquiries regarding leave policies, health insurance coverage, and reimbursement protocols, we integrated an intelligent conversational assistant:
-- Policy documents are parsed and vectorized.
-- The assistant retrieves relevant document clauses and formats concise, verified answers, significantly cutting down repetitive HR inquiries.
-
-### 5. Rigorous Testing Strategy with Vitest
-Leave calculations, prorated allowances, and complex tenure accrual algorithms are tested using Vitest with isolated mock event payloads:
-
-```typescript
-import { describe, it, expect } from 'vitest';
-import { calculateProratedLeave } from './leaveCalculator';
-
-describe('Leave Accrual Calculator', () => {
-  it('should prorate annual leave correctly for mid-year joiners', () => {
-    const joinDate = new Date('2024-07-01');
-    const totalAnnualAllowance = 24;
-    const result = calculateProratedLeave(joinDate, totalAnnualAllowance, 2024);
-    
-    expect(result.allowanceDays).toBe(12);
-    expect(result.isProbationary).toBe(true);
-  });
-});
-```
-
-<Callout type="tip" title="Why Vitest over Jest?">
-Vitest's native ESM and Vite configuration sharing allowed unit test suites to run in parallel with instant execution feedback, cutting CI pipeline test runs by over 60%.
-</Callout>
-
-## Technical Challenges & Solutions
-
-### Challenge 1: DynamoDB Single-Table Access Patterns
-- **Problem**: Querying employee profiles alongside their active leave requests and device allocations required joining multiple data structures, which traditional NoSQL lacks.
-- **Solution**: Designed composite partition keys (`PK: EMP#<id>`, `SK: PROFILE`), (`PK: EMP#<id>`, `SK: LEAVE#<date>`), and Global Secondary Indexes (GSIs) to fetch an employee and all associated sub-resources in a single targeted query.
-
-### Challenge 2: Peak Clock-In Concurrency
-- **Problem**: Hundreds of staff clocking in simultaneously between 8:55 AM and 9:05 AM risked causing database contention and Lambda cold starts.
-- **Solution**: Leveraged DynamoDB on-demand capacity and configured provisioned concurrency on high-frequency clock-in resolvers, ensuring smooth sub-50ms execution.
-
-## Results & Impact
-
-<Highlight title="Operational Outcomes">
-Enlear HRMS transitioned the organization from manual spreadsheet workflows to a fully auditable serverless platform. Routine leave approvals were reduced from days to minutes, and the AI policy assistant automated over 40% of standard HR inquiry resolutions.
-</Highlight>
 
 ## What I Learned
 

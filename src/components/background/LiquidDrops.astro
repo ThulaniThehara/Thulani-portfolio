@@ -1,0 +1,306 @@
+---
+/*
+  LiquidDrops.astro — Floating bokeh dust hero background.
+
+  Two particle layers drift upward on a <canvas>: small in-focus motes and larger
+  soft out-of-focus bokeh discs, both tinted from the brand palette. Gives the same
+  cinematic particle feel as a looping 4K clip at a few KB and no decode cost.
+
+  Note: the page background is very light, so particles are tinted teal/coral rather
+  than white — a white-cored glow is invisible against #EDF6F9.
+
+  Supply `videoSrc` to use a real looping video instead of the canvas.
+*/
+
+interface Props {
+  /** Optional path to a looping video (e.g. "/video/bokeh.mp4") to use instead of the canvas */
+  videoSrc?: string;
+  /** Poster frame shown while the video buffers */
+  posterSrc?: string;
+  /** Overall opacity multiplier, 0–1. Lower is subtler. */
+  intensity?: number;
+  class?: string;
+}
+
+const { videoSrc, posterSrc, intensity = 1, class: className = '' } = Astro.props;
+---
+
+<div
+  class={`liquid-drops absolute inset-0 overflow-hidden pointer-events-none ${className}`}
+  aria-hidden="true"
+>
+  {videoSrc ? (
+    <video
+      class="liquid-drops-video w-full h-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster={posterSrc}
+    >
+      <source src={videoSrc} type="video/mp4" />
+    </video>
+  ) : (
+    <canvas class="liquid-drops-canvas block w-full h-full" data-intensity={intensity}></canvas>
+  )}
+</div>
+
+<style>
+  .liquid-drops {
+    /* Isolate paint work so particle repaints never invalidate hero content */
+    contain: paint;
+  }
+
+  .liquid-drops-video {
+    opacity: 0.45;
+    mix-blend-mode: multiply;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .liquid-drops-video {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  type ParticleKind = 'mote' | 'bokeh';
+
+  interface Particle {
+    kind: ParticleKind;
+    sprite: HTMLCanvasElement;
+    x: number;
+    y: number;
+    radius: number;
+    /** Upward drift, px per second */
+    speedY: number;
+    /** Lateral drift, px per second */
+    speedX: number;
+    swayAmplitude: number;
+    swaySpeed: number;
+    swayPhase: number;
+    baseAlpha: number;
+    twinkleSpeed: number;
+    twinklePhase: number;
+  }
+
+  // Brand palette as raw RGB triplets
+  const DEEP_TEAL = '0, 109, 119';
+  const SOFT_TEAL = '131, 197, 190';
+  const CORAL = '226, 149, 120';
+
+  const SPRITE_SIZE = 128;
+
+  /**
+   * Pre-renders a particle to an offscreen canvas once, so the animation loop only
+   * blits bitmaps instead of building a radial gradient per particle per frame.
+   */
+  function makeSprite(tint: string, kind: ParticleKind): HTMLCanvasElement {
+    const sprite = document.createElement('canvas');
+    sprite.width = SPRITE_SIZE;
+    sprite.height = SPRITE_SIZE;
+
+    const g = sprite.getContext('2d')!;
+    const r = SPRITE_SIZE / 2;
+    const gradient = g.createRadialGradient(r, r, 0, r, r, r);
+
+    if (kind === 'bokeh') {
+      // Defocused highlight: dim centre, brighter toward the aperture rim
+      gradient.addColorStop(0, `rgba(${tint}, 0.30)`);
+      gradient.addColorStop(0.62, `rgba(${tint}, 0.42)`);
+      gradient.addColorStop(0.9, `rgba(${tint}, 0.66)`);
+      gradient.addColorStop(1, `rgba(${tint}, 0)`);
+    } else {
+      // In-focus mote: dense core fading to a soft halo
+      gradient.addColorStop(0, `rgba(${tint}, 0.95)`);
+      gradient.addColorStop(0.3, `rgba(${tint}, 0.6)`);
+      gradient.addColorStop(1, `rgba(${tint}, 0)`);
+    }
+
+    g.fillStyle = gradient;
+    g.beginPath();
+    g.arc(r, r, r, 0, Math.PI * 2);
+    g.fill();
+
+    return sprite;
+  }
+
+  function setupParticles(canvas: HTMLCanvasElement) {
+    if (canvas.dataset.dropsReady === 'true') return;
+    canvas.dataset.dropsReady = 'true';
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const intensity = Number(canvas.dataset.intensity) || 1;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const sprites = {
+      moteTeal: makeSprite(DEEP_TEAL, 'mote'),
+      moteCoral: makeSprite(CORAL, 'mote'),
+      bokehSoft: makeSprite(SOFT_TEAL, 'bokeh'),
+      bokehTeal: makeSprite(DEEP_TEAL, 'bokeh'),
+      bokehCoral: makeSprite(CORAL, 'bokeh'),
+    };
+
+    let width = 0;
+    let height = 0;
+    let particles: Particle[] = [];
+    let rafId: number | null = null;
+    let lastTime = 0;
+    let inView = true;
+
+    function makeParticle(seeded: boolean): Particle {
+      // ~70% small motes, ~30% large bokeh discs
+      const kind: ParticleKind = Math.random() < 0.7 ? 'mote' : 'bokeh';
+
+      if (kind === 'mote') {
+        const radius = 2 + Math.random() * 3.5;
+        return {
+          kind,
+          sprite: Math.random() < 0.8 ? sprites.moteTeal : sprites.moteCoral,
+          x: Math.random() * width,
+          y: seeded ? Math.random() * height : height + 20 + Math.random() * 80,
+          radius,
+          speedY: 26 + Math.random() * 34,
+          speedX: (Math.random() - 0.5) * 12,
+          swayAmplitude: 10 + Math.random() * 22,
+          swaySpeed: 0.5 + Math.random() * 0.7,
+          swayPhase: Math.random() * Math.PI * 2,
+          baseAlpha: (0.35 + Math.random() * 0.35) * intensity,
+          twinkleSpeed: 0.7 + Math.random() * 1.3,
+          twinklePhase: Math.random() * Math.PI * 2,
+        };
+      }
+
+      const radius = 16 + Math.random() * 40;
+      const roll = Math.random();
+      return {
+        kind,
+        sprite: roll < 0.65 ? sprites.bokehSoft : roll < 0.88 ? sprites.bokehTeal : sprites.bokehCoral,
+        x: Math.random() * width,
+        y: seeded ? Math.random() * height : height + radius + Math.random() * 120,
+        radius,
+        // Larger discs drift slower — reads as depth
+        speedY: 10 + Math.random() * 16,
+        speedX: (Math.random() - 0.5) * 8,
+        swayAmplitude: 14 + Math.random() * 26,
+        swaySpeed: 0.25 + Math.random() * 0.4,
+        swayPhase: Math.random() * Math.PI * 2,
+        baseAlpha: (0.14 + Math.random() * 0.16) * intensity,
+        twinkleSpeed: 0.3 + Math.random() * 0.6,
+        twinklePhase: Math.random() * Math.PI * 2,
+      };
+    }
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // Scale count to area; capped so large displays don't run away
+      const count = Math.max(18, Math.min(58, Math.round((width * height) / 15000)));
+      particles = Array.from({ length: count }, () => makeParticle(true));
+    }
+
+    function render(time: number) {
+      ctx!.clearRect(0, 0, width, height);
+
+      for (const p of particles) {
+        const twinkle = 0.55 + 0.45 * Math.sin(time * p.twinkleSpeed + p.twinklePhase);
+        const x = p.x + Math.sin(time * p.swaySpeed + p.swayPhase) * p.swayAmplitude;
+        const size = p.radius * 2;
+
+        ctx!.globalAlpha = Math.max(0, p.baseAlpha * twinkle);
+        ctx!.drawImage(p.sprite, x - p.radius, p.y - p.radius, size, size);
+      }
+
+      ctx!.globalAlpha = 1;
+    }
+
+    let elapsed = 0;
+
+    function tick(now: number) {
+      // Delta-timed so drift speed is identical on 60Hz and 120Hz displays
+      const delta = lastTime ? Math.min((now - lastTime) / 1000, 0.05) : 0;
+      lastTime = now;
+      elapsed += delta;
+
+      for (const p of particles) {
+        p.y -= p.speedY * delta;
+        p.x += p.speedX * delta;
+
+        if (p.y + p.radius < -60) {
+          Object.assign(p, makeParticle(false));
+        } else if (p.x < -80) {
+          p.x = width + 60;
+        } else if (p.x > width + 80) {
+          p.x = -60;
+        }
+      }
+
+      render(elapsed);
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function start() {
+      if (rafId !== null || prefersReducedMotion) return;
+      lastTime = 0;
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function stop() {
+      if (rafId === null) return;
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+
+    resize();
+
+    if (prefersReducedMotion) {
+      render(0);
+      return;
+    }
+
+    // Only animate while the hero is actually on screen
+    const observer = new IntersectionObserver(
+      (entries) => {
+        inView = entries[0]?.isIntersecting ?? false;
+        if (inView && !document.hidden) start();
+        else stop();
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else if (inView) start();
+    });
+
+    let resizeTimer: number | undefined;
+    window.addEventListener('resize', () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        resize();
+        render(elapsed);
+      }, 150);
+    });
+  }
+
+  function initLiquidDrops() {
+    document
+      .querySelectorAll<HTMLCanvasElement>('.liquid-drops-canvas')
+      .forEach(setupParticles);
+  }
+
+  initLiquidDrops();
+  document.addEventListener('astro:after-swap', initLiquidDrops);
+</script>

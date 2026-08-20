@@ -4,44 +4,6 @@ import { siteConfig } from '../../data/siteConfig';
 import Badge from '../../components/ui/Badge.astro';
 import Button from '../../components/ui/Button.astro';
 
-// Simplified skill groups (flat tags, no levels)
-const skillGroups = [
-  {
-    name: 'Frontend',
-    color: 'var(--brand-deep-teal)',
-    skills: ['TypeScript', 'React', 'Astro', 'Next.js', 'Tailwind CSS', 'HTML5 / A11y'],
-  },
-  {
-    name: 'Backend & APIs',
-    color: 'var(--brand-deep-teal)',
-    skills: ['Node.js', 'Express', 'Python / FastAPI', 'GraphQL', 'REST', 'WebSockets'],
-  },
-  {
-    name: 'Cloud & Infrastructure',
-    color: 'var(--brand-deep-teal-dark)',
-    skills: ['AWS Lambda', 'AppSync', 'DynamoDB', 'Amazon SQS', 'Cloudflare Workers', 'Docker'],
-  },
-  {
-    name: 'Databases',
-    color: 'var(--brand-soft-teal)',
-    skills: ['PostgreSQL', 'DynamoDB', 'Prisma ORM', 'Redis'],
-  },
-  {
-    name: 'AI & Data',
-    color: 'var(--brand-soft-teal)',
-    skills: ['OpenAI API', 'LangChain', 'RAG Pipelines', 'Vector Embeddings'],
-  },
-  {
-    name: 'IoT & Hardware',
-    color: 'var(--brand-coral)',
-    skills: ['ESP32', 'C / C++', 'FreeRTOS', 'MQTT', 'Sensors & Actuators'],
-  },
-  {
-    name: 'Tools',
-    color: 'var(--text-secondary)',
-    skills: ['Git', 'Vitest / Jest', 'Linux Shell', 'Vite', 'Postman'],
-  },
-];
 
 // Timeline
 const timeline = [
@@ -92,10 +54,10 @@ const timeline = [
 
       <div class="space-y-4 text-base text-[var(--text-secondary)] leading-relaxed max-w-2xl">
         <p>
-          I'm a software engineer interested in understanding how complete technical systems work — from microcontroller firmware and analog sensor circuits, through cloud message brokers and serverless functions, to type-safe web interfaces.
+          I’m a 3rd Year IT Undergraduate at the University of Moratuwa with a passion for software development and emerging technologies.
         </p>
         <p>
-          I build full-stack applications, design serverless architectures on AWS, create AI-powered tools, and prototype IoT hardware solutions. I prioritize clean code, strong types, and good user experiences.
+         I enjoy building practical, user-focused solutions while exploring full-stack development, cloud computing, and AI. I’m always eager to learn, experiment, and turn ideas into meaningful digital experiences.
         </p>
       </div>
 
@@ -112,33 +74,7 @@ const timeline = [
       </div>
     </section>
 
-    <!-- 2. Skills -->
-    <section class="space-y-6">
-      <div class="space-y-1">
-        <span class="text-xs font-semibold uppercase tracking-wider text-[var(--brand-deep-teal)]">Skills</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
-          Technologies I Work With
-        </h2>
-      </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {skillGroups.map((group) => (
-          <div class="space-y-2">
-            <div class="flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full" style={`background-color: ${group.color}`}></span>
-              <h3 class="text-sm font-bold text-[var(--text-primary)]">{group.name}</h3>
-            </div>
-            <div class="flex flex-wrap gap-1.5">
-              {group.skills.map((skill) => (
-                <span class="px-2.5 py-1 text-xs font-medium bg-[var(--bg-page)] text-[var(--text-secondary)] rounded-lg border border-[var(--border-subtle)]">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
 
     <!-- 3. Experience & Education Timeline -->
     <section class="space-y-6">

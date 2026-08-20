@@ -73,7 +73,7 @@
   --color-surface: var(--bg-surface);
   --color-surface-subtle: var(--bg-surface-subtle);
   --color-surface-peach: var(--bg-surface-peach);
-  
+
   --color-ink-primary: var(--text-primary);
   --color-ink-secondary: var(--text-secondary);
   --color-ink-muted: var(--text-muted);
@@ -90,7 +90,10 @@
 }
 
 @layer base {
-  *, ::before, ::after {
+
+  *,
+  ::before,
+  ::after {
     box-sizing: border-box;
   }
 
@@ -111,7 +114,12 @@
     overflow-x: hidden;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: var(--text-primary);
     font-weight: 700;
     letter-spacing: -0.025em;
@@ -139,6 +147,7 @@
     opacity: 0;
     transform: translateY(18px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -150,6 +159,7 @@
     opacity: 0;
     transform: scale(0.96) translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -157,9 +167,12 @@
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -174,24 +187,41 @@
   animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.delay-100 { animation-delay: 100ms; }
-.delay-150 { animation-delay: 150ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-250 { animation-delay: 250ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
+.delay-100 {
+  animation-delay: 100ms;
+}
 
-/* Scroll Reveal Utility (Triggered via IntersectionObserver) */
+.delay-150 {
+  animation-delay: 150ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-250 {
+  animation-delay: 250ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+/* Scroll Reveal Utility (continuously scroll-linked via rAF, see BaseLayout.astro) */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(56px) scale(0.94);
+  transform-origin: center bottom;
   will-change: opacity, transform;
 }
 
-.reveal-on-scroll.is-revealed {
-  opacity: 1;
-  transform: translateY(0);
+/* Opt-in: adds 3D tilt/depth for elements whose parent sets `perspective` */
+.reveal-on-scroll.approach-3d {
+  transform: translateY(56px) translateZ(-120px) rotateX(8deg) scale(0.94);
 }
 
 /* Smooth micro-interactions */
@@ -206,18 +236,144 @@
 }
 
 /* ==========================================================================
+   Continuous Marquee & Moving Cards System
+   ========================================================================== */
+
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes cardFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 28s linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marqueeRight 28s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation-duration: 40s;
+}
+
+.animate-marquee-fast {
+  animation-duration: 20s;
+}
+
+/* Pause on hover */
+.marquee-container:hover .animate-marquee-left,
+.marquee-container:hover .animate-marquee-right,
+.pause-on-hover:hover {
+  animation-play-state: paused;
+}
+
+/* Gradient edge masks for smooth conveyor entry and exit */
+.mask-marquee {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.mask-marquee-card {
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+/* Rotating Profile Border Animations */
+@keyframes borderRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes borderRotateRev {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-border-rotate {
+  animation: borderRotate 12s linear infinite;
+}
+
+.animate-border-rotate-rev {
+  animation: borderRotateRev 16s linear infinite;
+}
+
+/* Ambient Background Animations */
+@keyframes blobFloat1 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(35px, -30px) scale(1.08); }
+  66% { transform: translate(-25px, 20px) scale(0.95); }
+}
+
+@keyframes blobFloat2 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(-30px, 25px) scale(1.06); }
+  66% { transform: translate(30px, -20px) scale(0.96); }
+}
+
+.animate-blob-slow-1 {
+  animation: blobFloat1 18s ease-in-out infinite;
+}
+
+.animate-blob-slow-2 {
+  animation: blobFloat2 22s ease-in-out infinite;
+}
+
+/* ==========================================================================
    Accessibility: Strict Reduced Motion Override
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+
+  *,
+  ::before,
+  ::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
     transform: none !important;
   }
+
   .reveal-on-scroll {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none !important;
+    transform: none !important;
+    width: auto !important;
+    flex-wrap: wrap !important;
   }
 }
