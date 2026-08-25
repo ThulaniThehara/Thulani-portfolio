@@ -2,6 +2,7 @@
 import { navItems, navCTA } from '../../data/navigation';
 import { siteConfig } from '../../data/siteConfig';
 import Button from '../ui/Button.astro';
+import { getUrl } from '../../utils/url';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -10,7 +11,7 @@ const currentPath = Astro.url.pathname;
   <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
     <!-- Brand Logo -->
     <a
-      href="/"
+      href={getUrl('/')}
       class="group flex items-center gap-2.5 text-lg font-bold tracking-tight text-[#1F2937] focus-visible:outline-2 focus-visible:outline-[#2C3539] rounded-lg py-1"
       aria-label={`${siteConfig.author} Portfolio Home`}
     >
@@ -25,13 +26,14 @@ const currentPath = Astro.url.pathname;
     <!-- Desktop Navigation Links -->
     <nav class="hidden md:flex items-center gap-1 bg-white/70 px-3 py-1.5 rounded-full border border-[#E8E0D8] shadow-xs" aria-label="Main Navigation">
       {navItems.map((item) => {
+        const itemUrl = getUrl(item.href);
         const isActive = item.href === '/'
-          ? currentPath === '/'
-          : currentPath === item.href || currentPath.startsWith(item.href + '/');
+          ? (currentPath === getUrl('/') || currentPath === getUrl('/index.html') || currentPath === '/')
+          : currentPath.startsWith(itemUrl);
 
         return (
           <a
-            href={item.href}
+            href={itemUrl}
             class={`px-3.5 py-1.5 text-sm font-medium rounded-full transition-all duration-150 ${
               isActive
                 ? 'bg-[#2C3539] text-white shadow-xs'
@@ -47,7 +49,7 @@ const currentPath = Astro.url.pathname;
 
     <!-- Desktop CTA Button -->
     <div class="hidden md:flex items-center gap-3">
-      <Button href={navCTA.href} variant="primary" size="sm">
+      <Button href={getUrl(navCTA.href)} variant="primary" size="sm">
         {navCTA.label}
       </Button>
     </div>
@@ -80,13 +82,14 @@ const currentPath = Astro.url.pathname;
   >
     <div class="flex flex-col space-y-1">
       {navItems.map((item) => {
+        const itemUrl = getUrl(item.href);
         const isActive = item.href === '/'
-          ? currentPath === '/'
-          : currentPath === item.href || currentPath.startsWith(item.href + '/');
+          ? (currentPath === getUrl('/') || currentPath === getUrl('/index.html') || currentPath === '/')
+          : currentPath.startsWith(itemUrl);
 
         return (
           <a
-            href={item.href}
+            href={itemUrl}
             class={`px-4 py-2.5 text-base font-medium rounded-xl transition-colors ${
               isActive
                 ? 'bg-[#2C3539] text-white'
@@ -100,7 +103,7 @@ const currentPath = Astro.url.pathname;
       })}
     </div>
     <div class="pt-3 border-t border-[#E8E0D8]">
-      <Button href={navCTA.href} variant="primary" size="md" class="w-full justify-center">
+      <Button href={getUrl(navCTA.href)} variant="primary" size="md" class="w-full justify-center">
         {navCTA.label}
       </Button>
     </div>

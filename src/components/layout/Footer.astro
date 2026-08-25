@@ -1,6 +1,7 @@
 ---
 import { siteConfig } from '../../data/siteConfig';
 import { navItems } from '../../data/navigation';
+import { getUrl } from '../../utils/url';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -10,7 +11,7 @@ const currentYear = new Date().getFullYear();
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
       <!-- Column 1: Brand & Bio -->
       <div class="md:col-span-2 space-y-3">
-        <a href="/" class="text-xl font-bold tracking-tight text-[#1F2937] flex items-center gap-2">
+        <a href={getUrl('/')} class="text-xl font-bold tracking-tight text-[#1F2937] flex items-center gap-2">
           <span class="w-7 h-7 rounded-md bg-[#2C3539] text-white flex items-center justify-center font-mono text-xs font-semibold">
             T
           </span>
@@ -33,13 +34,13 @@ const currentYear = new Date().getFullYear();
         <ul class="space-y-2 text-sm text-[#718096]">
           {navItems.map((item) => (
             <li>
-              <a href={item.href} class="hover:text-[#2C3539] transition-colors">
+              <a href={getUrl(item.href)} class="hover:text-[#2C3539] transition-colors">
                 {item.label}
               </a>
             </li>
           ))}
           <li>
-            <a href="/lab" class="hover:text-[#2C3539] transition-colors">
+            <a href={getUrl('/lab')} class="hover:text-[#2C3539] transition-colors">
               Lab
             </a>
           </li>

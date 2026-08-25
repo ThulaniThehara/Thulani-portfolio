@@ -1,4 +1,6 @@
 ---
+import { getUrl } from '../../utils/url';
+
 interface Props {
   href?: string;
   variant?: 'primary' | 'secondary' | 'accent' | 'outline' | 'ghost';
@@ -21,6 +23,8 @@ const {
   'aria-label': ariaLabel,
 } = Astro.props;
 
+const resolvedHref = href ? getUrl(href) : undefined;
+
 const baseStyles = 'inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--brand-deep-teal)]';
 
 const sizeStyles = {
@@ -41,9 +45,9 @@ const computedClass = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant
 ---
 
 {
-  href ? (
+  resolvedHref ? (
     <a
-      href={href}
+      href={resolvedHref}
       class={computedClass}
       target={target}
       rel={target === '_blank' ? (rel || 'noopener noreferrer') : rel}

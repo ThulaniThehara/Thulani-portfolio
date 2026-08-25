@@ -1,5 +1,6 @@
 ---
 import { formatDate } from '../../utils/formatters';
+import { getUrl } from '../../utils/url';
 
 interface Props {
   title: string;
@@ -14,11 +15,9 @@ interface Props {
 
 const { title, description, category, tags = [], publishDate, readingTime, externalUrl, coverImage } = Astro.props;
 
-// Fallback cover: a deterministic teal gradient keyed off the title so each card
-// reads as distinct even when no coverImage is supplied in the frontmatter.
+const resolvedCoverImage = coverImage ? getUrl(coverImage) : undefined;
 const hueShift = title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 40;
 const monogram = title.trim().charAt(0).toUpperCase();
-// Unique per-card id so multiple fallback covers don't collide on the SVG pattern
 const patternId = `dots-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 32)}`;
 ---
 
@@ -30,9 +29,9 @@ const patternId = `dots-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(
 >
   <!-- Cover Media -->
   <div class="relative h-40 shrink-0 overflow-hidden">
-    {coverImage ? (
+    {resolvedCoverImage ? (
       <img
-        src={coverImage}
+        src={resolvedCoverImage}
         alt=""
         loading="lazy"
         class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"

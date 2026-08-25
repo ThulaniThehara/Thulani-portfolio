@@ -7,7 +7,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://thulani.dev',
+  site: 'https://ThulaniThehara.github.io',
+  base: '/Thulani-portfolio',
   integrations: [
     react(),
     mdx(),
