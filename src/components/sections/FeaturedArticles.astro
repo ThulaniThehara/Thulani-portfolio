@@ -1,0 +1,54 @@
+---
+import ArticleCard from '../articles/ArticleCard.astro';
+import Button from '../ui/Button.astro';
+import { getAllArticles, getReadingTime } from '../../utils/articles';
+
+const articles = (await getAllArticles()).slice(0, 3);
+---
+
+<section class="py-16 sm:py-24 bg-white border-t border-[var(--border-subtle)] reveal-on-scroll">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-12">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+      <div class="space-y-3 max-w-xl">
+        <div>
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-surface-teal-subtle)] text-[var(--brand-deep-teal)] text-xs font-mono font-bold uppercase tracking-wider border border-[var(--border-subtle)]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--brand-coral)] animate-pulse"></span>
+            LATEST WRITING
+          </span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--text-primary)]">
+          Featured Articles & Insights
+        </h2>
+        <p class="text-base text-[var(--text-muted)] leading-relaxed">
+          Technical articles and deep dives into cloud architecture, serverless pipelines, and software engineering.
+        </p>
+      </div>
+
+      <div class="shrink-0">
+        <Button href="/articles" variant="outline" size="md" class="group">
+          <span>View All Articles</span>
+          <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-150" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </Button>
+      </div>
+    </div>
+
+    <!-- 3 Articles Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {articles.map((article) => (
+        <ArticleCard
+          title={article.data.title}
+          description={article.data.description}
+          category={article.data.category}
+          tags={article.data.tags}
+          publishDate={article.data.publishDate}
+          readingTime={getReadingTime(article)}
+          externalUrl={article.data.externalUrl}
+          coverImage={article.data.coverImage}
+        />
+      ))}
+    </div>
+  </div>
+</section>

@@ -18,7 +18,7 @@ import { siteConfig } from '../../data/siteConfig';
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
         </svg>
       </Button>
-      <Button href={`mailto:${siteConfig.social.email}`} variant="outline" size="lg">
+      <Button href={`https://mail.google.com/mail/?view=cm&fs=1&to=${siteConfig.social.email}`} variant="outline" size="lg" target="_blank" rel="noopener noreferrer">
         {siteConfig.social.email}
       </Button>
     </div>

@@ -1,75 +1,274 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { siteConfig } from '../../data/siteConfig';
-import Button from '../../components/ui/Button.astro';
 ---
 
-<BaseLayout title={`Contact | ${siteConfig.author}`}>
-  <div class="max-w-3xl mx-auto py-12 px-4 sm:px-6 space-y-12">
-    <header class="space-y-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2C3539]/10 text-[#2C3539] text-xs font-semibold uppercase tracking-wider">
-        <span>Get in Touch</span>
+<BaseLayout
+  title={`Contact | ${siteConfig.author}`}
+  description="Get in touch with Thulani for software engineering roles, full-stack projects, cloud architecture, and technical inquiries."
+>
+  <div class="max-w-6xl mx-auto py-12 px-4 sm:px-6 space-y-12">
+    
+    <!-- Page Header -->
+    <header class="space-y-4 max-w-2xl">
+      <div>
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-surface-teal-subtle)] text-[var(--brand-deep-teal)] text-xs font-mono font-bold uppercase tracking-wider border border-[var(--border-subtle)]">
+          <span class="w-1.5 h-1.5 rounded-full bg-[var(--brand-coral)] animate-pulse"></span>
+          GET IN TOUCH
+        </span>
       </div>
-      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#1F2937]">Let's Connect</h1>
-      <p class="text-lg text-[#718096] leading-relaxed">
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.1]">
+        Let's Connect
+      </h1>
+      <p class="text-base sm:text-lg text-[var(--text-muted)] leading-relaxed font-normal">
         Whether you have a technical question, a project collaboration idea, or an engineering role, feel free to reach out.
       </p>
     </header>
 
-    <div class="bg-white rounded-2xl border border-[#E8E0D8] p-8 space-y-6 shadow-xs">
-      <div class="space-y-4">
-        <div class="flex items-center justify-between py-3 border-b border-[#E8E0D8]">
-          <span class="text-sm font-semibold text-[#718096]">Direct Email</span>
-          <a
-            href={`mailto:${siteConfig.social.email}`}
-            class="text-sm font-medium text-[#2C3539] hover:underline font-mono"
-          >
-            {siteConfig.social.email}
-          </a>
+    <!-- Split Contact Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- LEFT COLUMN: Channel Info Card (Matching Image 2 Badge Style) -->
+      <div class="lg:col-span-5 rounded-3xl bg-[var(--brand-deep-teal)] text-white p-6 sm:p-8 space-y-8 shadow-xl relative overflow-hidden border border-[var(--brand-deep-teal)] flex flex-col justify-between min-h-[440px]">
+        
+        <!-- Ambient Glow -->
+        <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="space-y-4 relative z-10">
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-snug">
+            Let's talk on something <span class="text-[var(--brand-soft-teal)]">great together</span>
+          </h2>
+          <p class="text-sm text-white/80 leading-relaxed">
+            I'm currently open for software engineering roles, full-stack projects, and technical collaborations. Feel free to connect via any of the channels below.
+          </p>
         </div>
 
-        <div class="flex items-center justify-between py-3 border-b border-[#E8E0D8]">
-          <span class="text-sm font-semibold text-[#718096]">GitHub</span>
-          <a
-            href={siteConfig.social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-sm font-medium text-[#2C3539] hover:underline"
-          >
-            {siteConfig.social.github} &rarr;
-          </a>
+        <!-- Channel Pills / Badges (Matching Image 2) -->
+        <div class="space-y-3 relative z-10 pt-2">
+          <span class="text-xs font-mono font-bold uppercase tracking-wider text-white/70 block">
+            Channels
+          </span>
+          <div class="grid grid-cols-2 gap-3">
+            
+            <!-- GitHub Button Pill -->
+            <a
+              href={siteConfig.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-medium text-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md group"
+            >
+              <svg class="w-5 h-5 text-white/90 group-hover:text-white shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+              <span>GitHub</span>
+            </a>
+
+            <!-- LinkedIn Button Pill -->
+            <a
+              href={siteConfig.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-medium text-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md group"
+            >
+              <svg class="w-5 h-5 text-white/90 group-hover:text-white shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45c-.89 0-1.61.72-1.61 1.61a1.61 1.61 0 0 0 1.61 1.61c.89 0 1.61-.72 1.61-1.61 0-.89-.72-1.61-1.61-1.61Z" />
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+
+            <!-- Email Button Pill (Opens Gmail Web Compose) -->
+            <a
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${siteConfig.social.email}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-medium text-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md group"
+            >
+              <svg class="w-5 h-5 text-white/90 group-hover:text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span>Email</span>
+            </a>
+
+            <!-- Medium Button Pill -->
+            <a
+              href={siteConfig.social.medium}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-medium text-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md group"
+            >
+              <svg class="w-5 h-5 text-white/90 group-hover:text-white shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+              </svg>
+              <span>Medium</span>
+            </a>
+
+          </div>
         </div>
 
-        <div class="flex items-center justify-between py-3 border-b border-[#E8E0D8]">
-          <span class="text-sm font-semibold text-[#718096]">LinkedIn</span>
-          <a
-            href={siteConfig.social.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-sm font-medium text-[#2C3539] hover:underline"
-          >
-            {siteConfig.social.linkedin} &rarr;
-          </a>
+        <!-- Direct Email Footer note -->
+        <div class="pt-4 border-t border-white/15 text-xs text-white/70 relative z-10 flex items-center justify-between">
+          <span>{siteConfig.social.email}</span>
+          <span class="text-[var(--brand-soft-teal)] font-semibold">Available for work</span>
         </div>
 
-        <div class="flex items-center justify-between py-3">
-          <span class="text-sm font-semibold text-[#718096]">Medium</span>
-          <a
-            href={siteConfig.social.medium}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-sm font-medium text-[#2C3539] hover:underline"
-          >
-            {siteConfig.social.medium} &rarr;
-          </a>
-        </div>
       </div>
 
-      <div class="pt-4 border-t border-[#E8E0D8]">
-        <Button href={`mailto:${siteConfig.social.email}`} variant="primary" class="w-full justify-center">
-          Send An Email Directly
-        </Button>
+      <!-- RIGHT COLUMN: Clean Contact Form (Matching Image 1) -->
+      <div class="lg:col-span-7 rounded-3xl bg-white border border-[var(--border-subtle)] p-6 sm:p-8 shadow-card space-y-6">
+        
+        <form id="direct-contact-form" class="space-y-5">
+          
+          <!-- Name Field (Image 1) -->
+          <div class="space-y-2">
+            <label for="user_name" class="text-sm font-bold text-[var(--text-primary)] block">
+              Name <span class="text-[var(--brand-coral)]">*</span>
+            </label>
+            <input
+              type="text"
+              id="user_name"
+              name="name"
+              required
+              placeholder="Your name"
+              class="w-full px-4 py-3 text-sm rounded-2xl bg-[var(--bg-surface-subtle)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--brand-deep-teal)] focus:ring-2 focus:ring-[var(--brand-soft-teal)]/20 transition-all"
+            />
+          </div>
+
+          <!-- Email Field (Image 1) -->
+          <div class="space-y-2">
+            <label for="user_email" class="text-sm font-bold text-[var(--text-primary)] block">
+              Email <span class="text-[var(--brand-coral)]">*</span>
+            </label>
+            <input
+              type="email"
+              id="user_email"
+              name="email"
+              required
+              placeholder="you@example.com"
+              class="w-full px-4 py-3 text-sm rounded-2xl bg-[var(--bg-surface-subtle)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--brand-deep-teal)] focus:ring-2 focus:ring-[var(--brand-soft-teal)]/20 transition-all"
+            />
+          </div>
+
+          <!-- Message Field (Image 1) -->
+          <div class="space-y-2">
+            <label for="user_message" class="text-sm font-bold text-[var(--text-primary)] block">
+              Message <span class="text-[var(--brand-coral)]">*</span>
+            </label>
+            <textarea
+              id="user_message"
+              name="message"
+              rows="5"
+              required
+              placeholder="Tell me about your project, idea, or inquiry..."
+              class="w-full px-4 py-3 text-sm rounded-2xl bg-[var(--bg-surface-subtle)] border border-[var(--border-subtle)] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--brand-deep-teal)] focus:ring-2 focus:ring-[var(--brand-soft-teal)]/20 transition-all resize-none"
+            ></textarea>
+          </div>
+
+          <!-- Submit Button (Image 1 Style) -->
+          <div class="pt-2">
+            <button
+              type="submit"
+              id="submit-btn"
+              class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-[var(--brand-deep-teal)] hover:bg-[var(--brand-deep-teal-hover)] text-white font-bold text-sm transition-all shadow-md focus:outline-none cursor-pointer group active:scale-95"
+            >
+              <span id="btn-text">Send Message</span>
+              <svg id="btn-icon" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3 21l18-9L3 3l3 9zm0 0h7" />
+              </svg>
+            </button>
+          </div>
+
+        </form>
+
+        <!-- Dynamic Feedback States -->
+        <div id="form-success" class="hidden p-4 rounded-2xl bg-[#E8F5E9] text-[#2E7D32] text-sm font-semibold border border-[#A5D6A7] flex items-center gap-3">
+          <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          <span>Message sent successfully! I will get back to you shortly.</span>
+        </div>
+
+        <div id="form-error" class="hidden p-4 rounded-2xl bg-[#FFEBEE] text-[#C62828] text-sm font-semibold border border-[#FFCDD2] flex items-center gap-3">
+          <svg class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span>Unable to dispatch via direct API. Opening email client instead...</span>
+        </div>
+
       </div>
+
     </div>
+
   </div>
 </BaseLayout>
+
+<script>
+  function setupDirectContactForm() {
+    const form = document.getElementById('direct-contact-form') as HTMLFormElement;
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const btnText = document.getElementById('btn-text');
+    const successBox = document.getElementById('form-success');
+    const errorBox = document.getElementById('form-error');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const nameInput = document.getElementById('user_name') as HTMLInputElement;
+        const emailInput = document.getElementById('user_email') as HTMLInputElement;
+        const messageInput = document.getElementById('user_message') as HTMLTextAreaElement;
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const message = messageInput.value.trim();
+
+        if (!name || !email || !message) return;
+
+        // UI Loading State
+        if (submitBtn) submitBtn.disabled = true;
+        if (btnText) btnText.textContent = 'Sending...';
+        if (successBox) successBox.classList.add('hidden');
+        if (errorBox) errorBox.classList.add('hidden');
+
+        try {
+          // Direct email integration via FormSubmit AJAX API
+          const response = await fetch('https://formsubmit.co/ajax/thulanithehara03@gmail.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              name: name,
+              email: email,
+              message: message,
+              _subject: `New Portfolio Message from ${name} (${email})`,
+              _template: 'table'
+            })
+          });
+
+          const result = await response.json();
+
+          if (response.ok && (result.success === "true" || result.success === true || result.message)) {
+            if (successBox) successBox.classList.remove('hidden');
+            form.reset();
+          } else {
+            throw new Error('API submission rejected');
+          }
+        } catch (err) {
+          // Fallback to mailto client if offline or API blocked
+          if (errorBox) errorBox.classList.remove('hidden');
+          const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(message)}`;
+          setTimeout(() => {
+            window.location.href = `mailto:thulanithehara03@gmail.com?subject=${encodeURIComponent(`New Message from ${name}`)}&body=${body}`;
+          }, 800);
+        } finally {
+          if (submitBtn) submitBtn.disabled = false;
+          if (btnText) btnText.textContent = 'Send Message';
+        }
+      });
+    }
+  }
+
+  setupDirectContactForm();
+  document.addEventListener('astro:page-load', setupDirectContactForm);
+</script>

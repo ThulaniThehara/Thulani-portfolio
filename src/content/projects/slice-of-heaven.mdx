@@ -1,176 +1,148 @@
 ---
-title: "Slice of Heaven — Full-Stack E-Commerce & Culinary Storefront"
+title: "Slice of Heaven — Artisanal Patisserie & Bakery Web Application"
 slug: "slice-of-heaven"
-description: "A full-stack artisan culinary and pastry e-commerce platform built with React, Node.js, PostgreSQL, and cloud image optimization. Features dynamic product management, custom dietary filtering, persistent cart synchronization, and secure checkout flows."
-shortDescription: "Artisan bakery e-commerce platform with dynamic catalog and optimized media."
-year: 2023
-category: "Full-Stack & E-Commerce"
-featured: true
-technologies: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma ORM", "Cloudinary", "Tailwind CSS", "Stripe API"]
+description: "A full-stack, editorial e-commerce platform designed for an artisanal cake shop and luxury patisserie. Provides a customer-facing storefront for browsing, customizing, and ordering celebration cakes, gateaux, and offers, alongside an administrative dashboard for inventory, campaigns, and order dispatch."
+shortDescription: "Full-stack artisanal bakery e-commerce platform with customer storefront and admin dashboard."
+year: 2024
+category: "Full-Stack & Web Platforms"
+projectType: "FULL-STACK · E-COMMERCE · PERSONAL PROJECT"
+icon: "code"
+frontendTech: ["React 19", "Vite 7", "React Router 7", "Context API", "SASS / Vanilla CSS"]
+backendTech: ["Node.js", "Express.js 5", "Multer", "Cloudinary"]
+databaseTech: ["MongoDB (Mongoose 8)"]
+featured: false
+technologies: ["React 19", "Node.js", "Express.js", "MongoDB", "Mongoose", "Multer", "Cloudinary", "SASS", "Axios"]
 role: "Full-Stack Software Engineer"
 duration: "2.5 Months"
-team: "Design & Engineering Duo (2 Members)"
+team: "Personal Project"
 githubUrl: "https://github.com"
+githubUrlFrontend: "https://github.com/Ashankavinda277/Demo-Project-Frontend"
+githubUrlBackend: "https://github.com/Ashankavinda277/Demo-Project-Backend"
 liveUrl: "https://example.com"
+image: "/images/projects/slice-of-heaven.png"
 status: "Completed"
 ---
 
 import ArchitectureDiagram from '../../components/mdx/ArchitectureDiagram.astro';
 import TechStack from '../../components/mdx/TechStack.astro';
 import ProjectStats from '../../components/mdx/ProjectStats.astro';
-import ProjectImage from '../../components/mdx/ProjectImage.astro';
 import Callout from '../../components/mdx/Callout.astro';
 import Highlight from '../../components/mdx/Highlight.astro';
 
 ## Overview
 
-**Slice of Heaven** is a full-stack digital commerce platform engineered for an artisan bakery and culinary brand. The application connects an appetizing, image-rich customer ordering frontend with a robust backend inventory management system, relational database order tracking, automated image transformation pipelines, and secure payment processing.
+**Slice of Heaven** is a full-stack, editorial e-commerce platform designed for an artisanal cake shop and luxury patisserie. It provides a customer-facing shop for browsing, customizing, and ordering fresh celebration cakes, gateaux, muffins, and special promotional offers, alongside a comprehensive administrative dashboard for catalog management, promotional campaigns, and order dispatch tracking.
 
 <ProjectStats stats={[
-  { label: 'Cart Conversion', value: '+34%', detail: 'Increase over baseline flow' },
-  { label: 'Image Load Savings', value: '65%', detail: 'Cloudinary AVIF/WebP srcset' },
-  { label: 'Page Speed', value: '98/100', detail: 'Mobile Lighthouse score' },
-  { label: 'Order Processing', value: '< 1.8s', detail: 'End-to-end webhook validation' }
+  { label: 'Frontend Stack', value: 'React 19', detail: 'Vite + React Router 7 + Context API' },
+  { label: 'Backend API', value: 'Express.js 5', detail: 'Node.js REST API with Cloudinary' },
+  { label: 'Database', value: 'MongoDB', detail: 'Mongoose schemas & collections' },
+  { label: 'Aesthetics', value: 'Modern Luxury', detail: 'Minimal Editorial Bakery Design' }
 ]} />
 
-## The Problem
+## Technology Stack & Architecture
 
-Artisan food businesses rely heavily on visual appetite appeal and fresh stock management. However, typical e-commerce templates present major hurdles:
-1. **Bloated Media Payloads**: High-resolution bakery photos caused sluggish page loading on mobile networks, leading to immediate visitor drop-off.
-2. **Complex Product Customization**: Customers needed to specify custom cake messages, dietary substitutions (gluten-free, vegan), and pickup delivery time-slots during ordering.
-3. **Inventory Race Conditions**: Simultaneous orders for limited-batch seasonal items frequently caused out-of-stock ordering errors.
+The application is built using a decoupled MERN-style (MongoDB, Express, React, Node.js) architecture:
 
-## Goals
-
-- **Lightning-Fast Visual Catalog**: Deliver high-definition culinary media with automated edge compression (WebP/AVIF).
-- **Flexible Product Management**: Empower admins to manage complex variant pricing, dietary tags, and daily production quantities.
-- **Frictionless Cart & Checkout UX**: Provide an interactive sliding cart with optimistic state updates and persistent storage.
-- **Transactional Consistency**: Prevent over-ordering of limited baked items using database-level locking.
-
-## My Role & Responsibilities
-
-As the **Full-Stack Software Engineer**, I built:
-- **Database & Backend Architecture**: Designed the relational PostgreSQL schema and built RESTful APIs using Express and Prisma ORM.
-- **Frontend Application**: Created the interactive customer storefront in React with TypeScript, Zustand state management, and Tailwind CSS.
-- **Media Optimization Pipeline**: Configured Cloudinary asset transformations for dynamic image resizing and responsive delivery.
-- **Payment & Webhook Engine**: Integrated the Stripe payment gateway with cryptographically verified order fulfillment webhooks.
+- **Frontend**: React 19, React Router DOM v7, Vite build system, Axios, `lucide-react` / `react-icons`, and custom Vanilla CSS with a centralized Design System.
+- **Backend**: Node.js & Express.js (v5), MongoDB with Mongoose schemas, Multer & Cloudinary integration for image uploads, CORS middleware, and Dotenv configuration.
+- **State Management**: React Context (`CartContext.jsx`) managing shopping bag items, quantity steppers, cart persistence, subtotal calculation, and dynamic top-bar free delivery threshold calculations.
 
 <TechStack stack={[
-  { category: 'Frontend & UI', items: ['React 18', 'TypeScript', 'Tailwind CSS', 'Zustand', 'Framer Motion'] },
-  { category: 'Backend & APIs', items: ['Node.js', 'Express', 'Prisma ORM', 'Stripe API', 'JWT Auth'] },
-  { category: 'Database & Media', items: ['PostgreSQL', 'Cloudinary CDN', 'Docker', 'Redis'] }
+  { category: 'Frontend & UI', items: ['React 19', 'Vite 7', 'React Router DOM v7', 'React Context API', 'Vanilla CSS & SASS', 'lucide-react', 'Axios'] },
+  { category: 'Backend & Cloud', items: ['Node.js', 'Express.js 5', 'MongoDB (Atlas)', 'Mongoose 8', 'Multer', 'Cloudinary SDK', 'CORS & Dotenv'] }
 ]} />
+
+## Design System & Aesthetics
+
+The design follows a **Modern Bakery × Premium Editorial × Minimal Luxury** aesthetic:
+
+- **Color Palette**: Warm Alabaster Cream background (`#FAF7F2`), Deep Espresso Cocoa typography/accents (`#2C1A14`), Warm Caramel/Terracotta buttons & badges (`#C87D55`), and Honeycomb Gold highlights (`#D4A373`).
+- **Typography**: Paired display serif headers (*Playfair Display*) with clean geometric interface body copy (*Plus Jakarta Sans*).
+- **Micro-interactions**: Hover elevations, touch-friendly target sizes (min 42px), animated toast notifications, free delivery progress bars, and tabbed filters.
 
 ## System Architecture
 
 <ArchitectureDiagram
-  title="Slice of Heaven Full-Stack Commerce Architecture"
+  title="Slice of Heaven Decoupled Architecture"
   nodes={[
-    { title: "React Storefront", desc: "Interactive menu, instant filters & slide-out cart drawer", type: "client" },
-    { title: "Express REST API", desc: "Product catalog, auth, order fulfillment & stock management", type: "server" },
-    { title: "PostgreSQL Store", desc: "ACID relational schema for products, variants & orders", type: "db" },
-    { title: "Cloudinary CDN", desc: "Automated format conversion (AVIF/WebP) & resizing", type: "cloud" },
-    { title: "Stripe Gateway", desc: "Payment intent creation & verified webhook triggers", type: "cloud" }
+    { title: "React 19 Storefront & Admin", desc: "Vite SPA with CartContext & custom luxury CSS design tokens", type: "client" },
+    { title: "Express.js 5 Backend API", desc: "RESTful endpoints, Multer image parser & CORS middleware", type: "server" },
+    { title: "MongoDB Atlas", desc: "Mongoose models for products, orders, promotions & customers", type: "db" },
+    { title: "Cloudinary CDN", desc: "Optimized image storage for product assets & offer banners", type: "cloud" }
   ]}
 />
 
-## Implementation Deep Dive
+## In-Depth Analysis of Every Page
 
-### 1. Relational Product & Variant Schema Design
-Bakery items require multi-dimensional properties: categories, dietary flags, size variants, custom toppings, and daily batch limits. We modeled this cleanly in PostgreSQL with Prisma:
+### 1. Customer-Facing Pages
 
-```prisma
-model Product {
-  id          String         @id @default(uuid())
-  title       String
-  slug        String         @unique
-  description String
-  basePrice   Decimal        @db.Decimal(10, 2)
-  imageUrl    String
-  isAvailable Boolean        @default(true)
-  dietaryTags DietaryTag[]
-  variants    ProductVariant[]
-  category    Category       @relation(fields: [categoryId], references: [id])
-  categoryId  String
-  createdAt   DateTime       @default(now())
-}
+#### 🏡 Home Page (`/` or `/Home`)
+- **Hero Slider**: Full-width auto-playing banner showcasing fresh artisanal signature cakes and promotional highlights.
+- **Category Grid**: Interactive visual cards linking to targeted cake collections (*Birthday Cakes, Wedding Cakes, Chocolate Cakes, Signature Gateaux, Muffins, Cupcakes*).
+- **Middle Story Bar**: Highlighting master pastry chef craftsmanship and fresh morning baking guarantees.
+- **Main Offer Showcase**: Displays current active deals with discounted pricing cards.
+- **Feature Grid**: Value propositions highlighting hygienic preparation, climate-controlled courier delivery, and custom cake inscriptions.
 
-model ProductVariant {
-  id         String   @id @default(uuid())
-  name       String   // e.g. "6-Inch", "8-Inch", "Gluten-Free"
-  priceDelta Decimal  @db.Decimal(10, 2)
-  stockCount Int      @default(0)
-  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId  String
-}
-```
+#### 🎂 Products Catalog Page (`/products` or `/categories/:type`)
+- **Category Navigation Pills**: Scrollable filter bar to switch between categories (*All Delights, Birthday Cakes, Wedding Cakes, Chocolate Cakes, Signature Gateaux, Muffins, Cupcakes*).
+- **In-Category Live Filter**: Real-time search bar to instantly filter cakes by flavor or name.
+- **Dynamic Catalog Grid**: Displays product cards showing image, weight, category pill, price (Rs.), and quick action buttons.
+- **State Handling**: Loading spinners, error fallback displays with retry buttons, and empty state illustrations when no items match search terms.
 
-### 2. Automated Cloudinary Image Strategy
-To ensure photos look appetizing while loading instantly, images are uploaded directly to Cloudinary and requested with dynamic query transformations:
+#### 🔍 Product Details Page (`/product/:slug`)
+- **Visual Showcase**: High-res image frame with category pill overlay and trust badges (*Hygienic Prep, Safe Delivery, Fresh Ingredients*).
+- **Product Metadata**: Displays price, weight in kg, status pill (*Freshly Baked to Order*), and flavor/recipe descriptions.
+- **Interactive Stepper**: Allows customers to select quantities with live order total preview calculations.
+- **Actions**:
+  - **Add to Bag**: Pushes product into `CartContext` with feedback toast notification.
+  - **Order Now**: Instantly bypasses cart and navigates directly to the checkout page with single-product order state.
 
-```typescript
-export function getOptimizedImageUrl(publicId: string, width = 600): string {
-  // Automatically serves AVIF/WebP based on browser support + sharp compression
-  return `https://res.cloudinary.com/sliceofheaven/image/upload/f_auto,q_auto,w_${width},c_limit/${publicId}`;
-}
-```
+#### 🏷️ Special Offers Page (`/offers` or `/Offers`)
+- **Promotional Banner**: Dedicated landing page featuring discounted celebration gateaux.
+- **Offer Cards**: Shows regular vs. discounted prices, calculated percentage savings badge, offer expiration dates, and direct order links for promotional deals.
 
-### 3. Persistent Cart State & Optimistic UI
-A dedicated Zustand store handles the cart experience. When customers add items or adjust quantities, the UI updates instantaneously while validating stock in the background:
+#### 🛍️ Shopping Bag Page (`/cart`)
+- **Free Delivery Progress Bar**: Interactive visual bar indicating progress toward unlocking FREE delivery (Rs. 5,000 threshold).
+- **Item Management**: Quantity increase/decrease controls, single-item deletion, and clear bag option.
+- **Order Summary Card**: Breakdown of items subtotal, estimated delivery fee (Rs. 250 or FREE), and total to pay, with a button to proceed to direct checkout.
 
-```typescript
-export const useCartStore = create<CartStore>()(
-  persist(
-    (set, get) => ({
-      items: [],
-      addItem: (item) => {
-        const current = get().items;
-        const exists = current.find((i) => i.variantId === item.variantId);
-        if (exists) {
-          set({
-            items: current.map((i) =>
-              i.variantId === item.variantId ? { ...i, quantity: i.quantity + item.quantity } : i
-            ),
-          });
-        } else {
-          set({ items: [...current, item] });
-        }
-      },
-      removeItem: (variantId) =>
-        set({ items: get().items.filter((i) => i.variantId !== variantId) }),
-      clearCart: () => set({ items: [] }),
-    }),
-    { name: 'slice-heaven-cart-v1' }
-  )
-);
-```
+#### 📋 Checkout & Direct Order Page (`/order`)
+- **Custom Cake Message Inscription**: Allows customers to specify custom chocolate plaque messages (up to 50 characters) for each cake ordered.
+- **Delivery Coordinates Form**: Collects customer Full Name, Email Address, Contact Number, Delivery Address, and requested Delivery Date.
+- **Multi-Source Checkout Support**: Seamlessly processes orders originating from the cart, direct product "Order Now", or promotional offers.
 
-<Callout type="tip" title="Stripe Webhook Idempotency">
-To protect against duplicate order fulfillment if Stripe resends a webhook, all processed payment intent IDs are recorded in an idempotent transactions table before decrementing stock.
+#### 🎉 Order Confirmation Page (`/order-success`)
+- **Confirmation Receipt**: Displays unique Order ID reference number (`#XXXXXX`).
+- **Next Steps Timeline**: Guides customer through Email Dispatch &rarr; Fresh Artisanal Baking &rarr; Punctual Courier Delivery.
+
+#### 📜 About Us & Contact Pages (`/aboutUs` & `/ContactUs`)
+- Shares the story of the bakery, master pastry chefs, high-grade Belgian chocolate sourcing, store contact details, opening hours, bakery location, and feedback forms.
+
+---
+
+### 2. Admin Management Portal
+
+#### 🖥️ Admin Dashboard (`/admin`)
+- Central entry point for store managers, providing access to product inventory control, marketing campaigns, and fulfillment dispatch.
+
+#### 📦 Product Inventory Management (`/ManageProducts`)
+- **Product Form**: Allows admins to publish new cakes to the live store with fields for Product Name, Category dropdown, Price (Rs), Weight (kg), Description, Status (Active/Inactive), and Cloudinary image upload.
+
+#### 🏷️ Promotional Offer Campaign Manager (`/ManageOffers`)
+- **Offer Form**: Enables creation of limited-time deals with inputs for Regular Price, Discounted Price, automatically calculated percentage savings preview, Expiration Date picker, description, and promotional banner image upload.
+
+#### 🚚 Order Dispatch & Kanban Fulfillment Board (`/ViewOrders`)
+- **Kanban Board**: Organizes orders across 4 columns: *Pending*, *Processing*, *Completed*, and *Cancelled*.
+- **Real-time Status Updating**: Dropdown controls on each card to change order status dynamically.
+- **Order Details**: Displays order ID, customer contact info, delivery address, delivery date badge, items ordered breakdown, custom cake messages, and total price.
+
+<Callout type="tip" title="Cart Context Persistence">
+Utilizes React Context API (`CartContext`) with `localStorage` fallback to preserve shopping bag contents across page navigation and browser sessions.
 </Callout>
-
-## Technical Challenges & Solutions
-
-### Challenge 1: Flash Inventory Contention
-- **Problem**: During holiday promotion drops, multiple customers attempting to check out the last box of artisan macarons simultaneously caused overselling.
-- **Solution**: Implemented transactional inventory decrement with PostgreSQL checks (`stock_count >= requested_quantity`) inside an ACID transaction block, rolling back payment initialization if stock was exhausted.
-
-### Challenge 2: Slow Mobile Network Image Rendering
-- **Problem**: High-resolution gallery grids lagged on 3G/4G connections.
-- **Solution**: Generated responsive HTML `srcset` attributes with low-quality image placeholders (LQIP) blurred into place before the full asset loaded.
 
 ## Results & Impact
 
-<Highlight title="Business & Technical Outcomes">
-Slice of Heaven achieved a 34% lift in completed checkout conversions and dropped median mobile page load time to under 1.2 seconds, processing hundreds of daily seasonal orders with zero inventory discrepancies.
+<Highlight title="Luxury Artisanal E-Commerce Platform">
+Engineered a complete, modern e-commerce application tailored specifically for a high-end bakery business, pairing luxury editorial UI design with robust order fulfillment and catalog administration features.
 </Highlight>
-
-## What I Learned
-
-- Designing e-commerce systems requires tight coupling between frontend state guarantees and backend transactional integrity.
-- Automated responsive media pipelines are one of the highest-leverage performance optimizations for consumer-facing storefronts.
-
-## Future Improvements
-
-- Add scheduled recurring subscription boxes for weekly bakery deliveries.
-- Build an automated kitchen printer integration via thermal receipt WebSockets.

@@ -74,7 +74,6 @@ const cards: SkillCard[] = [
     accentColor: '#C4A882',
     technologies: [
       { name: 'Git', tag: 'VCS', isHighlight: true },
-      { name: 'GitHub', tag: 'Collaboration', isHighlight: true },
       { name: 'VS Code', tag: 'Editor' },
       { name: 'Figma', tag: 'Design' },
       { name: 'Vitest', tag: 'Testing' },
@@ -162,12 +161,8 @@ const cards: SkillCard[] = [
                       : 'bg-[#F7F4F0]/80 border-[#D4C8BA] hover:bg-white hover:border-[#C4A882]'
                   }`}
                 >
-                  <!-- Marker Dot (#006D77 or #83C5BE) -->
-                  <span
-                    class={`w-2 h-2 rounded-full flex-shrink-0 ${
-                      tech.isHighlight ? 'bg-[#2C3539]' : 'bg-[#C4A882]'
-                    }`}
-                  ></span>
+                  <!-- Marker Dot (Black #2C3539) -->
+                  <span class="w-2 h-2 rounded-full flex-shrink-0 bg-[#2C3539]"></span>
 
                   <!-- Main Technology Name: Bold Deep Teal #006D77 for maximum focus -->
                   <span class="text-[13px] sm:text-sm font-bold text-[#2C3539] tracking-tight">
@@ -184,14 +179,10 @@ const cards: SkillCard[] = [
               ))}
             </div>
 
-            <!-- Card Footer Status: #006D77 text with #E29578 Coral Active Focus Indicator -->
+            <!-- Card Footer Status -->
             <div class="mt-6 pt-4 border-t border-[#E8E0D8] flex items-center justify-between text-xs">
               <span class="font-mono text-xs font-bold text-[#2C3539]">
                 {card.technologies.length} Technologies
-              </span>
-              <span class="active-badge hidden items-center gap-1.5 font-bold text-[#C07856] text-xs">
-                <span class="w-2 h-2 rounded-full bg-[#C07856] animate-pulse"></span>
-                Active Focus
               </span>
             </div>
           </div>
@@ -280,8 +271,6 @@ const cards: SkillCard[] = [
         if (diff > total / 2) diff -= total;
         if (diff < -total / 2) diff += total;
 
-        const activeBadge = card.querySelector<HTMLElement>('.active-badge');
-
         if (diff === 0) {
           // Center Card: Emphasized, scaled, straight, full opacity
           card.style.transform = 'translate3d(0, 0, 80px) scale(1) rotateY(0deg) rotateZ(0deg)';
@@ -291,7 +280,6 @@ const cards: SkillCard[] = [
           card.style.cursor = 'default';
           card.classList.add('shadow-card-hover', 'border-[#2C3539]', 'ring-1', 'ring-[#2C3539]/20');
           card.classList.remove('opacity-60');
-          if (activeBadge) activeBadge.style.display = 'inline-flex';
         } else if (diff === -1) {
           // Left Card: Angled outward to left, smaller, lower opacity
           card.style.transform = `translate3d(-${translateXDistance}px, 0, -40px) scale(0.85) rotateY(18deg) rotateZ(-1.5deg)`;
@@ -300,7 +288,6 @@ const cards: SkillCard[] = [
           card.style.pointerEvents = 'auto';
           card.style.cursor = 'pointer';
           card.classList.remove('shadow-card-hover', 'border-[#2C3539]', 'ring-1', 'ring-[#2C3539]/20');
-          if (activeBadge) activeBadge.style.display = 'none';
         } else if (diff === 1) {
           // Right Card: Angled outward to right, smaller, lower opacity
           card.style.transform = `translate3d(${translateXDistance}px, 0, -40px) scale(0.85) rotateY(-18deg) rotateZ(1.5deg)`;
@@ -309,21 +296,18 @@ const cards: SkillCard[] = [
           card.style.pointerEvents = 'auto';
           card.style.cursor = 'pointer';
           card.classList.remove('shadow-card-hover', 'border-[#2C3539]', 'ring-1', 'ring-[#2C3539]/20');
-          if (activeBadge) activeBadge.style.display = 'none';
         } else if (diff === -2) {
           // Far Left Card: Stacked behind along circular path
           card.style.transform = `translate3d(-${translateXDistance * 1.5}px, 0, -120px) scale(0.7) rotateY(28deg)`;
           card.style.opacity = '0';
           card.style.zIndex = '10';
           card.style.pointerEvents = 'none';
-          if (activeBadge) activeBadge.style.display = 'none';
         } else {
           // Far Right Card: Stacked behind along circular path
           card.style.transform = `translate3d(${translateXDistance * 1.5}px, 0, -120px) scale(0.7) rotateY(-28deg)`;
           card.style.opacity = '0';
           card.style.zIndex = '10';
           card.style.pointerEvents = 'none';
-          if (activeBadge) activeBadge.style.display = 'none';
         }
       });
 

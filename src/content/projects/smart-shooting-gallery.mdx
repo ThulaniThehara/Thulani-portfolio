@@ -1,162 +1,128 @@
 ---
 title: "Smart Shooting Gallery — Embedded IoT & Telemetry System"
 slug: "smart-shooting-gallery"
-description: "A physical interactive target shooting gallery combining hardware and software engineering: ESP32 microcontrollers, BPW34 photodiodes for optical laser detection, Force Sensitive Resistors (FSRs), haptic vibration feedback, and sub-50ms MQTT telemetry to a real-time web scoreboard."
-shortDescription: "Interactive IoT hardware shooting gallery with ESP32, BPW34 photodiodes, and MQTT telemetry."
+description: "A physical interactive target shooting gallery combining hardware and software engineering: ESP32 microcontrollers, smart glove pressure triggers, BPW34 photodiodes for tiered 3-ring optical laser detection, haptic vibration feedback, linear actuator target movement, and sub-50ms MQTT telemetry."
+shortDescription: "Interactive IoT hardware shooting gallery with ESP32, smart glove, BPW34 photodiodes, and MQTT telemetry."
 year: 2024
 category: "IoT & Hardware"
+projectType: "EMBEDDED · IOT · PHYSICAL COMPUTING"
+icon: "code"
+frontendTech: ["React", "Tailwind CSS", "WebSockets", "Chart.js"]
+backendTech: ["Node.js", "Express", "MQTT (Mosquitto)", "C++ / Arduino"]
+databaseTech: ["MongoDB"]
 featured: true
-technologies: ["ESP32", "C++", "FreeRTOS", "BPW34 Photodiodes", "FSR Sensors", "MQTT", "WebSockets", "Node.js", "React", "Tailwind CSS"]
+technologies: ["ESP32", "Arduino Mega", "C++", "FreeRTOS", "BPW34 Photodiodes", "LM358 Op-Amp", "MQTT", "NodeMCU ESP8266", "DFPlayer Mini", "NeoPixel Matrix", "A4988 Steppers"]
 role: "Hardware & IoT Systems Engineer"
 duration: "3 Months"
 team: "Solo Hardware & Software Project"
-githubUrl: "https://github.com"
+githubUrl: "https://github.com/Ashankavinda277/3rd-game-version"
 liveUrl: "https://example.com"
+image: "/images/projects/smart-shooting-gallery.png"
 status: "Completed"
 ---
 
 import ArchitectureDiagram from '../../components/mdx/ArchitectureDiagram.astro';
 import TechStack from '../../components/mdx/TechStack.astro';
 import ProjectStats from '../../components/mdx/ProjectStats.astro';
-import ProjectImage from '../../components/mdx/ProjectImage.astro';
 import Callout from '../../components/mdx/Callout.astro';
 import Highlight from '../../components/mdx/Highlight.astro';
 
-## Overview
+## Overview & Introduction
 
-The **Smart Shooting Gallery** is a full-stack cyber-physical system bridging custom electronics, embedded firmware, and real-time web applications. Physical target modules equipped with high-speed optical sensors and force transducers detect laser impulses and projectile impacts, registering hits within microseconds and broadcasting event telemetry across an MQTT broker to a spectator leaderboard.
+The **Smart Glove-Based Laser Shooting Game** is a cyber-physical system combining advanced sensor technology, haptic interaction, and real-time audio-visual feedback. 
+
+A wearable smart glove equipped with a thumb pressure sensor detects when the user presses against their middle finger, firing a focused red laser diode while activating an internal vibration motor for tactile feedback. The target system consists of a single dynamic target divided into three concentric clear acrylic rings, each embedded with **BPW34 silicon PIN photodiodes** to detect laser impact zones for tiered scoring.
+
+Real-time feedback is provided through an RGB NeoPixel matrix, a 12V high-power LED strip driven by an IRF520 MOSFET, and an integrated sound system powered by a DFPlayer Mini and PAM8403 audio amplifier. Controlled via an **ESP32 microcontroller** and an **Arduino Mega** bridged wirelessly through a **NodeMCU (ESP8266)** module, the game features multiple modes (*Time Attack*) across Easy, Medium, and Hard difficulty levels.
 
 <ProjectStats stats={[
-  { label: 'Optical Response', value: '< 20µs', detail: 'BPW34 silicon PIN rise time' },
-  { label: 'Telemetry Latency', value: '< 45ms', detail: 'Hardware strike to web display' },
-  { label: 'Sampling Rate', value: '1,000 Hz', detail: 'Dedicated FreeRTOS core loop' },
-  { label: 'False Positive Rate', value: '0%', detail: 'Dual-sensor validation gate' }
+  { label: 'Optical Sensor', value: 'BPW34 Photodiodes', detail: '3 concentric acrylic scoring rings' },
+  { label: 'Glove Microcontroller', value: 'ESP32 Dual-Core', detail: 'Wi-Fi, FreeRTOS & PWM haptics' },
+  { label: 'Motion Control', value: 'NEMA17 Steppers', detail: 'Arduino Mega + CNC Shield + A4988' },
+  { label: 'Telemetry Latency', value: '< 45ms', detail: 'Hardware strike to web leaderboard' }
 ]} />
 
-## The Problem
+## Problem & Significance of Study
 
-Traditional recreational target systems are either entirely analog (requiring manual score tracking with no digital analytics) or built as closed arcade machines without cloud connectivity or real-time spectatorship. The challenge was to engineer an open, modular physical shooting gallery that:
-1. Detects low-power pulsed laser hits and physical strikes with high temporal accuracy.
-2. Rejects harsh ambient environmental light (overhead fluorescent lights, daylight) without missing fast laser pulses.
-3. Transmits match telemetry over Wi-Fi with imperceptible latency to multi-screen spectator dashboards.
+### 1. The Problem in Brief
+In today's fast-paced environment, individuals and students face elevated stress levels and limited physical engagement. Traditional screen-based mobile and console games contribute to sedentary habits, eye strain, and overstimulation without encouraging physical interactivity.
 
-## Goals
+### 2. Significance & Benefits
+- **Active & Screen-Free Gameplay**: Encourages physical movement and hand-eye coordination without staring at mobile screens.
+- **Immediate Stress Relief**: Combines physical target shooting precision with tactile haptic and audio-visual rewards.
+- **Promotes Social Interaction**: Supports solo practice and competitive multiplayer leaderboards.
 
-- **Millisecond-Accurate Hit Detection**: Detect pulses down to 10 milliseconds using fast photodiode sensor arrays.
-- **Physical Haptic Feedback**: Actuate micro-vibration motors and target LEDs immediately upon successful strike.
-- **Dual-Sensor Noise Immunity**: Combine optical sensing with Force Sensitive Resistors (FSRs) to eliminate false triggers.
-- **Real-Time Browser Dashboard**: Live scoreboard displaying reaction time, accuracy rate, and player rankings.
+## Aim & Core Objectives
 
-## Electronics & Sensor Decisions
+### Aim
+Develop an interactive, smart glove-based laser target system that delivers an immersive physical gaming experience while promoting active engagement.
 
-Designing the physical sensing circuits required careful component selection:
-
-1. **BPW34 Silicon PIN Photodiode**:
-   - *Why chosen*: Features a 20ns rise time and broad spectral sensitivity (430nm to 1100nm), making it ideal for detecting visible red (650nm) laser pulses without sluggishness found in standard photoresistors (LDRs).
-2. **Force Sensitive Resistors (FSR)**:
-   - *Why chosen*: Provides analog pressure-to-resistance variance upon mechanical impact, allowing the system to distinguish light touches from high-velocity projectile strikes.
-3. **Coin Vibration Haptic Actuators**:
-   - *Why chosen*: Driven by NPN transistor switches (2N2222) with flyback protection diodes, providing instantaneous tactile confirmation to physical targets.
+### Key Objectives
+- **Precision Pressure Trigger**: Design a thumb-to-finger pressure trigger on the glove for laser firing paired with instantaneous haptic vibration confirmation.
+- **Tiered 3-Ring Hit Detection**: Construct a 3-zone concentric acrylic target using BPW34 photodiodes and LM358 operational amplifiers to calculate precise scores based on impact location.
+- **Wireless Inter-Module Bridge**: Implement wireless data transmission between the Arduino Mega (sensor & motor control) and ESP32 glove via a NodeMCU (ESP8266) module.
+- **Scalable Difficulty & Movement**: Implement *Time Attack* game modes with dynamic target trajectories:
+  - **Easy**: Linear X-axis movement along a pre-defined path.
+  - **Medium**: 2D X and Y-axis pre-defined movement.
+  - **Hard**: Randomized 2D X and Y-axis movement.
+- **Multi-Modal Feedback**: Synchronize 14x8 NeoPixel matrix animations, 12V LED flashes, and DFPlayer Mini sound effects upon confirmed laser strikes.
 
 <TechStack stack={[
-  { category: 'Embedded & Hardware', items: ['ESP32 Dual-Core MCU', 'C / C++', 'FreeRTOS', 'BPW34 Photodiodes', 'FSR 402 Sensors', 'LM393 Comparators'] },
-  { category: 'Networking & Protocols', items: ['MQTT (Mosquitto)', 'WebSockets', 'Wi-Fi 802.11 b/g/n', 'JSON Payloads'] },
-  { category: 'Backend & Dashboard', items: ['Node.js', 'Express', 'React', 'Tailwind CSS', 'Chart.js'] }
+  { category: 'Embedded Microcontrollers', items: ['ESP32 Dual-Core MCU', 'Arduino Mega 2560', 'NodeMCU ESP8266'] },
+  { category: 'Sensors & Signal Conditioning', items: ['BPW34 Silicon PIN Photodiodes', 'LM358 Operational Amplifiers', 'Thumb Pressure Sensor', 'Limit Switches'] },
+  { category: 'Actuators & Motion', items: ['NEMA17 Stepper Motors', 'A4988 Drivers', 'CNC Shield v3', 'Vibration Haptic Motor', '2N2222 NPN Transistors'] },
+  { category: 'Power & Audio/Visual', items: ['3S Li-ion Battery Pack', 'BMS 3S 20A', 'LM2596 Buck Converter', 'DFPlayer Mini MP3', 'PAM8403 Amplifier', 'NeoPixel 14x8 Matrix', 'IRF520 MOSFET'] }
 ]} />
+
+## Proposed Solution & Features
+
+1. **Pressure-Based Shooting Interaction**: Glove-embedded thumb pressure sensor triggers the red laser diode and vibration motor simultaneously.
+2. **Concentric Ring Target Precision**: Three acrylic rings housing BPW34 photodiodes pass signals through LM358 op-amp conditioning to distinguish inner bullseye vs outer ring hits.
+3. **Linear Actuator Motion System**: NEMA17 steppers driven by an A4988/CNC Shield assembly slide the target horizontally and vertically across precision rails.
+4. **Wireless Telemetry**: ESP8266 NodeMCU bridges physical target event data to a Node.js WebSocket gateway and React web scoreboard.
+
+## Hardware & System Component Breakdown
+
+### 🔧 Linear Actuator System (Target Movement)
+- **Arduino Mega**: Processes target positioning logic and limit switch feedback.
+- **CNC Shield & A4988 Drivers**: Interfaces stepping sequences to NEMA17 motors.
+- **NEMA17 Stepper Motors & Linear Rail**: Powers smooth X/Y target translation.
+- **Limit Switches**: Prevents mechanical over-travel damage.
+
+### 🎯 Target System (Hit Detection & Scoring)
+- **BPW34 Photodiodes**: Detects Visible Red (650nm) laser pulses within microseconds.
+- **LM358 Operational Amplifier IC**: Amplifies photodiode signals for high-precision digital logic conversion.
+- **Layered Clear Acrylic Rings**: 3 distinct physical zones for tiered score calculation.
+
+### ✋ Smart Glove (Player Interaction Unit)
+- **ESP32 Microcontroller**: Samples pressure sensor inputs and controls laser/haptics via FreeRTOS tasks.
+- **Red Laser Diode Module**: Controlled via 2N2222 NPN transistor switch with 1N4007 reverse-polarity protection.
+- **3S Li-ion Battery & BMS 20A**: Portable power supply managed by an LM2596 buck converter and BMS protection board.
+
+### 🔊 Visual & Audio Feedback System
+- **DFPlayer Mini & PAM8403 Amplifier**: Plays real-time sound effects for hits, countdowns, and game over states.
+- **NeoPixel 14x8 RGB LED Matrix**: Displays animated green "HIT" confirmations and score tallies.
+- **12V Single-Color LED Strip & IRF520 MOSFET**: Delivers high-brightness flash feedback upon successful target impact.
 
 ## System Architecture
 
-The physical rig and software stack are structured across three interconnected tiers:
-
 <ArchitectureDiagram
-  title="Smart Shooting Gallery Hardware & Software Pipeline"
+  title="Smart Shooting Gallery Multi-Module Hardware Architecture"
   nodes={[
-    { title: "Physical Target Array", desc: "BPW34 Optical + FSR Transducers on ESP32", type: "hardware" },
-    { title: "Edge Signal Conditioning", desc: "LM393 analog comparator & hardware interrupts", type: "hardware" },
-    { title: "Local MQTT Broker", desc: "Low-overhead event publication topic tree", type: "server" },
-    { title: "Node.js WebSocket Hub", desc: "Translates MQTT events to live browser clients", type: "server" },
-    { title: "React Live Scoreboard", desc: "Real-time match scoring and reaction timing", type: "client" }
+    { title: "Smart Glove (ESP32)", desc: "Pressure trigger, red laser diode & haptic vibration motor", type: "hardware" },
+    { title: "Target Module (Arduino Mega)", desc: "3-ring BPW34 photodiodes + LM358 op-amp hit detection", type: "hardware" },
+    { title: "Linear Actuator System", desc: "NEMA17 steppers, CNC Shield & A4988 movement engine", type: "hardware" },
+    { title: "Wireless NodeMCU Bridge", desc: "NodeMCU ESP8266 bridging hardware data over Wi-Fi", type: "server" },
+    { title: "Web Scoreboard", desc: "Real-time match scoring and reaction timing dashboard", type: "client" }
   ]}
 />
 
-## Implementation Deep Dive
-
-### 1. Analog Signal Conditioning & Interrupts
-Direct analog-to-digital (ADC) polling is too slow for microsecond laser pulses. We implemented an external LM393 voltage comparator circuit with an adjustable potentiometer reference threshold. When the photodiode voltage spikes, the comparator pulls low, firing a hardware interrupt on the ESP32:
-
-```cpp
-// ESP32 High-Priority Interrupt Service Routine (ISR)
-volatile uint32_t lastLaserHitMicros = 0;
-const uint32_t DEBOUNCE_THRESHOLD_US = 80000; // 80ms window
-
-void IRAM_ATTR onLaserDetectedISR() {
-  uint32_t currentMicros = micros();
-  if (currentMicros - lastLaserHitMicros > DEBOUNCE_THRESHOLD_US) {
-    lastLaserHitMicros = currentMicros;
-    portENTER_CRITICAL_ISR(&sensorMux);
-    flagLaserHit = true;
-    portEXIT_CRITICAL_ISR(&sensorMux);
-  }
-}
-```
-
-### 2. Dual-Core Task Pinning with FreeRTOS
-The ESP32's dual-core Xtensa processor was utilized to separate time-critical sensing from network communications:
-- **Core 1 (Sensory Loop)**: Dedicated strictly to ADC sampling of FSR pressure sensors, optical interrupt handling, and immediate haptic PWM triggering.
-- **Core 0 (Network Loop)**: Connects to Wi-Fi, serializes JSON hit payloads, and manages MQTT publishing with automatic reconnection logic.
-
-```cpp
-// FreeRTOS Task Setup
-xTaskCreatePinnedToCore(
-  SensorPollingTask,   // Task function
-  "SensorTask",        // Name
-  4096,                // Stack size
-  NULL,                // Parameters
-  2,                   // High priority
-  &xSensorTaskHandle,  // Handle
-  1                    // Run on Core 1
-);
-
-xTaskCreatePinnedToCore(
-  MqttPublishingTask,
-  "MqttTask",
-  4096,
-  NULL,
-  1,                   // Lower priority
-  &xMqttTaskHandle,
-  0                    // Run on Core 0
-);
-```
-
-### 3. Sub-50ms Telemetry Relay Pipeline
-Once an event is confirmed, the ESP32 publishes to topic `gallery/target/04/hit`. A lightweight Node.js gateway subscribes via MQTT, computes running score multipliers, and broadcasts the event over WebSockets to the React browser interface.
-
-<Callout type="tip" title="WebSockets over HTTP Polling">
-Using persistent WebSockets reduced message round-trip latency from ~280ms (polling) to ~38ms, creating an immediate, tactile response on the spectator leaderboard.
+<Callout type="tip" title="Dual-Core FreeRTOS Partitioning">
+Task pinning on the ESP32 ensures that thumb pressure sampling and laser firing run on Core 1 without being delayed by Wi-Fi packet transmission on Core 0.
 </Callout>
-
-## Hardware Challenges & Engineering Solutions
-
-### Challenge 1: Ambient Light Interference
-- **Problem**: Overhead halogen and daylight flooded the BPW34 photodiodes, keeping the comparator triggered constantly.
-- **Solution**: Implemented an optical bandpass filter tube over the diode and added a high-pass RC filter ($C = 100nF, R = 10k\Omega$) in the analog front-end to block steady DC ambient sunlight while passing sharp AC laser pulses.
-
-### Challenge 2: Mechanical Frame Vibration Crosstalk
-- **Problem**: Physical impacts on Target 1 rattled the mounting wood frame, triggering FSR readings on Target 2.
-- **Solution**: Implemented silicone rubber isolation grommets on each target housing and combined FSR analog thresholds with optical beam validation (dual confirmation gate).
 
 ## Results & Demonstrated Skills
 
-<Highlight title="Outside Traditional Web Development">
-This project demonstrated real-time physical computing, analog circuit conditioning, embedded firmware in C++, FreeRTOS task concurrency, and low-latency networking under physical constraints.
+<Highlight title="Cyber-Physical Systems Integration">
+Successfully engineered a complete physical target shooting rig combining analog optical conditioning, embedded C++ firmware, stepper motor motion control, and wireless web telemetry.
 </Highlight>
-
-## What I Learned
-
-- Hardware debouncing and RC filtering save tremendous firmware complexity when dealing with noisy physical transducers.
-- Separating network I/O from hardware interrupt loops prevents packet latency from blocking physical responsiveness.
-
-## Future Improvements
-
-- Design a custom 2-layer printed circuit board (PCB) in KiCad to replace breadboards.
-- Add dynamic servo-driven pop-up target mechanisms for reaction training.

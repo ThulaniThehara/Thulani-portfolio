@@ -17,13 +17,13 @@ const timeline = [
     tags: ['Software Engineering', 'Cloud Architecture', 'Networking', 'OOP', 'CGPA: 3.77'],
   },
   {
-    period: 'Completed',
-    type: 'Certification',
-    role: 'Certificate Level Course in Human Resource Management',
-    organization: 'International Business Studies Campus (IBS Campus)',
+    period: 'Open for Opportunities',
+    type: 'Next Milestone',
+    role: 'Software Engineering Role',
+    organization: 'Open for Opportunities',
     description:
-      'Comprehensive coursework covering core human resource management principles, organizational behavior, professional communication, and leadership practices.',
-    tags: ['Human Resource Management', 'Organizational Behavior', 'Leadership'],
+      'Actively seeking software engineering roles & internships focused on full-stack web platforms, cloud architecture, and AI-driven solutions.',
+    tags: ['Full-Stack Platforms', 'Cloud Architecture', 'AI Solutions'],
   },
 ];
 ---
@@ -68,9 +68,9 @@ const timeline = [
     <!-- 2. Education & Qualifications Timeline -->
     <section class="space-y-6">
       <div class="space-y-1">
-        <span class="text-xs font-semibold uppercase tracking-wider text-[var(--brand-deep-teal)]">Education & Qualifications</span>
+        <span class="text-xs font-semibold uppercase tracking-wider text-[var(--brand-deep-teal)]">Background & Journey</span>
         <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--text-primary)]">
-          Background
+          Milestones & Education
         </h2>
       </div>
 
@@ -79,10 +79,11 @@ const timeline = [
           <div class="rounded-2xl bg-white border border-[var(--border-subtle)] p-6 space-y-3 shadow-2xs hover:border-[var(--brand-soft-teal)] transition-colors">
             <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
               <div class="space-y-0.5">
-                <h3 class="text-base sm:text-lg font-bold text-[var(--text-primary)]">{item.role}</h3>
+                <span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--text-muted)] block">{item.type}</span>
+                <h3 class="text-base sm:text-lg font-extrabold text-[var(--text-primary)]">{item.role}</h3>
                 <div class="text-sm font-semibold text-[var(--brand-deep-teal)]">{item.organization}</div>
               </div>
-              <Badge variant={item.type === 'Education' ? 'soft-teal' : 'peach'} size="sm">
+              <Badge variant={item.type === 'Next Milestone' ? 'peach' : 'soft-teal'} size="sm">
                 {item.period}
               </Badge>
             </div>
@@ -103,12 +104,12 @@ const timeline = [
       </div>
     </section>
 
-    <!-- 4. Contact CTA -->
-    <section class="rounded-2xl bg-[var(--brand-deep-teal)] text-white p-8 sm:p-12 text-center space-y-5">
-      <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+    <!-- 4. Contact CTA Banner -->
+    <section class="rounded-3xl bg-[var(--brand-deep-teal)] text-white p-8 sm:p-12 text-center space-y-5 shadow-lg border border-[var(--brand-deep-teal)]">
+      <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
         Let's build something together
       </h2>
-      <p class="text-sm text-[var(--brand-ice-white)]/85 max-w-lg mx-auto">
+      <p class="text-sm sm:text-base text-white/90 max-w-lg mx-auto leading-relaxed">
         I'm open to full-stack engineering roles, cloud architecture projects, and IoT hardware collaborations.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
@@ -116,9 +117,11 @@ const timeline = [
           Get in Touch
         </Button>
         <Button
-          href={`mailto:${siteConfig.social.email}`}
+          href={`https://mail.google.com/mail/?view=cm&fs=1&to=${siteConfig.social.email}`}
           variant="outline"
           size="lg"
+          target="_blank"
+          rel="noopener noreferrer"
           class="!border-white !text-white hover:!bg-white/10"
         >
           Send an Email
