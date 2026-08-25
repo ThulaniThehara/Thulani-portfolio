@@ -1,0 +1,109 @@
+---
+import { exploringIconPaths, type ExploringTopic } from '../../data/exploringTopics';
+
+interface Props {
+  topic: ExploringTopic;
+  index: number;
+}
+
+const { topic, index } = Astro.props;
+const displayIndex = String(index + 1).padStart(2, '0');
+const iconPath = exploringIconPaths[topic.icon];
+
+// Odd items sit left of the spine on desktop, even items right — the alternating
+// zig-zag that makes a six-step timeline readable at a glance.
+const isLeft = index % 2 === 0;
+---
+
+<div
+  class={`timeline-item relative animate-fade-in-up pl-16 lg:pl-0 ${
+    isLeft ? 'lg:pr-[calc(50%+2.5rem)]' : 'lg:pl-[calc(50%+2.5rem)]'
+  }`}
+  style={`animation-delay: ${index * 110}ms`}
+>
+  <!-- Node on the spine -->
+  <span
+    class="timeline-node absolute left-6 lg:left-1/2 top-8 z-10 w-5 h-5 -translate-x-1/2 rounded-full border-[3px] border-white shadow-[0_2px_8px_rgba(0,109,119,0.35)] transition-transform duration-300"
+    style={`background-color: ${topic.accentFrom}`}
+    aria-hidden="true"
+  ></span>
+
+  <!-- Connector from spine to card -->
+  <span
+    class="absolute top-[2.625rem] h-px left-6 w-10 lg:hidden"
+    style={`background-color: ${topic.accentTo}`}
+    aria-hidden="true"
+  ></span>
+  <span
+    class="absolute top-[2.625rem] h-px hidden lg:block"
+    style={`background-color: ${topic.accentTo}; ${
+      isLeft ? 'left: calc(50% - 2.5rem); width: 2.5rem;' : 'left: 50%; width: 2.5rem;'
+    }`}
+    aria-hidden="true"
+  ></span>
+
+  <article class="timeline-card group relative rounded-2xl overflow-hidden border border-[var(--border-subtle)] bg-white shadow-[0_2px_10px_rgba(0,109,119,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_-14px_rgba(0,109,119,0.32)]">
+    <!-- Colored header: index + title -->
+    <div
+      class="flex items-center gap-4 px-5 py-4"
+      style={`background: linear-gradient(120deg, ${topic.accentFrom} 0%, ${topic.accentTo} 100%)`}
+    >
+      <span class="text-3xl sm:text-4xl font-extrabold text-white leading-none tabular-nums tracking-tight">
+        {displayIndex}
+      </span>
+      <span class="w-px self-stretch bg-white/30" aria-hidden="true"></span>
+      <h3 class="flex-1 text-base sm:text-lg font-bold text-white leading-snug tracking-tight">
+        {topic.title}
+      </h3>
+    </div>
+
+    <!-- Body: icon + description + focus chips -->
+    <div class="flex items-start gap-4 p-5">
+      <div
+        class="timeline-icon shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300"
+        style={`background-color: ${topic.accentFrom}14; color: ${topic.accentFrom}`}
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d={iconPath} />
+        </svg>
+      </div>
+
+      <div class="flex-1 min-w-0 space-y-3">
+        <p class="text-[15px] text-[var(--text-secondary)] leading-[1.7]">
+          {topic.description}
+        </p>
+
+        <div class="flex flex-wrap gap-1.5">
+          {topic.focus.map((item) => (
+            <span class="px-2.5 py-1 text-[11px] font-semibold rounded-md bg-[var(--bg-surface-subtle)] text-[var(--text-secondary)] border border-[var(--border-subtle)]">
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<style>
+  .timeline-item:hover .timeline-node {
+    transform: translateX(-50%) scale(1.35);
+  }
+
+  .timeline-card:hover .timeline-icon {
+    transform: scale(1.08);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-item {
+      animation: none !important;
+    }
+
+    .timeline-node,
+    .timeline-card,
+    .timeline-icon {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>

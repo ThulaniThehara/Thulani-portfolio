@@ -23,8 +23,8 @@ const SYSTEM_NODES: SystemNode[] = [
     name: 'Software & Web Systems',
     category: 'Application Layer',
     position: [-2.2, 1.1, 0],
-    color: '#006D77',
-    accentColor: '#83C5BE',
+    color: '#2C3539',
+    accentColor: '#C4A882',
     summary: 'Type-safe frontend architectures, modular UI design systems, and resilient client-side state management.',
     techStack: ['React 18/19', 'Astro', 'TypeScript', 'Tailwind CSS', 'TanStack Query', 'Zustand'],
     capabilities: ['Islands Architecture', 'Atomic Design Systems', 'Optimistic UI', 'Full-Stack Type Safety'],
@@ -35,8 +35,8 @@ const SYSTEM_NODES: SystemNode[] = [
     name: 'Cloud & Serverless',
     category: 'Infrastructure Layer',
     position: [2.2, 1.1, 0],
-    color: '#00565F',
-    accentColor: '#83C5BE',
+    color: '#1C2529',
+    accentColor: '#C4A882',
     summary: 'Distributed serverless backends, GraphQL APIs, event-driven message queues, and global edge compute.',
     techStack: ['AWS AppSync (GraphQL)', 'AWS Lambda', 'Amazon DynamoDB', 'Amazon SQS', 'Cloudflare Workers'],
     capabilities: ['Single-Table NoSQL Modeling', 'Event-Driven SQS Pipelines', 'Edge Caching (<10ms)', 'Cognito RBAC'],
@@ -47,8 +47,8 @@ const SYSTEM_NODES: SystemNode[] = [
     name: 'Applied AI & LLMs',
     category: 'Intelligence Layer',
     position: [-1.7, -1.3, 0.4],
-    color: '#0E838E',
-    accentColor: '#83C5BE',
+    color: '#3D4A4F',
+    accentColor: '#C4A882',
     summary: 'Streaming conversational agents, retrieval-augmented generation (RAG), and deterministic tool execution loops.',
     techStack: ['OpenAI GPT-4', 'Python / FastAPI', 'LangChain', 'Pinecone Vector DB', 'Server-Sent Events'],
     capabilities: ['Phonetic Rhyme Guarantees', 'Constrained JSON Tool Calling', 'Context Window Pruning', 'Low-Latency Streaming'],
@@ -59,8 +59,8 @@ const SYSTEM_NODES: SystemNode[] = [
     name: 'IoT & Hardware Systems',
     category: 'Physical Computing Layer',
     position: [1.7, -1.3, -0.4],
-    color: '#E29578',
-    accentColor: '#FFDDD2',
+    color: '#C07856',
+    accentColor: '#F2E0D5',
     summary: 'Real-time microcontroller firmware, analog sensor signal conditioning, and low-latency MQTT telemetry.',
     techStack: ['ESP32 Dual-Core', 'C / C++', 'FreeRTOS', 'BPW34 Photodiodes', 'MQTT Protocol', 'WebSockets'],
     capabilities: ['Microsecond Laser Pulse Capture', 'FreeRTOS Dual-Core Task Pinning', 'Hardware Analog RC Filters', 'Sub-50ms WebSockets'],
@@ -207,10 +207,10 @@ const CentralCoreMesh: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }
       <mesh ref={coreRef}>
         <octahedronGeometry args={[0.55, 1]} />
         <meshStandardMaterial
-          color="#006D77"
+          color="#2C3539"
           roughness={0.1}
           metalness={0.8}
-          emissive="#83C5BE"
+          emissive="#C4A882"
           emissiveIntensity={0.4}
           wireframe
         />
@@ -219,12 +219,12 @@ const CentralCoreMesh: React.FC<{ reducedMotion: boolean }> = ({ reducedMotion }
       {/* Concentric Rotating Rings */}
       <mesh ref={ring1Ref}>
         <torusGeometry args={[0.85, 0.015, 12, 32]} />
-        <meshBasicMaterial color="#83C5BE" transparent opacity={0.5} />
+        <meshBasicMaterial color="#C4A882" transparent opacity={0.5} />
       </mesh>
 
       <mesh ref={ring2Ref} rotation={[Math.PI / 3, 0, 0]}>
         <torusGeometry args={[1.05, 0.012, 12, 32]} />
-        <meshBasicMaterial color="#006D77" transparent opacity={0.35} />
+        <meshBasicMaterial color="#2C3539" transparent opacity={0.35} />
       </mesh>
 
       <Html position={[0, 0.9, 0]} center distanceFactor={8}>
@@ -248,7 +248,7 @@ const Scene: React.FC<{
     <>
       <ambientLight intensity={0.8} />
       <directionalLight position={[5, 8, 5]} intensity={1.2} />
-      <pointLight position={[-4, -4, 2]} intensity={0.6} color="#83C5BE" />
+      <pointLight position={[-4, -4, 2]} intensity={0.6} color="#C4A882" />
 
       {/* Orbit Controls with bounded angles */}
       <OrbitControls

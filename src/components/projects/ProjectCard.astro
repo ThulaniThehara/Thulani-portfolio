@@ -7,7 +7,8 @@ interface Props {
   description: string;
   category: string;
   projectType?: string;
-  icon?: string;
+  image?: string;
+  year?: number | string;
   frontendTech?: string[];
   backendTech?: string[];
   databaseTech?: string[];
@@ -16,101 +17,157 @@ interface Props {
   publishDate?: Date | string;
 }
 
-const { id, title, description, category, projectType, icon, frontendTech = [], backendTech = [], databaseTech = [], githubUrl, tags, publishDate } = Astro.props;
+const {
+  id,
+  title,
+  description,
+  category,
+  projectType,
+  image,
+  year = 2025,
+  frontendTech = [],
+  backendTech = [],
+  databaseTech = [],
+  githubUrl,
+  tags = [],
+  publishDate,
+} = Astro.props;
 
-// SVG icons mapping based on the `icon` string
-const getIcon = (name?: string) => {
-  if (name === 'cloud' || name === 'serverless') {
-    return `<svg class="w-8 h-8 text-[var(--brand-deep-teal)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>`;
-  }
-  // Default icon (code)
-  return `<svg class="w-8 h-8 text-[var(--brand-deep-teal)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>`;
-}
+const monogram = title.trim().charAt(0).toUpperCase();
 ---
 
-<div class="group perspective-1000 relative w-full h-[450px]">
-  <!-- Inner Container for 3D Transform -->
-  <div class="project-card-inner relative w-full h-full transition-transform duration-700 preserve-3d">
+<div class="group perspective-1000 relative w-full h-[470px]">
+  <!-- Inner Container for 3D Transform & Hover Animation -->
+  <div class="project-card-inner relative w-full h-full transition-all duration-700 ease-out preserve-3d group-hover:-translate-y-2 group-hover:shadow-xl">
     
-    <!-- Front Face -->
-    <article class="absolute inset-0 backface-hidden bg-white rounded-2xl border border-[var(--border-subtle)] flex flex-col justify-between p-6 shadow-sm hover:shadow-md transition-shadow">
+    <!-- FRONT FACE -->
+    <article class="absolute inset-0 backface-hidden bg-white rounded-3xl border border-[var(--border-subtle)] flex flex-col justify-between overflow-hidden shadow-sm transition-shadow">
       
-      <!-- Top Section -->
-      <div>
-        <div class="text-[10px] font-bold tracking-widest text-[var(--text-muted)] uppercase mb-4">
-          {projectType || category}
-        </div>
-        <div class="mb-4 bg-[var(--bg-surface-teal-subtle)] w-14 h-14 flex items-center justify-center rounded-xl">
-          <Fragment set:html={getIcon(icon)} />
-        </div>
-        <h3 class="text-2xl font-extrabold text-[var(--brand-deep-teal)] leading-tight mb-6">
-          {title}
-        </h3>
-        
-        <!-- Tech Stacks -->
-        <div class="space-y-4">
-          {frontendTech.length > 0 && (
-            <div class="flex items-start gap-3 text-sm">
-              <span class="font-semibold text-[var(--text-secondary)] min-w-[70px]">Frontend:</span>
-              <span class="text-[var(--text-primary)]">{frontendTech.join(', ')}</span>
-            </div>
-          )}
-          {backendTech.length > 0 && (
-            <div class="flex items-start gap-3 text-sm">
-              <span class="font-semibold text-[var(--text-secondary)] min-w-[70px]">Backend:</span>
-              <span class="text-[var(--text-primary)]">{backendTech.join(', ')}</span>
-            </div>
-          )}
-          {databaseTech.length > 0 && (
-            <div class="flex items-start gap-3 text-sm">
-              <span class="font-semibold text-[var(--text-secondary)] min-w-[70px]">Database:</span>
-              <span class="text-[var(--text-primary)]">{databaseTech.join(', ')}</span>
-            </div>
-          )}
-        </div>
+      <!-- Top Image Cover Section (No floating badge on top) -->
+      <div class="relative h-48 sm:h-52 w-full overflow-hidden bg-[var(--bg-surface-subtle)] border-b border-[var(--border-subtle)] shrink-0">
+        {image ? (
+          <img
+            src={image}
+            alt={title}
+            loading="lazy"
+            class="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
+          />
+        ) : (
+          <div class="w-full h-full bg-gradient-to-br from-[var(--brand-deep-teal)] to-[var(--brand-deep-teal-dark)] flex items-center justify-center relative">
+            <span class="text-6xl font-extrabold text-white/20 select-none tracking-tighter">
+              {monogram}
+            </span>
+          </div>
+        )}
       </div>
 
-      <!-- Bottom Section (Buttons) -->
-      <div class="flex items-center justify-between border-t border-[var(--border-subtle)] pt-4 mt-auto">
-        <button class="flip-btn-front flex items-center gap-1.5 text-xs font-bold text-[var(--brand-deep-teal)] hover:text-[var(--brand-soft-teal)] transition-colors focus:outline-none">
-          See Description
-          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </button>
-        {githubUrl && (
-          <a href={githubUrl} target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-[var(--brand-deep-teal)] text-white text-xs font-bold rounded-full hover:bg-[var(--brand-soft-teal)] transition-colors focus:outline-none">
-            Source Code
-          </a>
-        )}
+      <!-- Front Content Body -->
+      <div class="p-5 flex flex-col flex-1 justify-between gap-3">
+        <div class="space-y-2.5">
+          <!-- Category & Year Meta Row (Included below image) -->
+          <div class="text-[11px] font-mono font-semibold text-[var(--text-muted)] tracking-wider uppercase flex items-center gap-2">
+            <span>{projectType || category}</span>
+            <span>•</span>
+            <span>{year}</span>
+          </div>
+
+          <!-- Project Title (Refined font size) -->
+          <h3 class="text-lg sm:text-xl font-bold text-[var(--brand-deep-teal)] leading-snug tracking-tight line-clamp-2">
+            {title}
+          </h3>
+
+          <!-- Tech Stack Specs (No description on front) -->
+          <div class="space-y-1.5 pt-1 text-xs">
+            {frontendTech.length > 0 && (
+              <div class="flex items-start gap-2">
+                <span class="font-semibold text-[var(--text-secondary)] min-w-[65px]">Frontend:</span>
+                <span class="text-[var(--text-primary)] truncate">{frontendTech.join(', ')}</span>
+              </div>
+            )}
+            {backendTech.length > 0 && (
+              <div class="flex items-start gap-2">
+                <span class="font-semibold text-[var(--text-secondary)] min-w-[65px]">Backend:</span>
+                <span class="text-[var(--text-primary)] truncate">{backendTech.join(', ')}</span>
+              </div>
+            )}
+            {databaseTech.length > 0 && (
+              <div class="flex items-start gap-2">
+                <span class="font-semibold text-[var(--text-secondary)] min-w-[65px]">Database:</span>
+                <span class="text-[var(--text-primary)] truncate">{databaseTech.join(', ')}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <!-- Bottom Actions Row (Front) -->
+        <div class="flex items-center justify-between border-t border-[var(--border-subtle)] pt-3.5 mt-auto">
+          <!-- See Description Flip Button -->
+          <button
+            type="button"
+            class="flip-btn-front inline-flex items-center gap-1.5 text-xs font-bold text-[var(--brand-deep-teal)] hover:text-[var(--brand-coral)] transition-colors focus:outline-none cursor-pointer"
+          >
+            <span>See Description</span>
+            <svg class="w-3.5 h-3.5 transform group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+
+          {githubUrl && (
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-3.5 py-1.5 bg-[var(--brand-deep-teal)] text-white text-xs font-bold rounded-full hover:bg-[var(--brand-deep-teal-hover)] transition-colors focus:outline-none shadow-2xs"
+            >
+              Source Code
+            </a>
+          )}
+        </div>
       </div>
     </article>
 
-    <!-- Back Face -->
-    <article class="absolute inset-0 backface-hidden rotate-y-180 bg-[var(--brand-deep-teal)] text-white rounded-2xl border border-[var(--brand-deep-teal)] flex flex-col p-6 shadow-lg">
+    <!-- BACK FACE -->
+    <article class="absolute inset-0 backface-hidden rotate-y-180 bg-[var(--brand-deep-teal)] text-white rounded-3xl border border-[var(--brand-deep-teal)] flex flex-col p-6 shadow-xl justify-between">
       <div class="flex-1 overflow-y-auto custom-scrollbar pr-2 space-y-4">
-        <h4 class="text-xl font-bold text-white mb-2">{title}</h4>
+        <h4 class="text-xl font-bold text-white leading-tight">{title}</h4>
         <p class="text-white/90 text-sm leading-relaxed">
           {description}
         </p>
-        <div class="pt-4 mt-4 border-t border-white/10">
-           <a href={`/work/${id}`} class="inline-flex items-center gap-2 text-sm font-bold text-[var(--brand-soft-teal)] hover:text-white transition-colors">
-            Read Full Case Study
+        <div class="pt-4 border-t border-white/15">
+          <a
+            href={`/work/${id}`}
+            class="inline-flex items-center gap-2 text-sm font-bold text-[var(--brand-soft-teal)] hover:text-white transition-colors"
+          >
+            <span>Read Full Case Study</span>
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
-           </a>
+          </a>
         </div>
       </div>
-      
-      <!-- Back Bottom Section -->
-      <div class="pt-4 mt-auto">
-        <button class="flip-btn-back flex items-center gap-1.5 text-xs font-bold text-white/80 hover:text-white transition-colors focus:outline-none">
+
+      <!-- Back Bottom Controls -->
+      <div class="pt-4 border-t border-white/15 mt-auto flex items-center justify-between">
+        <button
+          type="button"
+          class="flip-btn-back inline-flex items-center gap-1.5 text-xs font-bold text-white/80 hover:text-white transition-colors focus:outline-none cursor-pointer"
+        >
           <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Back to Overview
+          <span>Back to Overview</span>
         </button>
+
+        {githubUrl && (
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs font-bold text-white/90 hover:text-white underline"
+          >
+            GitHub
+          </a>
+        )}
       </div>
     </article>
 
@@ -122,8 +179,7 @@ const getIcon = (name?: string) => {
     const frontButtons = document.querySelectorAll('.flip-btn-front');
     const backButtons = document.querySelectorAll('.flip-btn-back');
 
-    frontButtons.forEach(btn => {
-      // Remove old listeners by cloning, just to be safe if init runs multiple times
+    frontButtons.forEach((btn) => {
       const newBtn = btn.cloneNode(true);
       btn.parentNode?.replaceChild(newBtn, btn);
       newBtn.addEventListener('click', (e) => {
@@ -134,7 +190,7 @@ const getIcon = (name?: string) => {
       });
     });
 
-    backButtons.forEach(btn => {
+    backButtons.forEach((btn) => {
       const newBtn = btn.cloneNode(true);
       btn.parentNode?.replaceChild(newBtn, btn);
       newBtn.addEventListener('click', (e) => {
@@ -146,7 +202,6 @@ const getIcon = (name?: string) => {
     });
   }
 
-  // Run on initial load and view transitions
   document.addEventListener('DOMContentLoaded', initProjectCards);
   document.addEventListener('astro:page-load', initProjectCards);
 </script>
@@ -165,8 +220,7 @@ const getIcon = (name?: string) => {
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
-  
-  /* Custom thin scrollbar for back description if it gets too long */
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
   }

@@ -40,11 +40,12 @@ const featuredProjects = await getFeaturedProjects();
         description={project.data.description}
         category={project.data.category}
         projectType={project.data.projectType}
-        icon={project.data.icon}
+        image={project.data.image}
+        year={project.data.year}
         frontendTech={project.data.frontendTech}
         backendTech={project.data.backendTech}
         databaseTech={project.data.databaseTech}
-        githubUrl={project.data.githubUrl}
+        githubUrl={project.data.githubUrlFrontend || project.data.githubUrl}
         tags={project.data.technologies || project.data.tags || []}
         publishDate={project.data.publishDate || `${project.data.year}-01-01`}
       />

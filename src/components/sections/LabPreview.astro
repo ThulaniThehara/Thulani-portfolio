@@ -21,14 +21,14 @@ const experiments = [
 ---
 
 <section class="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6 reveal-on-scroll">
-  <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#102A30] via-[#004249] to-[#006D77] text-white p-8 sm:p-12 lg:p-16 shadow-md hover:shadow-lg transition-shadow">
+  <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1F2937] via-[#151D21] to-[#2C3539] text-white p-8 sm:p-12 lg:p-16 shadow-md hover:shadow-lg transition-shadow">
     <!-- Subtle Background Graphic Grid -->
-    <div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#83C5BE_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    <div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#C4A882_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
     <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
       <div class="lg:col-span-6 space-y-6">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-xs text-[#83C5BE] text-xs font-semibold uppercase tracking-wider border border-white/10">
-          <span class="w-2 h-2 rounded-full bg-[#83C5BE] animate-ping"></span>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-xs text-[#C4A882] text-xs font-semibold uppercase tracking-wider border border-white/10">
+          <span class="w-2 h-2 rounded-full bg-[#C4A882] animate-ping"></span>
           <span>Experimental Sandbox</span>
         </div>
 
@@ -36,7 +36,7 @@ const experiments = [
           The Lab & R&D Explorations
         </h2>
 
-        <p class="text-base text-[#EDF6F9]/85 leading-relaxed">
+        <p class="text-base text-[#F7F4F0]/85 leading-relaxed">
           Not all code belongs in a formal production release. The Lab is where I stress-test early prototypes, explore bleeding-edge frameworks, build hardware hacks, and document technical experiments.
         </p>
 
@@ -54,12 +54,12 @@ const experiments = [
       <div class="lg:col-span-6 space-y-3 font-sans">
         {experiments.map((exp, idx) => (
           <div class="p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 hover:bg-white/15 hover:-translate-y-0.5 transition-all duration-200">
-            <div class="flex items-center justify-between text-xs text-[#83C5BE] font-mono mb-1">
+            <div class="flex items-center justify-between text-xs text-[#C4A882] font-mono mb-1">
               <span>{exp.tag}</span>
               <span>0{idx + 1}</span>
             </div>
             <h3 class="text-base font-bold text-white mb-1">{exp.title}</h3>
-            <p class="text-xs text-[#EDF6F9]/80">{exp.summary}</p>
+            <p class="text-xs text-[#F7F4F0]/80">{exp.summary}</p>
           </div>
         ))}
       </div>

@@ -1,0 +1,90 @@
+---
+title: "Concepts Blog - FullStack Blogging & Content Management Platform"
+slug: "concepts"
+description: "A modern full-stack blogging and content management web platform built with Next.js 16 (App Router), FastAPI (Python), MongoDB, and TipTap. Features dynamic article filtering, draggable/floatable callout boxes, JWT-secured admin studio, Cloudinary media integration, and an integrated SMTP email reply inbox."
+shortDescription: "Full-stack personal blogging and CMS platform with Next.js 16, FastAPI, and custom TipTap editor."
+year: 2025
+publishDate: 2025-09-01
+category: "Full-Stack & Web Platforms"
+projectType: "FULL-STACK · CMS · PERSONAL PROJECT"
+icon: "code"
+frontendTech: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4"]
+backendTech: ["FastAPI", "Python", "JWT Auth", "Cloudinary"]
+databaseTech: ["MongoDB (Atlas)"]
+featured: true
+technologies: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "FastAPI", "Python", "MongoDB", "JWT", "Cloudinary", "Framer Motion", "TipTap v3"]
+role: "Full-Stack Software Engineer"
+duration: "4 Months"
+team: "Personal Project"
+githubUrl: "https://github.com/Ashankavinda277/My-personal-website-Frontend"
+githubUrlFrontend: "https://github.com/Ashankavinda277/My-personal-website-Frontend"
+githubUrlBackend: "https://github.com/Ashankavinda277/My-personal-website-Backend-"
+liveUrl: "https://www.linkedin.com/feed/update/urn:li:activity:7474748062226071553/"
+image: "/images/projects/concepts.png"
+status: "Completed"
+---
+
+import ArchitectureDiagram from '../../components/mdx/ArchitectureDiagram.astro';
+import TechStack from '../../components/mdx/TechStack.astro';
+import ProjectStats from '../../components/mdx/ProjectStats.astro';
+import ProjectImage from '../../components/mdx/ProjectImage.astro';
+import Callout from '../../components/mdx/Callout.astro';
+import Highlight from '../../components/mdx/Highlight.astro';
+
+## Overview
+
+**Concepts Blog** is a full-stack personal blogging and content management web platform engineered to publish, categorize, and read rich educational articles across IT, DevOps, Software Engineering, and Science.
+
+The platform pairs a high-performance **Next.js 16 (App Router) & React 19** frontend styled with **Tailwind CSS v4** with an asynchronous **FastAPI (Python)** backend connected to **MongoDB**. It features a custom **TipTap WYSIWYG editor** supporting draggable callout text boxes, Cloudinary media hosting, protected JWT-authenticated admin studio workflows, and a direct SMTP contact message inbox.
+
+<ProjectStats stats={[
+  { label: 'Frontend Stack', value: 'Next.js 16', detail: 'React 19 + App Router + Tailwind v4' },
+  { label: 'Backend API', value: 'FastAPI', detail: 'Asynchronous Python with Mangum' },
+  { label: 'Database', value: 'MongoDB', detail: 'Document storage on MongoDB Atlas' },
+  { label: 'Editor Engine', value: 'TipTap v3', detail: 'Draggable & floatable callout nodes' }
+]} />
+
+## Key Capabilities & Features
+
+- **Responsive Public Reading Experience**:
+  - Interactive hero section with Framer Motion ambient gradient orbs and latest articles preview.
+  - Live article search, category/type filtering, read-time calculation, and paginated catalog (15 articles per page).
+  - Dynamic prose view with an automatic DOM parser algorithm that floats embedded callout boxes beside article text based on saved drag coordinates.
+- **Custom TipTap Rich Text Editor (`RichTextEditor.tsx`)**:
+  - WYSIWYG formatting tools: Headings (H1–H3), bold, italic, underline, strike, bullet/ordered lists, text alignment, font sizes, and custom color pickers.
+  - Inline image uploading connected directly to Cloudinary and local static fallback storage.
+  - Custom draggable callout boxes with relative coordinate tracking (`data-x`, `data-y`, `data-target-index`).
+- **Protected Admin Dashboard & Studio (`/admin`)**:
+  - Secure authentication using JWT access tokens with bcrypt password hashing and route guards.
+  - Complete article CRUD management with thumbnail/cover uploads, category assignment, and tag management.
+  - Category creation, renaming, icon assignment, and bulk blog category re-assignment.
+  - Real-time contact inbox with status filtering (`All`, `New`, `Replied`) and direct visitor email replies sent through Python `smtplib`.
+
+<TechStack stack={[
+  { category: 'Frontend & UI', items: ['Next.js 16 (App Router)', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'Framer Motion', 'TipTap v3', 'Lucide React', 'Axios'] },
+  { category: 'Backend & Cloud', items: ['FastAPI (Python)', 'MongoDB (PyMongo / Atlas)', 'JWT & Passlib Bcrypt', 'Cloudinary SDK', 'Python smtplib (SMTP)', 'Mangum Serverless'] }
+]} />
+
+## System Architecture
+
+The project is decoupled into an asynchronous Python REST backend and a modern React server/client frontend:
+
+<ArchitectureDiagram
+  title="Concepts Blog Decoupled Architecture"
+  nodes={[
+    { title: "Next.js 16 Client", desc: "App Router pages, Framer Motion animations & TipTap WYSIWYG editor", type: "client" },
+    { title: "FastAPI Backend", desc: "Async Python REST API with JWT guards & Mangum serverless adapter", type: "server" },
+    { title: "MongoDB Atlas", desc: "NoSQL document collections for articles, categories, users & messages", type: "db" },
+    { title: "Cloudinary & SMTP", desc: "Optimized image storage CDN & direct email transport services", type: "cloud" }
+  ]}
+/>
+
+## Results & Key Highlights
+
+<Highlight title="End-to-End Content Platform">
+Built a full-stack blog platform with a FastAPI (Python) backend and a Next.js frontend, with a responsive interface with article search, category filters and pagination, deployed to Vercel as serverless functions.
+</Highlight>
+
+## What I Learned
+
+Built stronger skills in full-stack architecture, JWT authentication, REST APIs, MongoDB, and serverless deployment, while learning to customize TipTap for advanced content editing and integrate multiple services into a complete application.

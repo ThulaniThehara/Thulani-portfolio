@@ -1,0 +1,113 @@
+---
+title: "PTS – Performance Tracking & Project Management System"
+slug: "pts"
+description: "A full-stack, enterprise-ready web application designed for university societies, clubs, or organizations to streamline project management, committee coordination, member performance evaluation, event scheduling, and feedback tracking across multiple organizational roles."
+shortDescription: "Full-stack performance tracking and project management system for university societies."
+year: 2025
+publishDate: 2025-05-01
+category: "Full-Stack & Web Platforms"
+projectType: "FULL-STACK · PROJECT MANAGEMENT · PERSONAL PROJECT"
+icon: "code"
+frontendTech: ["React 19", "Vite 7", "TypeScript", "SASS/SCSS", "i18next", "React Router 7"]
+backendTech: ["Node.js", "Express.js 5", "JWT Auth", "bcryptjs"]
+databaseTech: ["MongoDB (Mongoose 8)"]
+featured: true
+technologies: ["React 19", "Vite", "Node.js", "Express.js", "MongoDB", "Mongoose", "JWT", "Bcrypt", "SASS/SCSS", "i18next", "Axios"]
+role: "Full-Stack Software Engineer"
+duration: "3 Months"
+team: "Personal Project"
+githubUrl: "https://github.com/ThulaniThehara/Performance-Tracking-System-Frontend"
+githubUrlFrontend: "https://github.com/ThulaniThehara/Performance-Tracking-System-Frontend"
+githubUrlBackend: "https://github.com/ThulaniThehara/Performance-Tracking-System-Backend"
+liveUrl: "https://example.com"
+image: "/images/projects/pts.png"
+status: "Completed"
+---
+
+import ArchitectureDiagram from '../../components/mdx/ArchitectureDiagram.astro';
+import TechStack from '../../components/mdx/TechStack.astro';
+import ProjectStats from '../../components/mdx/ProjectStats.astro';
+import Callout from '../../components/mdx/Callout.astro';
+import Highlight from '../../components/mdx/Highlight.astro';
+
+## Overview
+
+The **Performance Tracking & Project Management System (PTS)** is a full-stack, enterprise-ready web application designed for university societies, clubs, and organizations. It replaces manual spreadsheets and paper records by streamlining project management, committee coordination, member performance evaluation, event scheduling, and feedback tracking across four organizational roles.
+
+<ProjectStats stats={[
+  { label: 'Frontend Stack', value: 'React 19', detail: 'Vite 7 + React Router 7 + i18next' },
+  { label: 'Backend API', value: 'Express 5', detail: 'Asynchronous Node.js runtime' },
+  { label: 'Database', value: 'MongoDB', detail: 'Mongoose 8 single-connection caching' },
+  { label: 'User Roles', value: '4 Hierarchy Levels', detail: 'Admin, Chairperson, Committee Head, Member' }
+]} />
+
+## User Roles & Access Hierarchy
+
+The system defines four distinct user roles with strict role-based access control (RBAC):
+
+- **ADMIN**: Overall system administration, user invitations, role assignments, society-wide event management, high-level project creation, and feedback/complaint oversight.
+- **CHAIRPERSON**: Project owner/leader. Manages project scope, creates project committees, appoints committee heads, assigns tasks with priorities and due dates, and tracks progress.
+- **COMMITTEE HEAD**: Leads specific functional committees (Logistics, IT, Marketing, Operations) under a project and manages committee-level member task assignments.
+- **MEMBER**: Society member. Views assigned tasks, updates progress (`TODO` &rarr; `IN_PROGRESS` &rarr; `COMPLETED`), submits feedback or complaints, and accesses the shared society calendar.
+
+<TechStack stack={[
+  { category: 'Frontend & UI', items: ['React 19', 'Vite 7', 'React Router DOM v7', 'SASS / SCSS', 'i18next (English, Sinhala, Tamil)', 'react-icons', 'react-calendar', 'Axios'] },
+  { category: 'Backend & Database', items: ['Node.js', 'Express.js 5', 'MongoDB (Atlas)', 'Mongoose 8', 'JSON Web Token (JWT)', 'bcryptjs', 'dotenv'] }
+]} />
+
+## System Architecture
+
+The application adopts a modular decoupled architecture connecting a React 19 single-page application with a RESTful Express.js 5 backend powered by MongoDB Atlas.
+
+<ArchitectureDiagram
+  title="PTS Decoupled System Architecture"
+  nodes={[
+    { title: "React 19 Client", desc: "Multilingual UI (en/si/ta), role-based routes & SASS themes", type: "client" },
+    { title: "Express.js 5 Gateway", desc: "JWT security guards, regex CORS validation & RBAC middleware", type: "server" },
+    { title: "MongoDB Atlas", desc: "Mongoose 8 document models with connection handle caching", type: "db" },
+    { title: "Notification Service", desc: "Real-time task alerts, due-soon & overdue deadline dispatchers", type: "cloud" }
+  ]}
+/>
+
+## Core Functional Modules
+
+### 1. Authentication & Onboarding
+- **Flexible Credentials**: Login support using either Email or University Index Number.
+- **Secure Invitation Flow**: Admins generate account invitations. An invitation token (SHA-256 hashed in database) allows new members to provision their credentials securely upon first sign-in via `/set-password`.
+- **Password Governance**: In-app password updates and self-service setting management.
+
+### 2. Project & Task Hub (`/api/pm`)
+- **Project Lifecycle**: Dynamic transition management across `UPCOMING`, `ACTIVE`, and `COMPLETED` project states.
+- **Task Scheduling & Priorities**: Tasks carry priorities (`LOW`, `MEDIUM`, `HIGH`) and completion statuses (`TODO`, `IN_PROGRESS`, `COMPLETED`).
+- **Derived Overdue Status**: Overdue state (`isOverdue`) is calculated dynamically on query based on `dueDate` and completion status without needing background cron jobs.
+
+### 3. Committee Management (`/api/committee`)
+- Create functional committees within projects (e.g., Logistics, IT, Marketing, Operations).
+- Appoint Committee Leads (`leadId`) and assign member rosters with individual responsibilities.
+
+### 4. Shared Society Event & Calendar System (`/api/event`)
+- Manages society events categorized as `EVENT`, `SPECIAL_TASK`, `MEETING`, or `DEADLINE`.
+- Rendered visually on the interactive `react-calendar` component on both Admin and Member dashboards.
+
+### 5. Multilingual Support (i18n)
+- Complete interface translation into **English**, **Sinhala**, and **Tamil** powered by `i18next` and `react-i18next`.
+
+### 6. Smart In-App Notification Engine (`/api/notifications`)
+- Dispatch alerts for events like `TASK_ASSIGNED`, `TASK_COMPLETED`, `PROJECT_MEMBER_ADDED`, and `COMMITTEE_MEMBER_ADDED`.
+- Dynamic deadline reminders ("due soon" or "overdue") with dismissal persistence (`DismissedDeadline`) to prevent notification fatigue.
+
+<Callout type="tip" title="Single-Connection Handle Caching">
+Optimized MongoDB connection handling using Mongoose handle caching (`useDb("MPTS", { useCache: true })`) to ensure fast response times across high-concurrency request spikes.
+</Callout>
+
+## Results & Impact
+
+<Highlight title="Streamlined Organizational Management">
+Replaced manual spreadsheets and paper records with a unified, role-based platform that automated task tracking, deadline alerts, and multilingual coordination across university society members.
+</Highlight>
+
+## Key Takeaways & Learnings
+
+- Designing a 4-tier role-based access control system requires clean permission middleware boundaries.
+- Calculating dynamic status attributes (`isOverdue`) at read-time reduces cron background overhead.
+- Integrating `i18next` early simplifies multi-language rendering across complex dashboard views.

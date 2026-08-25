@@ -33,25 +33,25 @@ const capabilities = [
 ];
 ---
 
-<section class="py-16 sm:py-24 bg-white border-y border-[#D8EAEF] reveal-on-scroll">
+<section class="py-16 sm:py-24 bg-white border-y border-[#E8E0D8] reveal-on-scroll">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="max-w-2xl mb-12 space-y-3">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#006D77]/10 text-[#006D77] text-xs font-semibold uppercase tracking-wider">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2C3539]/10 text-[#2C3539] text-xs font-semibold uppercase tracking-wider">
         <span>Core Competencies</span>
       </div>
-      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#102A30]">
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1F2937]">
         What I Build & Engineer
       </h2>
-      <p class="text-base text-[#547A85] leading-relaxed">
+      <p class="text-base text-[#718096] leading-relaxed">
         I engineer across the complete stack — from microcontroller firmware to cloud pipelines and modern user interfaces.
       </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {capabilities.map((item) => (
-        <div class="p-6 rounded-2xl bg-[#EDF6F9]/60 border border-[#D8EAEF] hover:bg-white hover:border-[var(--brand-soft-teal)] hover:shadow-xs transition-all duration-200 flex flex-col justify-between space-y-4 group">
+        <div class="p-6 rounded-2xl bg-[#F7F4F0]/60 border border-[#E8E0D8] hover:bg-white hover:border-[var(--brand-soft-teal)] hover:shadow-xs transition-all duration-200 flex flex-col justify-between space-y-4 group">
           <div class="space-y-3">
-            <div class="w-10 h-10 rounded-xl bg-[#006D77] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform duration-200">
+            <div class="w-10 h-10 rounded-xl bg-[#2C3539] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform duration-200">
               {item.iconType === 'code' && (
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -78,30 +78,30 @@ const capabilities = [
                 </svg>
               )}
             </div>
-            <h3 class="text-lg font-bold text-[#102A30] group-hover:text-[var(--brand-deep-teal)] transition-colors">{item.title}</h3>
-            <p class="text-sm text-[#547A85] leading-relaxed">
+            <h3 class="text-lg font-bold text-[#1F2937] group-hover:text-[var(--brand-deep-teal)] transition-colors">{item.title}</h3>
+            <p class="text-sm text-[#718096] leading-relaxed">
               {item.description}
             </p>
           </div>
 
-          <div class="pt-3 border-t border-[#D8EAEF] text-xs font-mono text-[#006D77]">
+          <div class="pt-3 border-t border-[#E8E0D8] text-xs font-mono text-[#2C3539]">
             {item.tech}
           </div>
         </div>
       ))}
 
       <!-- Systems Integration Highlight Card -->
-      <div class="p-6 rounded-2xl bg-gradient-to-br from-[#006D77] to-[#004249] text-white flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md transition-shadow">
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-[#2C3539] to-[#151D21] text-white flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md transition-shadow">
         <div class="space-y-3">
-          <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white/20 text-[#EDF6F9]">
+          <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white/20 text-[#F7F4F0]">
             The Core Advantage
           </span>
           <h3 class="text-xl font-bold">End-to-End System Thinking</h3>
-          <p class="text-sm text-[#EDF6F9]/85 leading-relaxed">
+          <p class="text-sm text-[#F7F4F0]/85 leading-relaxed">
             Rather than staying siloed in one layer, I design software that seamlessly speaks to microcontrollers, cloud databases, and AI models.
           </p>
         </div>
-        <div class="pt-3 border-t border-white/20 text-xs font-mono text-[#83C5BE]">
+        <div class="pt-3 border-t border-white/20 text-xs font-mono text-[#C4A882]">
           Hardware &harr; Cloud &harr; Web &harr; Intelligence
         </div>
       </div>

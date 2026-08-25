@@ -17,8 +17,8 @@ const cards: SkillCard[] = [
     subtitle: 'Client interfaces & reactive web apps',
     number: '01',
     icon: '💻',
-    color: '#006D77',
-    accentColor: '#83C5BE',
+    color: '#2C3539',
+    accentColor: '#C4A882',
     technologies: [
       { name: 'React', tag: 'Core', isHighlight: true },
       { name: 'TypeScript', tag: 'Core', isHighlight: true },
@@ -36,8 +36,8 @@ const cards: SkillCard[] = [
     subtitle: 'Server logic, APIs & data pipelines',
     number: '02',
     icon: '⚡',
-    color: '#006D77',
-    accentColor: '#83C5BE',
+    color: '#2C3539',
+    accentColor: '#C4A882',
     technologies: [
       { name: 'Node.js', tag: 'Runtime', isHighlight: true },
       { name: 'Express', tag: 'Framework', isHighlight: true },
@@ -53,8 +53,8 @@ const cards: SkillCard[] = [
     subtitle: 'Serverless architecture & message queues',
     number: '03',
     icon: '☁️',
-    color: '#006D77',
-    accentColor: '#83C5BE',
+    color: '#2C3539',
+    accentColor: '#C4A882',
     technologies: [
       { name: 'AWS', tag: 'Cloud Platform', isHighlight: true },
       { name: 'Lambda', tag: 'Serverless', isHighlight: true },
@@ -70,8 +70,8 @@ const cards: SkillCard[] = [
     subtitle: 'Development workflows & containers',
     number: '04',
     icon: '🛠️',
-    color: '#006D77',
-    accentColor: '#83C5BE',
+    color: '#2C3539',
+    accentColor: '#C4A882',
     technologies: [
       { name: 'Git', tag: 'VCS', isHighlight: true },
       { name: 'GitHub', tag: 'Collaboration', isHighlight: true },
@@ -88,8 +88,8 @@ const cards: SkillCard[] = [
     subtitle: 'Microcontrollers & sensor electronics',
     number: '05',
     icon: '🔌',
-    color: '#006D77',
-    accentColor: '#83C5BE',
+    color: '#2C3539',
+    accentColor: '#C4A882',
     technologies: [
       { name: 'ESP32', tag: 'Microcontroller', isHighlight: true },
       { name: 'Arduino', tag: 'Platform', isHighlight: true },
@@ -103,16 +103,16 @@ const cards: SkillCard[] = [
 
 <section class="py-20 sm:py-28 bg-[var(--bg-page)] relative overflow-hidden border-y border-[var(--border-subtle)] reveal-on-scroll" id="skills-section">
   <!-- Calm Background Texture: Subtle minimal dots in soft teal at low opacity -->
-  <div class="absolute inset-0 pointer-events-none opacity-25 bg-[radial-gradient(#83C5BE_1px,transparent_1px)] [background-size:24px_24px]"></div>
+  <div class="absolute inset-0 pointer-events-none opacity-25 bg-[radial-gradient(#C4A882_1px,transparent_1px)] [background-size:24px_24px]"></div>
 
   <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
     <!-- Section Introduction -->
     <div class="text-center max-w-2xl mx-auto space-y-3 mb-12 sm:mb-16">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EDF6F9] border border-[#83C5BE]/60 text-[#006D77] text-xs font-semibold uppercase tracking-wider shadow-2xs">
-        <span class="w-1.5 h-1.5 rounded-full bg-[#E29578] animate-pulse"></span>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F7F4F0] border border-[#C4A882]/60 text-[#2C3539] text-xs font-semibold uppercase tracking-wider shadow-2xs">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#C07856] animate-pulse"></span>
         <span>SKILLS & TECHNOLOGIES</span>
       </div>
-      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#006D77]">
+      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#2C3539]">
         Technologies I Build With
       </h2>
       <p class="text-base text-[var(--text-muted)]">
@@ -126,28 +126,28 @@ const cards: SkillCard[] = [
       <div class="relative w-full h-[430px] sm:h-[450px] flex items-center justify-center [perspective:1200px]" id="carousel-track">
         {cards.map((card, index) => (
           <div
-            class="carousel-card absolute w-[300px] sm:w-[360px] md:w-[390px] bg-white rounded-3xl border border-[#83C5BE]/60 p-6 sm:p-7 shadow-card transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer will-change-transform"
+            class="carousel-card absolute w-[300px] sm:w-[360px] md:w-[390px] bg-white rounded-3xl border border-[#C4A882]/60 p-6 sm:p-7 shadow-card transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer will-change-transform"
             data-index={index}
             data-card-id={card.id}
           >
             <!-- Card Header: Primary Deep Teal #006D77 + Secondary Soft Teal #83C5BE -->
-            <div class="flex items-start justify-between border-b border-[#D8EAEF] pb-4 mb-5">
+            <div class="flex items-start justify-between border-b border-[#E8E0D8] pb-4 mb-5">
               <div class="flex items-center gap-3">
-                <span class="w-12 h-12 rounded-2xl bg-[#EDF6F9] border border-[#83C5BE]/60 flex items-center justify-center text-2xl shadow-2xs">
+                <span class="w-12 h-12 rounded-2xl bg-[#F7F4F0] border border-[#C4A882]/60 flex items-center justify-center text-2xl shadow-2xs">
                   {card.icon}
                 </span>
                 <div>
-                  <h3 class="text-xl font-extrabold text-[#006D77] tracking-tight leading-tight">
+                  <h3 class="text-xl font-extrabold text-[#2C3539] tracking-tight leading-tight">
                     {card.category}
                   </h3>
-                  <p class="text-xs text-[#547A85] mt-0.5 font-medium">
+                  <p class="text-xs text-[#718096] mt-0.5 font-medium">
                     {card.subtitle}
                   </p>
                 </div>
               </div>
 
               <!-- Category Number Badge -->
-              <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-[#EDF6F9] border border-[#83C5BE]/50 text-[#006D77]">
+              <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-[#F7F4F0] border border-[#C4A882]/50 text-[#2C3539]">
                 {card.number}
               </span>
             </div>
@@ -158,25 +158,25 @@ const cards: SkillCard[] = [
                 <div
                   class={`inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl border transition-all duration-200 hover:scale-102 hover:shadow-2xs ${
                     tech.isHighlight
-                      ? 'bg-[#EDF6F9] border-[#83C5BE] shadow-2xs'
-                      : 'bg-[#EDF6F9]/80 border-[#B6D7DE] hover:bg-white hover:border-[#83C5BE]'
+                      ? 'bg-[#F7F4F0] border-[#C4A882] shadow-2xs'
+                      : 'bg-[#F7F4F0]/80 border-[#D4C8BA] hover:bg-white hover:border-[#C4A882]'
                   }`}
                 >
                   <!-- Marker Dot (#006D77 or #83C5BE) -->
                   <span
                     class={`w-2 h-2 rounded-full flex-shrink-0 ${
-                      tech.isHighlight ? 'bg-[#006D77]' : 'bg-[#83C5BE]'
+                      tech.isHighlight ? 'bg-[#2C3539]' : 'bg-[#C4A882]'
                     }`}
                   ></span>
 
                   <!-- Main Technology Name: Bold Deep Teal #006D77 for maximum focus -->
-                  <span class="text-[13px] sm:text-sm font-bold text-[#006D77] tracking-tight">
+                  <span class="text-[13px] sm:text-sm font-bold text-[#2C3539] tracking-tight">
                     {tech.name}
                   </span>
 
                   <!-- Divider and Secondary Label / Skill Type: #83C5BE border + muted teal text -->
                   {tech.tag && (
-                    <span class="text-[11px] font-medium text-[#547A85] border-l border-[#83C5BE]/70 pl-2 ml-0.5">
+                    <span class="text-[11px] font-medium text-[#718096] border-l border-[#C4A882]/70 pl-2 ml-0.5">
                       {tech.tag}
                     </span>
                   )}
@@ -185,12 +185,12 @@ const cards: SkillCard[] = [
             </div>
 
             <!-- Card Footer Status: #006D77 text with #E29578 Coral Active Focus Indicator -->
-            <div class="mt-6 pt-4 border-t border-[#D8EAEF] flex items-center justify-between text-xs">
-              <span class="font-mono text-xs font-bold text-[#006D77]">
+            <div class="mt-6 pt-4 border-t border-[#E8E0D8] flex items-center justify-between text-xs">
+              <span class="font-mono text-xs font-bold text-[#2C3539]">
                 {card.technologies.length} Technologies
               </span>
-              <span class="active-badge hidden items-center gap-1.5 font-bold text-[#E29578] text-xs">
-                <span class="w-2 h-2 rounded-full bg-[#E29578] animate-pulse"></span>
+              <span class="active-badge hidden items-center gap-1.5 font-bold text-[#C07856] text-xs">
+                <span class="w-2 h-2 rounded-full bg-[#C07856] animate-pulse"></span>
                 Active Focus
               </span>
             </div>
@@ -202,7 +202,7 @@ const cards: SkillCard[] = [
       <button
         type="button"
         id="carousel-prev"
-        class="absolute left-0 sm:-left-5 z-40 w-11 h-11 rounded-full bg-white border border-[#83C5BE] text-[#006D77] shadow-md hover:bg-[#EDF6F9] hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#006D77]"
+        class="absolute left-0 sm:-left-5 z-40 w-11 h-11 rounded-full bg-white border border-[#C4A882] text-[#2C3539] shadow-md hover:bg-[#F7F4F0] hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#2C3539]"
         aria-label="Previous Category Card"
       >
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -213,7 +213,7 @@ const cards: SkillCard[] = [
       <button
         type="button"
         id="carousel-next"
-        class="absolute right-0 sm:-right-5 z-40 w-11 h-11 rounded-full bg-white border border-[#83C5BE] text-[#006D77] shadow-md hover:bg-[#EDF6F9] hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#006D77]"
+        class="absolute right-0 sm:-right-5 z-40 w-11 h-11 rounded-full bg-white border border-[#C4A882] text-[#2C3539] shadow-md hover:bg-[#F7F4F0] hover:scale-110 active:scale-95 transition-all flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#2C3539]"
         aria-label="Next Category Card"
       >
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -229,7 +229,7 @@ const cards: SkillCard[] = [
         {cards.map((card, idx) => (
           <button
             type="button"
-            class="carousel-dot w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer bg-[#B6D7DE] hover:bg-[#83C5BE]"
+            class="carousel-dot w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer bg-[#D4C8BA] hover:bg-[#C4A882]"
             data-dot-index={idx}
             aria-label={`Jump to ${card.category}`}
           ></button>
@@ -241,7 +241,7 @@ const cards: SkillCard[] = [
         {cards.map((card, idx) => (
           <button
             type="button"
-            class="carousel-nav-pill px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all duration-300 cursor-pointer bg-white border-[#83C5BE]/60 text-[#006D77] hover:border-[#006D77] hover:bg-[#EDF6F9]"
+            class="carousel-nav-pill px-3.5 py-1.5 rounded-full text-xs font-bold border transition-all duration-300 cursor-pointer bg-white border-[#C4A882]/60 text-[#2C3539] hover:border-[#2C3539] hover:bg-[#F7F4F0]"
             data-nav-index={idx}
           >
             <span class="mr-1">{card.icon}</span>
@@ -289,7 +289,7 @@ const cards: SkillCard[] = [
           card.style.zIndex = '30';
           card.style.pointerEvents = 'auto';
           card.style.cursor = 'default';
-          card.classList.add('shadow-card-hover', 'border-[#006D77]', 'ring-1', 'ring-[#006D77]/20');
+          card.classList.add('shadow-card-hover', 'border-[#2C3539]', 'ring-1', 'ring-[#2C3539]/20');
           card.classList.remove('opacity-60');
           if (activeBadge) activeBadge.style.display = 'inline-flex';
         } else if (diff === -1) {
@@ -299,7 +299,7 @@ const cards: SkillCard[] = [
           card.style.zIndex = '20';
           card.style.pointerEvents = 'auto';
           card.style.cursor = 'pointer';
-          card.classList.remove('shadow-card-hover', 'border-[#006D77]', 'ring-1', 'ring-[#006D77]/20');
+          card.classList.remove('shadow-card-hover', 'border-[#2C3539]', 'ring-1', 'ring-[#2C3539]/20');
           if (activeBadge) activeBadge.style.display = 'none';
         } else if (diff === 1) {
           // Right Card: Angled outward to right, smaller, lower opacity
@@ -308,7 +308,7 @@ const cards: SkillCard[] = [
           card.style.zIndex = '20';
           card.style.pointerEvents = 'auto';
           card.style.cursor = 'pointer';
-          card.classList.remove('shadow-card-hover', 'border-[#006D77]', 'ring-1', 'ring-[#006D77]/20');
+          card.classList.remove('shadow-card-hover', 'border-[#2C3539]', 'ring-1', 'ring-[#2C3539]/20');
           if (activeBadge) activeBadge.style.display = 'none';
         } else if (diff === -2) {
           // Far Left Card: Stacked behind along circular path
@@ -330,22 +330,22 @@ const cards: SkillCard[] = [
       // Update Navigation Dots
       dots.forEach((dot, idx) => {
         if (idx === currentIndex) {
-          dot.classList.add('w-8', 'bg-[#006D77]');
-          dot.classList.remove('w-2.5', 'bg-[#B6D7DE]');
+          dot.classList.add('w-8', 'bg-[#2C3539]');
+          dot.classList.remove('w-2.5', 'bg-[#D4C8BA]');
         } else {
-          dot.classList.remove('w-8', 'bg-[#006D77]');
-          dot.classList.add('w-2.5', 'bg-[#B6D7DE]');
+          dot.classList.remove('w-8', 'bg-[#2C3539]');
+          dot.classList.add('w-2.5', 'bg-[#D4C8BA]');
         }
       });
 
       // Update Navigation Category Pills
       pills.forEach((pill, idx) => {
         if (idx === currentIndex) {
-          pill.classList.add('bg-[#006D77]', 'text-white', 'border-[#006D77]', 'shadow-xs');
-          pill.classList.remove('bg-white', 'text-[#006D77]', 'border-[#83C5BE]/60');
+          pill.classList.add('bg-[#2C3539]', 'text-white', 'border-[#2C3539]', 'shadow-xs');
+          pill.classList.remove('bg-white', 'text-[#2C3539]', 'border-[#C4A882]/60');
         } else {
-          pill.classList.remove('bg-[#006D77]', 'text-white', 'border-[#006D77]', 'shadow-xs');
-          pill.classList.add('bg-white', 'text-[#006D77]', 'border-[#83C5BE]/60');
+          pill.classList.remove('bg-[#2C3539]', 'text-white', 'border-[#2C3539]', 'shadow-xs');
+          pill.classList.add('bg-white', 'text-[#2C3539]', 'border-[#C4A882]/60');
         }
       });
     }
