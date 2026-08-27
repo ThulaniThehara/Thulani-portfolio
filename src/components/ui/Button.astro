@@ -9,7 +9,6 @@ interface Props {
   type?: 'button' | 'submit' | 'reset';
   target?: string;
   rel?: string;
-  download?: string | boolean;
   'aria-label'?: string;
 }
 
@@ -21,7 +20,6 @@ const {
   type = 'button',
   target,
   rel,
-  download,
   'aria-label': ariaLabel,
 } = Astro.props;
 
@@ -53,7 +51,6 @@ const computedClass = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant
       class={computedClass}
       target={target}
       rel={target === '_blank' ? (rel || 'noopener noreferrer') : rel}
-      download={download}
       aria-label={ariaLabel}
     >
       <slot />
