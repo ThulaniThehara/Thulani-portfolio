@@ -14,7 +14,7 @@ export interface ExploringTopic {
   /** Focus keywords drawn from the topic description */
   focus: string[];
   /**
-   * Header gradient stops. The ramp runs deep teal → bright teal → coral so each
+   * Header gradient stops. The ramp runs deep navy → slate → sky blue so each
    * card is distinguishable while staying inside the brand palette. Both stops are
    * kept dark enough to clear WCAG contrast for the white heading text on top.
    */
@@ -31,7 +31,7 @@ export const exploringTopics: ExploringTopic[] = [
     icon: 'cloud',
     focus: ['AWS', 'Scalable Architecture', 'Serverless'],
     accentFrom: '#1F2937',
-    accentTo: '#2C3539',
+    accentTo: '#03045A',
   },
   {
     id: 'ai-generative-ai',
@@ -40,7 +40,7 @@ export const exploringTopics: ExploringTopic[] = [
       'Exploring LLMs, AI agents, and practical AI-powered applications.',
     icon: 'ai',
     focus: ['LLMs', 'AI Agents', 'Applied AI'],
-    accentFrom: '#2C3539',
+    accentFrom: '#03045A',
     accentTo: '#3D4A4F',
   },
   {
@@ -70,8 +70,8 @@ export const exploringTopics: ExploringTopic[] = [
       'Exploring cross-platform mobile application development.',
     icon: 'mobile',
     focus: ['Flutter', 'Cross-Platform', 'Mobile'],
-    accentFrom: '#8B7355',
-    accentTo: '#C4A882',
+    accentFrom: '#3E7C96',
+    accentTo: '#8FD6E9',
   },
   {
     id: 'devops-cicd',
@@ -80,8 +80,8 @@ export const exploringTopics: ExploringTopic[] = [
       'Learning modern development workflows, automation, and deployment practices.',
     icon: 'devops',
     focus: ['CI/CD', 'Automation', 'Deployment'],
-    accentFrom: '#A86540',
-    accentTo: '#C07856',
+    accentFrom: '#017286',
+    accentTo: '#0090BF',
   },
 ];
 

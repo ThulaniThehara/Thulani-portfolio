@@ -7,24 +7,24 @@ import { getUrl } from '../../utils/url';
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 w-full backdrop-blur-md bg-[#F7F4F0]/90 border-b border-[#E8E0D8] transition-colors">
+<header class="sticky top-0 z-50 w-full backdrop-blur-md bg-[#F5F9FB]/90 border-b border-[#DCE8EE] transition-colors">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
     <!-- Brand Logo -->
     <a
       href={getUrl('/')}
-      class="group flex items-center gap-2.5 text-lg font-bold tracking-tight text-[#1F2937] focus-visible:outline-2 focus-visible:outline-[#2C3539] rounded-lg py-1"
+      class="group flex items-center gap-2.5 text-lg font-bold tracking-tight text-[#1F2937] focus-visible:outline-2 focus-visible:outline-[#03045A] rounded-lg py-1"
       aria-label={`${siteConfig.author} Portfolio Home`}
     >
-      <span class="w-8 h-8 rounded-lg bg-[#2C3539] text-white flex items-center justify-center font-mono text-sm font-semibold shadow-sm group-hover:bg-[#1C2529] transition-colors">
+      <span class="w-8 h-8 rounded-lg bg-[#03045A] text-white flex items-center justify-center font-mono text-sm font-semibold shadow-sm group-hover:bg-[#020341] transition-colors">
         T
       </span>
-      <span class="font-semibold text-[#1F2937] group-hover:text-[#2C3539] transition-colors">
+      <span class="font-semibold text-[#1F2937] group-hover:text-[#03045A] transition-colors">
         {siteConfig.author}
       </span>
     </a>
 
     <!-- Desktop Navigation Links -->
-    <nav class="hidden md:flex items-center gap-1 bg-white/70 px-3 py-1.5 rounded-full border border-[#E8E0D8] shadow-xs" aria-label="Main Navigation">
+    <nav class="hidden md:flex items-center gap-1 bg-white/70 px-3 py-1.5 rounded-full border border-[#DCE8EE] shadow-xs" aria-label="Main Navigation">
       {navItems.map((item) => {
         const itemUrl = getUrl(item.href);
         const isActive = item.href === '/'
@@ -36,8 +36,8 @@ const currentPath = Astro.url.pathname;
             href={itemUrl}
             class={`px-3.5 py-1.5 text-sm font-medium rounded-full transition-all duration-150 ${
               isActive
-                ? 'bg-[#2C3539] text-white shadow-xs'
-                : 'text-[#4A5568] hover:text-[#2C3539] hover:bg-[#C4A882]/15'
+                ? 'bg-[#03045A] text-white shadow-xs'
+                : 'text-[#4A5568] hover:text-[#03045A] hover:bg-[#8FD6E9]/25'
             }`}
             aria-current={isActive ? 'page' : undefined}
           >
@@ -58,7 +58,7 @@ const currentPath = Astro.url.pathname;
     <button
       id="mobile-menu-button"
       type="button"
-      class="md:hidden inline-flex items-center justify-center p-2 rounded-xl text-[#4A5568] hover:text-[#2C3539] hover:bg-[#C4A882]/20 focus:outline-none focus:ring-2 focus:ring-[#2C3539] transition-colors"
+      class="md:hidden inline-flex items-center justify-center p-2 rounded-xl text-[#4A5568] hover:text-[#03045A] hover:bg-[#8FD6E9]/30 focus:outline-none focus:ring-2 focus:ring-[#03045A] transition-colors"
       aria-expanded="false"
       aria-controls="mobile-menu"
       aria-label="Toggle navigation menu"
@@ -77,7 +77,7 @@ const currentPath = Astro.url.pathname;
   <!-- Mobile Dropdown Menu -->
   <div
     id="mobile-menu"
-    class="hidden md:hidden border-t border-[#E8E0D8] bg-[#F7F4F0] px-4 pt-3 pb-6 space-y-2 shadow-lg"
+    class="hidden md:hidden border-t border-[#DCE8EE] bg-[#F5F9FB] px-4 pt-3 pb-6 space-y-2 shadow-lg"
     aria-label="Mobile Navigation"
   >
     <div class="flex flex-col space-y-1">
@@ -92,8 +92,8 @@ const currentPath = Astro.url.pathname;
             href={itemUrl}
             class={`px-4 py-2.5 text-base font-medium rounded-xl transition-colors ${
               isActive
-                ? 'bg-[#2C3539] text-white'
-                : 'text-[#4A5568] hover:text-[#2C3539] hover:bg-white/80'
+                ? 'bg-[#03045A] text-white'
+                : 'text-[#4A5568] hover:text-[#03045A] hover:bg-white/80'
             }`}
             aria-current={isActive ? 'page' : undefined}
           >
@@ -102,7 +102,7 @@ const currentPath = Astro.url.pathname;
         );
       })}
     </div>
-    <div class="pt-3 border-t border-[#E8E0D8]">
+    <div class="pt-3 border-t border-[#DCE8EE]">
       <Button href={navCTA.href} variant="primary" size="md" class="w-full justify-center">
         {navCTA.label}
       </Button>

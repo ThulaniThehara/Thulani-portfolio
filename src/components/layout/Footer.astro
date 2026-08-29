@@ -6,13 +6,13 @@ import { getUrl } from '../../utils/url';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="border-t border-[#E8E0D8] bg-white/80 mt-auto">
+<footer class="border-t border-[#DCE8EE] bg-white/80 mt-auto">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
       <!-- Column 1: Brand & Bio -->
       <div class="md:col-span-2 space-y-3">
         <a href={getUrl('/')} class="text-xl font-bold tracking-tight text-[#1F2937] flex items-center gap-2">
-          <span class="w-7 h-7 rounded-md bg-[#2C3539] text-white flex items-center justify-center font-mono text-xs font-semibold">
+          <span class="w-7 h-7 rounded-md bg-[#03045A] text-white flex items-center justify-center font-mono text-xs font-semibold">
             T
           </span>
           <span>{siteConfig.author}</span>
@@ -21,8 +21,8 @@ const currentYear = new Date().getFullYear();
           {siteConfig.positioning}
         </p>
         <div class="flex items-center gap-3 pt-2">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-[#C4A882]/20 text-[#2C3539]">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#2C3539] animate-pulse"></span>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-[#8FD6E9]/20 text-[#03045A]">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#03045A] animate-pulse"></span>
             Available for opportunities
           </span>
         </div>
@@ -34,13 +34,13 @@ const currentYear = new Date().getFullYear();
         <ul class="space-y-2 text-sm text-[#718096]">
           {navItems.map((item) => (
             <li>
-              <a href={getUrl(item.href)} class="hover:text-[#2C3539] transition-colors">
+              <a href={getUrl(item.href)} class="hover:text-[#03045A] transition-colors">
                 {item.label}
               </a>
             </li>
           ))}
           <li>
-            <a href={getUrl('/lab')} class="hover:text-[#2C3539] transition-colors">
+            <a href={getUrl('/lab')} class="hover:text-[#03045A] transition-colors">
               Lab
             </a>
           </li>
@@ -56,7 +56,7 @@ const currentYear = new Date().getFullYear();
               href={siteConfig.social.github}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 hover:text-[#2C3539] transition-colors"
+              class="inline-flex items-center gap-2 hover:text-[#03045A] transition-colors"
               aria-label="GitHub Profile"
             >
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -70,7 +70,7 @@ const currentYear = new Date().getFullYear();
               href={siteConfig.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 hover:text-[#2C3539] transition-colors"
+              class="inline-flex items-center gap-2 hover:text-[#03045A] transition-colors"
               aria-label="LinkedIn Profile"
             >
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -84,7 +84,7 @@ const currentYear = new Date().getFullYear();
               href={siteConfig.social.medium}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 hover:text-[#2C3539] transition-colors"
+              class="inline-flex items-center gap-2 hover:text-[#03045A] transition-colors"
               aria-label="Medium Profile"
             >
               <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -98,7 +98,7 @@ const currentYear = new Date().getFullYear();
               href={`https://mail.google.com/mail/?view=cm&fs=1&to=${siteConfig.social.email}`}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 hover:text-[#2C3539] transition-colors"
+              class="inline-flex items-center gap-2 hover:text-[#03045A] transition-colors"
               aria-label="Send Email in Gmail"
             >
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -112,7 +112,7 @@ const currentYear = new Date().getFullYear();
     </div>
 
     <!-- Bottom Copyright -->
-    <div class="pt-6 border-t border-[#E8E0D8] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#A0AEC0]">
+    <div class="pt-6 border-t border-[#DCE8EE] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#A0AEC0]">
       <p>&copy; {currentYear} {siteConfig.author}. Built with Astro & TypeScript.</p>
     </div>
   </div>

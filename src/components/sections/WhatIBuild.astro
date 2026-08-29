@@ -33,10 +33,10 @@ const capabilities = [
 ];
 ---
 
-<section class="py-16 sm:py-24 bg-white border-y border-[#E8E0D8] reveal-on-scroll">
+<section class="py-16 sm:py-24 bg-white border-y border-[#DCE8EE] reveal-on-scroll">
   <div class="max-w-6xl mx-auto px-4 sm:px-6">
     <div class="max-w-2xl mb-12 space-y-3">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2C3539]/10 text-[#2C3539] text-xs font-semibold uppercase tracking-wider">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#03045A]/10 text-[#03045A] text-xs font-semibold uppercase tracking-wider">
         <span>Core Competencies</span>
       </div>
       <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#1F2937]">
@@ -49,9 +49,9 @@ const capabilities = [
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {capabilities.map((item) => (
-        <div class="p-6 rounded-2xl bg-[#F7F4F0]/60 border border-[#E8E0D8] hover:bg-white hover:border-[var(--brand-soft-teal)] hover:shadow-xs transition-all duration-200 flex flex-col justify-between space-y-4 group">
+        <div class="p-6 rounded-2xl bg-[#F5F9FB]/60 border border-[#DCE8EE] hover:bg-white hover:border-[var(--brand-soft-teal)] hover:shadow-xs transition-all duration-200 flex flex-col justify-between space-y-4 group">
           <div class="space-y-3">
-            <div class="w-10 h-10 rounded-xl bg-[#2C3539] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform duration-200">
+            <div class="w-10 h-10 rounded-xl bg-[#03045A] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform duration-200">
               {item.iconType === 'code' && (
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -84,24 +84,24 @@ const capabilities = [
             </p>
           </div>
 
-          <div class="pt-3 border-t border-[#E8E0D8] text-xs font-mono text-[#2C3539]">
+          <div class="pt-3 border-t border-[#DCE8EE] text-xs font-mono text-[#03045A]">
             {item.tech}
           </div>
         </div>
       ))}
 
       <!-- Systems Integration Highlight Card -->
-      <div class="p-6 rounded-2xl bg-gradient-to-br from-[#2C3539] to-[#151D21] text-white flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md transition-shadow">
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-[#03045A] to-[#020341] text-white flex flex-col justify-between space-y-4 shadow-sm hover:shadow-md transition-shadow">
         <div class="space-y-3">
-          <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white/20 text-[#F7F4F0]">
+          <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-white/20 text-[#F5F9FB]">
             The Core Advantage
           </span>
           <h3 class="text-xl font-bold">End-to-End System Thinking</h3>
-          <p class="text-sm text-[#F7F4F0]/85 leading-relaxed">
+          <p class="text-sm text-[#F5F9FB]/85 leading-relaxed">
             Rather than staying siloed in one layer, I design software that seamlessly speaks to microcontrollers, cloud databases, and AI models.
           </p>
         </div>
-        <div class="pt-3 border-t border-white/20 text-xs font-mono text-[#C4A882]">
+        <div class="pt-3 border-t border-white/20 text-xs font-mono text-[#8FD6E9]">
           Hardware &harr; Cloud &harr; Web &harr; Intelligence
         </div>
       </div>
